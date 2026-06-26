@@ -9,12 +9,11 @@ member_bp = Blueprint(
     url_prefix='/member'
 )
 
-
 #  관리자 키 생성 페이지
 @member_bp.route('/admin_key_page', methods = ['GET'])
 def admin_key_page():
     if session.get('role') != 'ADMIN':
-        return '접근 불가'
+        return '접근 불가! 관리자 전용입니다.'
     
     return render_template('frontend/admin_key_page.html')
 
@@ -22,7 +21,7 @@ def admin_key_page():
 @member_bp.route('/generate_key', methods = ['POST'])
 def generate_key():
     if session.get('role') != 'ADMIN':
-        return '접근 불가'
+        return '접근 불가! 관리자 전용입니다.'
     
     admin_key = load_admins_key()
     new_uuid = str(uuid.uuid4())
@@ -40,7 +39,7 @@ def generate_key():
 # 관리자 회원가입 화면 이동
 @member_bp.route('/adminSignUp_form', methods = ['GET'])
 def adminSignUp_form():
-    print('adminSignUp_confirm CALL')
+    print('adminSignUp_confirm() CALLED')
 
     return render_template('frontend/adminSignUp_form.html')
 
@@ -48,7 +47,7 @@ def adminSignUp_form():
 # 관리자 회원가입 양식
 @member_bp.route('/adminSignUp_confirm', methods = ['POST'])
 def adminSignUp_confirm():
-    print('adminSignUp_confirm CALL')
+    print('adminSignUp_confirm() CALLED')
 
     mId = request.form['mId']
     mPw = request.form['mPw']
@@ -65,13 +64,11 @@ def adminSignUp_confirm():
             'frontend/adminSignUp_result.html',
             result = 'NG')
 
-
     #  이미 사용된 키 확인
     if admin_key[inputUuid].get('used'):
         return render_template(
             'frontend/adminSignUp_result.html', 
             result='NG')
-
 
     if mId in admin:
         return render_template(
@@ -112,6 +109,8 @@ def memberSingup_comfirm():
     mMail = request.form['mMail']
     mPhone = request.form['mPhone']
 
+    member = load_members()
+
     member [mId] = {
         'mId': mId,
         'mPw': mPw,
@@ -120,3 +119,35 @@ def memberSingup_comfirm():
     }
 
     save_members(member)
+
+    return render_template(
+        'frontend/memberSignUp_result.html', 
+        result = 'OK')
+
+# 로그인 화면 
+@member_bp.route('/memberSignIn_form', methods = ['GET'])
+def memberSignIn_form():
+    return render_template('memberSignIn_form/html')
+
+# 로그인 양식
+@member_bp.route('/memberSignIn_confirm', methods = ['POST'])
+def memberSignIn_confirm():
+    
+    
+
+    
+
+@member_bp.route('/memberModify_form', methods = ['GET'])
+def memberModify_form():
+    pass
+
+@member_bp.route('/memberModify_confirm', methods = ['POST'])
+def memberModify_confirm():
+    pass
+
+@member_bp.route('/memberDelete_confirm', methods = ['GET'])
+def memberDelete_confirm():
+    pass
+# @member_bp.route('/adminDelete_confirm', methods = ['GET'])
+# def adminDelete_confirm():
+#     pass
