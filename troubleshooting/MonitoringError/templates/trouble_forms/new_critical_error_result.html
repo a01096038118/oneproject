@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    
+    {% include 'include/trouble_title.html' %}
+
+    <link href="{{url_for('static', filename='css/trouble_css/common.css')}}" rel="stylesheet">
+    <link href="{{url_for('static', filename='css/trouble_css/trouble.css')}}" rel="stylesheet">
+
+    <script src="{{url_for('static', filename='js/trouble.js')}}"></script>
+
+</head>
+<body>
+
+    {% include 'include/trouble_nav.html' %}
+
+    <article id="new_critical_error_wrap">
+        <div class="new_critical_error_result">
+                <h2> NEW CRITICAL ERROR REGISTERED</h2>
+        </div>                                                                             
+
+    </article>
+
+</body>
+</html>
+
