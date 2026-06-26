@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% include 'include/trouble_title.html' %}
+
+    <link href="{{url_for('static', filename='css/trouble_css/trouble_common.css')}}" rel="stylesheet">
+    <link href="{{url_for('static', filename='css/trouble_css/trouble.css')}}" rel="stylesheet">
+
+    <script src="{{url_for('static', filename='js/trouble.js')}}"></script>
+
+</head>
+<body>
+....
+    
+    {% include 'include/trouble_nav.html' %}
+
+    <article id="new_critical_error_wrap">
+        <div class="new_critical_error_form">
+            <form action="/trouble/new_critical_error_confirm"  method="post" name="newErrorForm">
+                <input class="input_basic" type="text" name="eNum" value="{{ eNum }}" disabled>
+                <br>
+                <input class="input_basic" type="text" name="issue" placeholder="Input your Issue Exactly">
+                <br>
+                <input class="input_basic" type="text" name="error_code" placeholder="Input Error Code">
+                <br>
+                <input class="input_basic" type="text" name="reason" placeholder="Input the reason why">
+                <br>
+                <select class="select_basic" type="text" name="category" placeholder="select category of the error">
+                    <option value="git">
+                        Git
+                    </option value="html">
+                        HTML
+                    <option value="json">
+                        JSON 
+                    </option>
+                    <option value="yolo">
+                        YOLO
+                    </option>
+                    <option value="cam">
+                        ESP32-CAM
+                    </option >
+                    <option value="frontend">
+                        JS/CSS
+                    </option>
+                    <option value="python">
+                        FLASK
+                    </option>
+                <br>
+                <input class="input_button_basic_130" type="button" value="CREATE" onclick="submitTroubleForm();">
+                <input class="input_button_basic_130" type="reset" value="RESET">
+            </form>
+        </div>
+    </article>
+
+</body>
+</html>
+
+     
+            
+            <br>
+         
