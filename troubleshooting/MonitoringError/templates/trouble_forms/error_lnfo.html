@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% include 'include/trouble_title.html' %}
+
+    <link href="{{url_for('static', filename='css/bank_css/common.css')}}" rel="stylesheet">
+    <link href="{{url_for('static', filename='css/bank_css/bank.css')}}" rel="stylesheet">
+
+</head>
+<body>
+    
+    {% include 'include/bank_nav.html' %}
+
+    <article id="account_info_wrap">
+        <h2>N0. {{ account.aNum }}</h2>
+        <br>  
+        <h3>Deposit and Withdrawal History</h3>
+        <br>
+        <table class="account_info">
+            <thead>
+                <tr>
+                    <th>Date/Time</th>
+                    <th>Current Balance</th>
+                    <th>Deposit</th>
+                    <th>Withdrawal</th>
+                </tr>
+        </thead>
+        <tbody>
+            {% for date, info in account.history.items() %}
+                {% for datetime, value in info.items() %}
+                    <tr>
+                        <td>{{ datetime }}</td>
+                        <td>{{ account.bal }}</td>
+                        <td>{{ value.dAmount }}</td>
+                        <td>{{ value.wAmount }}</td>
+                    </tr>
+                {% endfor %}    
+            {% endfor %}
+        </tbody>
+        </table>
+    </article>
+
+  
+</body>
+</html>
