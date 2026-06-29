@@ -1,7 +1,7 @@
 import json, os
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-FILE = os.path.join(BASE_DIR, 'json','admins_json' )
+FILE = os.path.join(BASE_DIR, 'json','admins.json' )
 
 def load_admins():
     try:

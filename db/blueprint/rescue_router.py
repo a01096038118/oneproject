@@ -16,7 +16,7 @@ OCEAN_RESCUE_DIR = r"C:\ocean_rescue_images"
 def drone_capture():
     image_file = request.files.get('image')
     
-    # 조장님의 만능 함수 호출
+    # 만능 함수 호출
     result = save_logs(image_file)
     
     if not result["success"]:
