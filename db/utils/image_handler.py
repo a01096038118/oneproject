@@ -10,15 +10,15 @@ if not os.path.exists(OCEAN_RESCUE_DIR):
 
 def save_images(image_file):
     """
-    [이미지 저장 엔진 🌟 복수형 s 적용 완료!] 
+    [이미지 저장 엔진 복수형 s 적용 완료!] 
     드론이 준 이미지를 C:\ocean_rescue_images 폴더에 물리 저장합니다.
     파일명 포맷: 년-월-일_시분초_rescue_고유ID.확장자
     """
     if not image_file or image_file.filename == '':
         return None
 
-    # 확장자 추출 (.jpg 등)
-    file_extension = os.path.splitext(image_file.filename)
+    # os.path.splitext는 (파일명, 확장자) 튜플을 반환하므로 [1]을 붙여 확장자 문자열만 추출합니다.
+    file_extension = os.path.splitext(image_file.filename)[1]
     
     # 년-월-일_시분초 포맷 생성
     formatted_time = datetime.now().strftime("%Y-%m-%d_%H%M%S")

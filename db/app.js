@@ -11,11 +11,7 @@ async function loadRescueLogs() {
     logs.forEach(item => {
         const row = `
             <tr>
-                <td>${item.incident_id}</td>          <!-- 사건 번호 (중복X) -->
-                <td>${item.detected_status}</td>      <!-- 탐지 상태 (Person_Detected) -->
-                <td>${item.detected_time}</td>        <!-- 발생 시각 (년-월-일 시:분:초) -->
-                <td>
-                    <!-- 이미지 주소 그대로 img 태그에 넣으면 C드라이브에서 사진 꺼내와서 보여줌 -->
+                <td>${item.incident_id}</td>          <td>${item.detected_status}</td>      <td>${item.detected_time}</td>        <td>
                     <img src="/${item.captured_image_path}" width="150" alt="조난자 사진">
                 </td>
             </tr>
