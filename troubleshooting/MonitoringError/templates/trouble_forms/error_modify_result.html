@@ -4,18 +4,18 @@
     <meta charset="UTF-8">
     {% include 'include/trouble_title.html' %}
 
-    <link href="{{url_for('static', filename='css/bank_css/common.css')}}" rel="stylesheet">
-    <link href="{{url_for('static', filename='css/bank_css/index.css')}}" rel="stylesheet">
+    <link href="{{url_for('static', filename='css/trouble_common.css')}}" rel="stylesheet">
+    <link href="{{url_for('static', filename='css/trouble.css')}}" rel="stylesheet">
 
 </head>
 <body>
     
-    {% include 'include/bank_nav.html' %}
+    {% include 'include/trouble_nav.html' %}
 
-    <article id="accModify_wrap">
-        <div class="accModify_result">
+    <article id="errorModify_wrap">
+        <div class="errorModify_result">
            
-                <h3>ACCOUNT PW CHANGED SUCCESS!!</h3>
+                <h3>Error Info CHANGED SUCCESS!!</h3>
           
         </div>
     </article>
