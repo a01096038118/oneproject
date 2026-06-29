@@ -9,19 +9,15 @@ trouble_bp = Blueprint(
     url_prefix='/trouble'
 )
 
-
-
 #new_critical_error_form                     
 @trouble_bp.route('/new_critical_error_form', methods=['GET'])
 def new_critical_error_form():
-
-    event_num = str(uuid.uuid4())
 
     mId = session.get('signed_member_Id')
     if not mId:
         return redirect(url_for('member.signin_form'))
 
-    return render_template('trouble_forms/new_critical_error_form.html', eNum = event_num)
+    return render_template('trouble_forms/new_critical_error_form.html')
 
 #new_critical_error_confirm
 @trouble_bp.route('/new_critical_error_confirm', methods=['POST'])
@@ -32,27 +28,29 @@ def new_critical_error_confirm():
     if not mId:
         return redirect(url_for('/member.signin_form'))
     
+    eNum = str(uuid.uuid4())
+    
     regdatetime = time.getCurrentDateTime()
     
     eNum = request.form['eNum']
-    issue = request.form['issue']
-    error_code = request.form['error_code']
-    reason = request.form['reason']
     category = request.form['category']
+    error_code = request.form['error_code']
+    issue = request.form['issue']
+    progress = request.form['progress']
 
     critical_errors = load_errors()
 
     if mId not in critical_errors:
         critical_errors[mId] = {}
 
-    user_errors = critical_errors[mId]
+    staff_errors = critical_errors[mId]
      
-    user_errors[eNum] = {
-
-        'issue' : issue,
-        'error_code' : error_code,
-        'reason' : reason,
+    staff_errors[eNum] = {
         'category': category,
+        'error_code' : error_code,
+        'issue' : issue,
+        'progress': progress,
+        'resolution' :"",
         'date': regdatetime    
     }
     
@@ -61,13 +59,11 @@ def new_critical_error_confirm():
     return render_template('trouble_forms/new_critical_error_result.html')
 
 # /error_modify_form
-@trouble_bp.route('/error_modify_form')
+@trouble_bp.route('/error_modify_form', methods=['GET'])
 def error_modify_form():
     mId = session.get('signed_member_Id')
     if not mId:
         return redirect(url_for('member.signin_form'))
-    
-    event_num = str(uuid.uuid4())
     
     critical_errors = load_errors()
     
@@ -75,7 +71,7 @@ def error_modify_form():
    
         return redirect(url_for('new_critical_error_form'))
 
-    return render_template('trouble_forms/error_modify_confirm.html' , eNum = event_num)
+    return render_template('trouble_forms/error_modify_form.html')
 
 #/error_modify_confirm
 @trouble_bp.route('/error_modify_confirm', methods=['POST'])
@@ -86,25 +82,24 @@ def error_modify_confirm():
     if not mId:
         return redirect(url_for('member.signin_form'))
     
+    critical_errors = load_errors()
+    
     if mId not in critical_errors or not critical_errors[mId]:
    
         return redirect(url_for('new_critical_error_form'))
+
+    regdatetime = time.getCurrentDateTime()
     
-    eNum = request.form['eNum']
-    issue = request.form['issue']
-    error_code = request.form['error_code']
-    reason = request.form['reason']
-    category = request.form['category']
+    resolution = request.form['resolution']
+    progress = request.form['progress']
     
-    critical_errors = load_errors()
-    
-    user_errors = critical_errors.get(mId, {})
-    
-    user_errors[eNum]['issue'] = issue
-    user_errors[eNum]['error_code'] = error_code
-    user_errors[eNum]['reason'] = reason
-    user_errors[eNum]['category'] = category
-     
+    staff_errors = critical_errors.get(mId, {})
+
+    staff_errors[eNum]['resolution'] = resolution
+    staff_errors[eNum]['progress'] = progress
+    staff_errors[eNum]['regdatetime'] = regdatetime
+   
+
     save_errors(critical_errors)
     
     return render_template('trouble_forms/error_modify_result.html')
@@ -159,9 +154,9 @@ def error_list_view():
         
         return redirect(url_for('new_critical_error_form'))
     
-    user_errors = critical_errors.get(mId, {})
+    staff_errors = critical_errors.get(mId, {})
     
-    error_lists = list(user_errors.items())
+    error_lists = list(staff_errors.items())
     error_lists.reverse()
     
     return render_template('trouble_forms/error_list_result.html', mId = mId, critical_errors = error_lists)
@@ -175,12 +170,12 @@ def error_infos(eNum):
     
     critical_errors = load_errors()
   
-    user_errors = critical_errors.get(mId, {})
+    staff_errors = critical_errors.get(mId, {})
     
-    if eNum not in user_errors:
+    if eNum not in staff_errors:
         return render_template('trouble_forms/error.html', errorMsg="That Error NOT FOUND!")
 
-    return render_template('trouble_forms/error_lnfo.html', critical_errors=user_errors[eNum])
+    return render_template('trouble_forms/error_lnfo.html', critical_errors=staff_errors[eNum])
    
        
 # list view 방식을 쭉 테이블 형식으로 보여줄지 

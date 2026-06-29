@@ -1,56 +1,35 @@
-function submitTroubleForm() {
-    console.log('submitTroubleForm')
+function submitCriticalErrorForm() {
+    console.log('submitCriticalErrorForm')
 
     // alert("");
 
-    let form = document.submitTroubleForm;
+    let form = document.newErrorForm;
 
-    let issue = form.issue.value.trim();
-
-    console.log('issue:', issue)
-    
-    if (issue === '') {
+    let error_code = form.error_code.value;
+    let issue = form.issue.value;
+   
+    if (error_code === '') {
         alert('Please input your issue')
+        form.error_code.focus();
+    } else if (issue === '') {
+        alert('Please input error code')
         form.issue.focus();
-    } else if (issue.length < 50) {
-    alert('Account issue at least 50digits!!'); 
-    form.issue.focus();
-    
     } else {
         form.submit();
     }
 }
 
-function copyAccountNum(accountNumber) {
-    console.log('copyAccountToClipboard')
+function errorModifyForm() {
+    console.log('errorModifyForm')
 
-        navigator.clipboard.writeText(accountNumber)
-            .then(() => {
-                alert("COPY COMPLETE!");
-            })  
-            .catch(err => {
-                console.error("fail issue:", err);
-                alert("COPY FAILED!");
-            });
-}
+    let form = document.Modify_form;
 
-function depositForm() {
-    console.log('depositForm')
-
-    let form = document.deposit_form;
-
-    let aPw = form.aPw.value.trim(); 
-    let dAmount = form.dAmount.value.trim();
-
-    console.log('dAmount:', dAmount)
+    let resolution = form.resolution.value; 
     
-    if (aPw === '') {
-        alert('Please input Account PW!!')
-        form.aPw.focus();
-    } else if (dAmount === '') {
-        alert('Please input DEPOSIT AMOUNT!!')
-        form.dAmount.focus();
-    }  else {
+    if (resolution === '') {
+        alert('Please input how to resolve!!')
+        form.resolution.focus();
+    } else {
         form.submit();
     }
 }
