@@ -1,9 +1,17 @@
 from flask import Blueprint, render_template, request, redirect, session
 import uuid
-from db import load_admins, save_admins, load_admins_key, save_admins_key, save_members, load_members
+from db.utils.json_admin_manager import load_admins, save_admins
+from db.utils.json_key_manager import load_admins_key, save_admins_key
+from db.utils.json_member_manager import save_members, load_members
 import re
 
 
+
+admin_bp = Blueprint(
+    'admin',
+    __name__,
+    url_prefix='/admin'
+)
 
 member_bp = Blueprint(
     'member',
@@ -29,7 +37,7 @@ def admin_key_page():
     if session.get('role') != 'ADMIN':
         return '접근 불가! 관리자 전용입니다.'
     
-    return render_template('frontend/admin_key_page.html')
+    return render_template('member/admin_key_page.html')
 
 # 키 생성
 @member_bp.route('/generate_key', methods = ['POST'])
@@ -46,12 +54,12 @@ def generate_key():
 
     save_admins_key(admin_key)
     return render_template(
-        'frontend/admin_key_result.html',
+        'member/admin_key_result.html',
         new_key=new_uuid
     )
 
 # 관리자 회원가입 화면 이동
-@member_bp.route('/adminSignUp_form', methods = ['GET'])
+@admin_bp.route('/adminSignUp_form', methods = ['GET'])
 def adminSignUp_form():
     print('adminSignUp_confirm() CALLED')
 
@@ -59,7 +67,7 @@ def adminSignUp_form():
 
 
 # 관리자 회원가입 양식
-@member_bp.route('/adminSignUp_confirm', methods = ['POST'])
+@admin_bp.route('/adminSignUp_confirm', methods = ['POST'])
 def adminSignUp_confirm():
     print('adminSignUp_confirm() CALLED')
 
@@ -209,12 +217,12 @@ def memberSingup_comfirm():
         result = '회원가입 성공')
 
 # 관리자 로그인 화면 
-@member_bp.route('/adminSignIn_form', methods = ['GET'])
+@admin_bp.route('/adminSignIn_form', methods = ['GET'])
 def adminSignIn_form():
     return render_template('adminSignIn_form.html')
 
 # 관리자 로그인 양식
-@member_bp.route('/adminSignIn_confirm', methods = ['POST'])
+@admin_bp.route('/adminSignIn_confirm', methods = ['POST'])
 def adminSignIn_confirm():
 
     admins = load_admins()
