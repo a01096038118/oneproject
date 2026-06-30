@@ -15,7 +15,11 @@
 
     <article id="signin_wrap">
         <div class="signin_result">
-            <h3>SIGNIN SUCCESS!!</h3>
+            {% if result %}
+                <h3>{{ result }}</h3>
+            {% else %}
+                <h3>SIGNIN SUCCESS!!</h3>
+            {% endif %}
         </div>
 
     </article>

@@ -1,12 +1,14 @@
 import json, os
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-FILE = os.path.join(BASE_DIR, 'json','members.json' )
+FILE = os.path.join(BASE_DIR, 'members.json' )
 
 def load_members():
     try:
+        print(FILE)
         with open(FILE, encoding='utf-8') as f:
             return json.load(f)
+        
         
     except:
         return {}
