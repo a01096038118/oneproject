@@ -32,7 +32,7 @@ career_pattern = r'^\d+개월$'
 
 
 #  관리자 키 생성 페이지
-@member_bp.route('/admin_key_page', methods = ['GET'])
+@admin_bp.route('/admin_key_page', methods = ['GET'])
 def admin_key_page():
     if session.get('role') != 'ADMIN':
         return '접근 불가! 관리자 전용입니다.'
@@ -40,7 +40,7 @@ def admin_key_page():
     return render_template('member/admin_key_page.html')
 
 # 키 생성
-@member_bp.route('/generate_key', methods = ['POST'])
+@admin_bp.route('/generate_key', methods = ['POST'])
 def generate_key():
     if session.get('role') != 'ADMIN':
         return '접근 불가! 관리자 전용입니다.'
