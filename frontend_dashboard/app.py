@@ -6,7 +6,6 @@ app.secret_key = "dw-aiot5th-20260622"
 
 app.register_blueprint(member_bp)
 
-
 @app.route("/")
 def home():
     return render_template('index.html')
