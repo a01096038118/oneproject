@@ -17,8 +17,14 @@
 
     <article id="modify_wrap">
         
+        <div class="admin_key_form">
+            <form action="/member/memberModify_confirm" name="admin_key_form" method="POST">
+                <input class="input_basic" type="text" name="admin_key" placeholder="Input admin KEY"><br>
+            </form>
+        </div>
+
         <div class="modify_form">
-            <form action="/member/modify_confirm" name="modify_form" method="POST">
+            <form action="/member/memberModify_confirm" name="modify_form" method="POST">
                 <input type="hidden" name="mId" value="{{ member.mId }}">
                 <input class="input_basic" type="text" value="{{ member.mId }}" readonly disabled><br>
                 <input class="input_basic" type="password" name="mPw" value="{{ member.mPw }}" placeholder="Input member PW"><br>
