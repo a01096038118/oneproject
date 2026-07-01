@@ -260,10 +260,10 @@ def memberSignIn_confirm():
 
     # 회원이 여러명이 경우 [mId] = X
     if mId not in members:
-        return render_template('member/memberSignIn_result.html', 
+        return render_template('member/memberSignIn_form.html', 
                                result = 'ID가 존재하지않습니다.')
     if members [mId]['mPw'] !=mPw:
-        return render_template('member/memberSignIn_result.html', 
+        return render_template('member/memberSignIn_form.html', 
                                 result = '올바른 비밀번호가 아닙니다.')
                    
     return render_template('member/memberSignIn_result.html',
@@ -296,7 +296,7 @@ def modify_confirm():
                 break
         
     if not master_admin:
-        return render_template('member/adminSignIn_result.html',
+        return render_template('member/adminSignIn_form.html',
                                 result = '올바른 키번호가 아닙니다.')
     
     members = load_members()
