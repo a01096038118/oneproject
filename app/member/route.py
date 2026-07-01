@@ -78,10 +78,9 @@ def adminSignUp_confirm():
                                result = '아이디는 영문, 숫자 포함 4자 이상 20자 이하로 입력해주세요.')
     admin = load_admins()
 
-    for admin in admins:
-        if admin ['mId'] == mId:
-            return render_template('member/adminSignUp_result.html',
-                                   result = '중복된 ID 입니다. 다시 입력해주세요.')
+    if mId in admins:
+        return render_template('member/adminSignUp_result.html',
+                               result = '중복된 ID 입니다. 다시 입력해주세요.')
     
     # pw_pattern = r'^(?=.*[A-Za-z])(?=.*\d)[^\s]{8,20}$'
     mPw = request.form['mPw']
@@ -95,10 +94,10 @@ def adminSignUp_confirm():
         return render_template('member/adminSignUp_result.html',
                                result = '올바른 이메일 형식이 아닙니다.')
     admin = load_admins()
-    for admin in admins:
-        if admin ['mId'] == mId:
-            return render_template('member/adminSignUp_result.html',
-                                   result = '중복된 EMAIL입니다.')
+    
+    if mMail in admins:
+        return render_template('member/adminSignUp_result.html',
+                                result = '중복된 EMAIL입니다.')
 
     # phone_pattern =r'^\d{10,11}$'
     mPhone = request.form['mPhone']
@@ -106,7 +105,7 @@ def adminSignUp_confirm():
         return render_template('member/adminSignUp_result.html',
                                result = '숫자만 입력해주세요.')
     
-    inputUuid = request.form['admin_uuid']
+    inputUuid = request.form['admin_key']
 
     admin_key = load_admin_keys()
     admins = load_admins()
@@ -128,7 +127,7 @@ def adminSignUp_confirm():
             'member/adminSignUp_result.html',
             result = 'NG')
     
-    admin [mId] = {
+    admins [mId] = {
         'mId': mId,
         'mPw': mPw,
         'mMail': mMail,
@@ -138,7 +137,7 @@ def adminSignUp_confirm():
 
     admin_key[inputUuid]['used'] = True
 
-    save_admins(admin)
+    save_admins(admins)
     save_admin_keys(admin_key)
 
 
@@ -160,48 +159,47 @@ def memberSingup_comfirm():
     # id_pattern = r'^(?=.*[A-Za-z])[A-Za-z0-9]{4,20}$'
     mId = request.form['mId']
     if not re.match(id_pattern, mId):
-        return render_template('member/adminSignUp_result.html',
+        return render_template('member/memberSignUp_result.html',
                                result = '아이디는 영문, 숫자 포함 4자 이상 20자 이하로 입력해주세요.')
     members = load_members()
 
-    for member in members:
-        if member ['mId'] == mId:
-            return render_template('member/adminSignUp_result.html',
-                                   result = '중복된 ID입니다. 다시입력해주세요.')
+    if mId in members:
+        return render_template('member/memberSignUp_form.html',
+                               result = '중복된 ID입니다. 다시입력해주세요.')
 
     # pw_pattern = r'^(?=.*[A-Za-z])(?=.*\d)[^\s]{8,20}$'
     mPw = request.form['mPw']
     if not re.match(pw_pattern, mPw):
-        return render_template('member/adminSignUp_result.html',
+        return render_template('member/memberSignUp_result.html',
                                result = '비밀번호 특수문자, 영문, 숫자 포함하여 8자리 이상 20자리 이하로 입력해주세요.')
     
     # mail_pattern = r'^[\w.-]+@[\w.-]+\.[A-Za-z]{2,5}$'
     mMail = request.form['mMail']
     if not re.match(mail_pattern, mMail):
-        return render_template('member/adminSignUp_result.html',
+        return render_template('member/memberSignUp_result.html',
                                result = '올바른 이메일 형식이 아닙니다.')
     
     members = load_members()
     
-    for member in members:
-        if member ['mMail'] == mMail:
-            return render_template('member/adminSignUp_result.html',
+    for member in members.values():
+        if member['mMail'] == mMail:
+            return render_template('member/memberSignUp_form.html',
                                    result = '중복된 EMAIL입니다.')
 
     # phone_pattern =r'^\d{10,11}$'
     mPhone = request.form['mPhone']
     if not re.match(phone_pattern, mPhone):
-        return render_template('member/adminSignUp_result.html',
+        return render_template('member/memberSignUp_result.html',
                                result = '숫자만 입력해주세요.')
     
     mCareer = request.form['mCareer']
-    if re.match(career_pattern, mCareer):
-        return render_template('member/adminSignUp_result.html',
-                               result = 'OK')
+    if not re.match(career_pattern, mCareer):
+        return render_template('member/memberSignUp_result.html',
+                               result = '형식에 맞게 작성해주세요.')
 
     members = load_members()
 
-    member [mId] = {
+    members [mId] = {
         'mId': mId,
         'mPw': mPw,
         'mMail': mMail,
@@ -210,7 +208,7 @@ def memberSingup_comfirm():
         'role': 'MEMBER'
     }
 
-    save_members(member)
+    save_members(members)
 
     return render_template(
         'member/memberSignUp_result.html', 
@@ -230,21 +228,20 @@ def adminSignIn_confirm():
     mId = request.form['mId']
     mPw = request.form['mPw']
     inputUuid = request.form['admin_uuid']
-    for admin in admins:
-        if admin['mId'] == mId:
-            if admin['mPw'] != mPw:
-                return render_template('member/adminSignIn_result.html',
-                                       result = '올바른 비밀번호가 아닙니다.')   
+    
+    if mId in admins:
+        return render_template('member/adminSignIn_form.html',
+                                   result = 'ID가 존재하지 않습니다.')
+    if admins [mId]['mPw'] != mPw:
+        return render_template('member/adminSignIn_form.html',
+                               result = '올바른 비밀번호가 아닙니다.')   
                  
-            if inputUuid != admin['admin_uuid']:
-                return render_template('member/adminSignIn_result.html',
+    if inputUuid != admins['admin_uuid']:
+                return render_template('member/adminSignIn_form.html',
                                     result = '올바른 키번호가 아닙니다.')
-            
-            return render_template('member/adminSignIn_result.html',
-                                   result = 'SIGNUP SUCCESS!!')
         
     return render_template('member/adminSignIn_result.html',
-                            result = 'ID가 존재하지 않습니다.')
+                            result = 'SIGNIN SUCCESS!!')
 
     
 # member 로그인 화면
@@ -262,16 +259,13 @@ def memberSignIn_confirm():
     mPw = request.form['mPw']
 
     # 회원이 여러명이 경우 [mId] = X
-    for member in members:
-
-        if member['mId'] == mId:
-            if member['mPw'] != mPw:
-                return render_template('member/memberSignIn_result.html', 
-                                       result = '올바른 비밀번호가 아닙니다.')
-            
-            return render_template('member/memberSignIn_result.html', 
-                                   result = 'ID가 존재하지않습니다.')
-        
+    if mId not in members:
+        return render_template('member/memberSignIn_form.html', 
+                               result = 'ID가 존재하지않습니다.')
+    if members [mId]['mPw'] !=mPw:
+        return render_template('member/memberSignIn_form.html', 
+                                result = '올바른 비밀번호가 아닙니다.')
+                   
     return render_template('member/memberSignIn_result.html',
                         result = 'SIGNIN SUCCESS!!')
 
@@ -302,7 +296,7 @@ def modify_confirm():
                 break
         
     if not master_admin:
-        return render_template('member/adminSignIn_result.html',
+        return render_template('member/adminSignIn_form.html',
                                 result = '올바른 키번호가 아닙니다.')
     
     members = load_members()
@@ -334,8 +328,8 @@ def memberDelete_confirm():
 
     save_members(members)
 
-    session.clear
+    session.clear()
 
-    return render_template('member/memberDelete_result.html',
+    return render_template('member/delete_result.html',
                            result = 'OK')
     

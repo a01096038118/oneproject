@@ -9,6 +9,10 @@
 
     <script src="{{ url_for('static', filename='js/member.js') }}"></script>
     
+    {% if result %}
+    <script> alert("{{ result }}"); </script>
+    {% endif %}
+
 </head>
 <body>
     

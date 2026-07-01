@@ -1,3 +1,5 @@
+
+// ADMIN JS
 function signupForm() {
     console.log('signupForm() CALLED!!')
 
@@ -7,7 +9,7 @@ function signupForm() {
     let mPw = form.mPw.value.trim();
     let mMail = form.mMail.value.trim();
     let mPhone = form.mPhone.value.trim();
-    let mCareer = form.mCareer.value.trim();
+    
 
     let mIdPattern = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z0-9]{4,20}$/;
     let mPwPattern = /^(?=.*[A-Za-z])(?=.*\d)[^\s]{8,20}$/;
@@ -16,7 +18,7 @@ function signupForm() {
     
     
     if (mId === "") {
-        alert("PLEASE INPUT MEMBER ID");
+        alert("PLEASE INPUT ADMIN ID");
         form.mId.focus();
         
         
@@ -26,7 +28,7 @@ function signupForm() {
         
 
     } else if (mPw === "") {
-        alert("PLEASE INPUT MEMBER PW");
+        alert("PLEASE INPUT ADMIN PW");
         form.mPw.focus();
         
 
@@ -36,7 +38,7 @@ function signupForm() {
         
 
     } else if (mMail === "") {
-        alert("PLEASE INPUT MEMBER MAIL");
+        alert("PLEASE INPUT ADMIN MAIL");
         form.mMail.focus();
         
 
@@ -46,7 +48,7 @@ function signupForm() {
         
         
     } else if (mPhone === "") {
-        alert("PLEASE INPUT MEMBER PHONE");
+        alert("PLEASE INPUT ADMIN PHONE");
         form.mPhone.focus();
         
 
@@ -54,18 +56,9 @@ function signupForm() {
         alert("숫자만 입력해주세요.");
         form.mPhone.focus();
         
+    } 
+    else {
 
-    } else if (mCareer === "") {
-        alert("PLEASE INPUT YOUR CAREER MONTH");
-        form.mCareer.focus(); 
-        
-    } else if (!mCareerPattern.test(mCareer)){
-        alert("경력사항: 숫자+개월 형식으로 입력해주세요.");
-        form.mCareer.focus();
-    
-        
-    } else {
-        alert("SIGNUP SUCCESS!!")
         form.submit();
     }
 
@@ -78,12 +71,13 @@ function signinForm() {
 
     let mId = form.mId.value.trim();
     let mPw = form.mPw.value.trim();
+    let admin_key = form.admin_key.value.trim();
 
     let mIdPattern = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z0-9]{4,20}$/;
     let mPwPattern = /^(?=.*[A-Za-z])(?=.*\d)[^\s]{8,20}$/;
     
     if (mId === "") {
-        alert("Please input member ID");
+        alert("PLEASE INPUT ADMIN ID");
         form.mId.focus();
     
         
@@ -93,7 +87,7 @@ function signinForm() {
         
 
     } else if (mPw === "") {
-        alert("Please input member PW");
+        alert("PLEASE INPUT ADMIN PW");
         form.mPw.focus();
         
     
@@ -102,8 +96,13 @@ function signinForm() {
        form.mPw.focus();
        
 
-    } else {
-        alert("SIGNIN success!!")
+    } else if (admin_key === "") {
+        alert("PLEASE INPUT ADMIN KEY");
+        form.admin_key.focus();
+
+    } 
+    else {
+        alert("SIGNIN SUCCESS!!")
         form.submit();
     }
 
@@ -119,18 +118,19 @@ function modifyForm() {
     let mPhone = form.mPhone.value.trim();
     
     if (mPw === "") {
-        alert("Please input member PW");
+        alert("PLEASE INPUT ADMIN PW");
         form.mPw.focus();
 
     } else if (mMail === "") {
-        alert("Please input member MAIL");
+        alert("PLEASE INPUT ADMIN MAIL");
         form.mMail.focus();
 
     } else if (mPhone === "") {
-        alert("Please input member PHONE");
+        alert("PLEASE INPUT ADMIN PHONE");
         form.mPhone.focus();
 
     } else {
+        alert("ADMIN DATA MODIFY SUCCESS!!")
         form.submit();
 
     }
