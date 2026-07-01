@@ -1,6 +1,8 @@
 from flask import Blueprint, render_template, request, redirect, session
 from utils.json_manager import load_members, save_members
 
+'''modified'''
+
 member_bp = Blueprint(
     'member',
     __name__,
