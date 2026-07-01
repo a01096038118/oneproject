@@ -35,7 +35,8 @@ career_pattern = r'^\d+개월$'
 #  관리자 키 생성 페이지
 @admin_bp.route('/admin_key_page', methods = ['GET'])
 def admin_key_page():
-    if session.get('role') != 'ADMIN':
+    print(session['signIntedMember'])
+    if session['signIntedMember']['role'] != 'ADMIN':
         return '접근 불가! 관리자 전용입니다.'
     
     return render_template('member/admin_key_page.html')
@@ -43,7 +44,7 @@ def admin_key_page():
 # 키 생성
 @admin_bp.route('/generate_key', methods = ['POST'])
 def generate_key():
-    if session.get('role') != 'ADMIN':
+    if session['signIntedMember']['role'] != 'ADMIN':
         return '접근 불가! 관리자 전용입니다.'
     
     admin_key = load_admins_key()
@@ -77,7 +78,7 @@ def adminSignUp_confirm():
     if not re.match(id_pattern, mId):
         return render_template('member/adminSignUp_result.html',
                                result = '아이디는 영문, 숫자 포함 4자 이상 20자 이하로 입력해주세요.')
-    admin = load_admins()
+    admins = load_admins()
 
     for admin in admins:
         if admin ['mId'] == mId:
@@ -107,37 +108,39 @@ def adminSignUp_confirm():
         return render_template('member/adminSignUp_result.html',
                                result = '숫자만 입력해주세요.')
     
-    inputUuid = request.form['admin_uuid']
+    inputKey = request.form['admin_key']
 
     admin_key = load_admins_key()
+    print('admin_key:', admin_key)
     admins = load_admins()
 
     #  키 존재 확인
-    if inputUuid not in admin_key:
+    if inputKey not in admin_key:
         return render_template(
             'member/adminSignUp_result.html',
-            result = 'NG')
+            result = 'NG. 올바른 키번호가 아닙니다.')
 
     #  이미 사용된 키 확인
-    if admin_key[inputUuid].get('used'):
+    if admin_key[inputKey].get('used'):
         return render_template(
             'member/adminSignUp_result.html', 
-            result='NG')
+            result='NG . 이미 사용된 키입니다.')
 
     if mId in admin:
         return render_template(
             'member/adminSignUp_result.html',
-            result = 'NG')
+            result = 'NG. 이미 존재하는 ID입니다.')
     
     admin [mId] = {
         'mId': mId,
         'mPw': mPw,
         'mMail': mMail,
         'mPhone': mPhone,
-        'role': 'ADMIN'
+        'role': 'ADMIN',
+        'admin_key': inputKey
     }
 
-    admin_key[inputUuid]['used'] = True
+    admin_key[inputKey]['used'] = True
 
     save_admins(admin)
     save_admins_key(admin_key)
@@ -227,20 +230,24 @@ def adminSignIn_form():
 def adminSignIn_confirm():
 
     admins = load_admins()
+    keys = load_admins_key()
+    print(admins)
 
     mId = request.form['mId']
     mPw = request.form['mPw']
-    inputUuid = request.form['admin_uuid']
+    inputKey = request.form['admin_key']
     for admin in admins:
+        admin = admins[admin]
         if admin['mId'] == mId:
             if admin['mPw'] != mPw:
                 return render_template('member/adminSignIn_result.html',
                                        result = '올바른 비밀번호가 아닙니다.')   
                  
-            if inputUuid != admin['admin_uuid']:
+            if inputKey != admin['admin_key']:
                 return render_template('member/adminSignIn_result.html',
                                     result = '올바른 키번호가 아닙니다.')
             
+            session['signIntedMember'] = admin
             return render_template('member/adminSignIn_result.html',
                                    result = 'SIGNUP SUCCESS!!')
         
@@ -271,6 +278,7 @@ def memberSignIn_confirm():
                 return render_template('member/memberSignIn_result.html', 
                                        result = '올바른 비밀번호가 아닙니다.')
             
+            session['signIntedMember'] = member['mId']
             return render_template('member/memberSignIn_result.html', 
                                    result = 'OK')
         
@@ -278,33 +286,38 @@ def memberSignIn_confirm():
                            result = 'ID가 존재하지않습니다.')
 
 # 로그아웃
-@member_bp.route('/signOut_form', methods = ['GET'])
-def signOut_form():
+@member_bp.route('/signOut_confirm', methods = ['GET'])
+def signOut_confirm():
     
     session.clear()
 
-    redirect('/')
+    return redirect('/')
 
 # 회원정보 수정 화면
 @member_bp.route('/memberModify_form', methods = ['GET'])
 def memberModify_form():
-    return render_template('member/memberModify_form.html')
+
+    members = load_members()
+    signedId = session.get('signIntedMember')
+    member = members[signedId]
+
+    return render_template('member/memberModify_form.html', member = member)
 
 #  회원정보 수정 양식
-@member_bp.route('/memberModify_confirm.html', methods = ['POST'])
+@member_bp.route('/memberModify_confirm', methods = ['POST'])
 def memberModify_confirm():
 
-    admins = load_admins()
-    inputUuid = request.form['admin_uuid']
+    admins = load_admins_key()
+    inputKey = request.form['admin_key']
     master_admin = False
 
     for admin in admins:
-        if admin['admin_uuid'] == inputUuid:
+        if admin['admin_key'] == inputKey:
                 master_admin = True
                 break
         
     if not master_admin:
-        return render_template('adminSignIn_result.html',
+        return render_template('memberModify_result.html',
                                 result = '올바른 키번호가 아닙니다.')
     
     members = load_members()

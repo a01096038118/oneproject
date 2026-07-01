@@ -24,9 +24,10 @@
         {% endif %}
 
         <div class="signin_form">
-            <form action="/member/signin_confirm" name="signin_form" method="POST">
+            <form action="/admin/adminSignIn_confirm" name="signin_form" method="POST">
                 <input class="input_basic" type="text" name="mId" placeholder="Input new member ID"><br>
                 <input class="input_basic" type="password" name="mPw" placeholder="Input new member PW"><br>
+                <input class="input_basic" type="text" name="admin_key" placeholder="Input admin KEY"><br>
                 <input class="input_button_basic_130" type="button" value="SIGN IN" onclick="signinForm();">
                 <input class="input_button_basic_130" type="reset" value="RESET">
             </form>
