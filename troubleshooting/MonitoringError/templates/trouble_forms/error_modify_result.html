@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% include 'include/trouble_title.html' %}
+
+    <link href="{{url_for('static', filename='css/trouble_common.css')}}" rel="stylesheet">
+    <link href="{{url_for('static', filename='css/trouble.css')}}" rel="stylesheet">
+
+</head>
+<body>
+    
+    {% include 'include/trouble_nav.html' %}
+
+    <article id="errorModify_wrap">
+        <div class="errorModify_result">
+           
+                <h3>Error Info CHANGED SUCCESS!!</h3>
+          
+        </div>
+    </article>
+
+
+
+</body>
+</html>
