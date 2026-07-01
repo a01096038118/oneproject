@@ -1,0 +1,12 @@
+{
+    "devmode": {
+        "c5ac56ff-eaba-4ed6-ad47-e4bb0c3d4581": {
+            "category": "html",
+            "error_code": "GET http://127.0.0.1:5000/static/css/trouble_css/include/trouble.css net::ERR_ABORTED 404 (NOT FOUND)",
+            "issue": "Static File Path Error",
+            "progress": "In_Progress",
+            "resolution": "",
+            "date": "2026-06-29 11:45:17"
+        }
+        
+}
