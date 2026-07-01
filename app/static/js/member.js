@@ -65,7 +65,7 @@ function signupForm() {
     
         
     } else {
-        alert("SIGNUP SUCCESS!!")
+        
         form.submit();
     }
 
@@ -83,7 +83,7 @@ function signinForm() {
     let mPwPattern = /^(?=.*[A-Za-z])(?=.*\d)[^\s]{8,20}$/;
     
     if (mId === "") {
-        alert("Please input member ID");
+        alert("PLEASE INPUT MEMBER ID");
         form.mId.focus();
     
         
@@ -93,7 +93,7 @@ function signinForm() {
         
 
     } else if (mPw === "") {
-        alert("Please input member PW");
+        alert("PLEASE INPUT MEMBER PW");
         form.mPw.focus();
         
     
@@ -103,7 +103,7 @@ function signinForm() {
        
 
     } else {
-        alert("SIGNIN success!!")
+        alert("SIGNIN SUCCESS!!")
         form.submit();
     }
 
@@ -119,18 +119,19 @@ function modifyForm() {
     let mPhone = form.mPhone.value.trim();
     
     if (mPw === "") {
-        alert("Please input member PW");
+        alert("PLEASE INPUT MEMBER PW");
         form.mPw.focus();
 
     } else if (mMail === "") {
-        alert("Please input member MAIL");
+        alert("PLEASE INPUT MEMBER MAIL");
         form.mMail.focus();
 
     } else if (mPhone === "") {
-        alert("Please input member PHONE");
+        alert("PLEASE INPUT MEMBER PHONE");
         form.mPhone.focus();
 
     } else {
+        alert("MEMBER DATA MODIFY SUCCESS!!")
         form.submit();
 
     }
