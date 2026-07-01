@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request, redirect, session
 import uuid
 from db.utils.json_admin_manager import load_admins, save_admins
-from db.utils.json_key_manager import load_admins_key, save_admins_key
+from db.utils.json_key_manager import load_admin_keys, save_admin_keys
 from db.utils.json_member_manager import save_members, load_members
 import re
 
@@ -46,14 +46,14 @@ def generate_key():
     if session.get('role') != 'ADMIN':
         return '접근 불가! 관리자 전용입니다.'
     
-    admin_key = load_admins_key()
+    admin_key = load_admin_keys()
     new_uuid = str(uuid.uuid4())
 
     admin_key[new_uuid] = {
         'used': False
     }
 
-    save_admins_key(admin_key)
+    save_admin_keys(admin_key)
     return render_template(
         'member/admin_key_result.html',
         new_key=new_uuid
@@ -96,8 +96,8 @@ def adminSignUp_confirm():
         return render_template('frontend/adminSignUp_result.html',
                                result = '올바른 이메일 형식이 아닙니다.')
     admin = load_admins()
-    for admin in admins:
-        if admin ['mId'] == mId:
+    for admin in admins.values():
+        if admin ['mMail'] == mMail:
             return render_template('frontend/adminSignUp_result.html',
                                    result = '중복된 EMAIL입니다.')
 
@@ -109,7 +109,7 @@ def adminSignUp_confirm():
     
     inputUuid = request.form['admin_key']
 
-    admin_key = load_admins_key()
+    admin_key = load_admin_keys()
     admins = load_admins()
 
     #  키 존재 확인
@@ -140,7 +140,7 @@ def adminSignUp_confirm():
     admin_key[inputUuid]['used'] = True
 
     save_admins(admins)
-    save_admins_key(admin_key)
+    save_admin_keys(admin_key)
 
 
     return render_template(
@@ -289,7 +289,7 @@ def memberModify_form():
 def memberModify_confirm():
 
     admins = load_admins()
-    inputUuid = request.form['admin_uuid']
+    inputUuid = request.form['admin_key']
     master_admin = False
 
     for admin in admins:
