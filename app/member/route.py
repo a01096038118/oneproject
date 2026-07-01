@@ -93,11 +93,13 @@ def adminSignUp_confirm():
     if not re.match(mail_pattern, mMail):
         return render_template('member/adminSignUp_result.html',
                                result = '올바른 이메일 형식이 아닙니다.')
+    
     admin = load_admins()
     
-    if mMail in admins:
-        return render_template('member/adminSignUp_result.html',
-                                result = '중복된 EMAIL입니다.')
+    for admin in admins.values():
+        if admin ['mMail'] == mMail:
+            return render_template('member/adminSignUp_form.html',
+                                    result = '중복된 EMAIL입니다.')
 
     # phone_pattern =r'^\d{10,11}$'
     mPhone = request.form['mPhone']
@@ -287,7 +289,7 @@ def modify_form():
 def modify_confirm():
 
     admins = load_admins()
-    inputUuid = request.form['admin_uuid']
+    inputUuid = request.form['admin_key']
     master_admin = False
 
     for admin in admins:
