@@ -7,8 +7,13 @@
     <link href="{{ url_for('static', filename='css/common.css') }}" rel="stylesheet">
     <link href="{{ url_for('static', filename='css/member/member.css') }}" rel="stylesheet">
 
-    <script src="{{ url_for('static', filename='js/member.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/admin.js') }}"></script>
     
+
+    {% if result %}
+    <script> alert("{{ result }}"); </script>
+    {% endif %}
+
 </head>
 <body>
     
@@ -18,7 +23,7 @@
     <article id="signup_wrap">
         
         <div class="signup_form">
-            <form action="/member/signup_confirm" name="signup_form" method="POST">
+            <form action="/admin/adminSignUp_confirm" name="signup_form" method="POST">
                 <input class="input_basic" type="text" name="mId" placeholder="Input new member ID"><br>
                 <input class="input_basic" type="password" name="mPw" placeholder="Input new member PW"><br>
                 <input class="input_basic" type="email" name="mMail" placeholder="Input new member MAIL"><br>

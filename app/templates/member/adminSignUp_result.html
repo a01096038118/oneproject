@@ -6,6 +6,7 @@
 
     <link href="{{ url_for('static', filename='css/common.css') }}" rel="stylesheet">
     <link href="{{ url_for('static', filename='css/member/member.css') }}" rel="stylesheet">
+    <script src="{{ url_for('static', filename='js/admin.js') }}"> </script>
 
 </head>
 <body>
@@ -18,10 +19,12 @@
         
 
         <div class="signup_result">
-            {% if result == 'OK' %}
-                <h3>SIGNUP SUCCESS!!</h3>
-            {% else %}
-                <h3>SIGNUP FAIL!!</h3>
+            <h3>{{ result }}</h3>
+            
+            {% if admin_key %}
+
+                <input type="hidden" id="adminKey" value="{{ admin_key }}">
+                
             {% endif %}
         </div>
         
