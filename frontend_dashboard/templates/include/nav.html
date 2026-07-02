@@ -1,23 +1,32 @@
 <link href="{{ url_for('static', filename='css/include/nav.css') }}" rel="stylesheet">
 
 <nav>
-    {% if not session.get('signinedMemberId') %}
+    {% if not session.get('signIntedMember') %}
         <div class="nav_wrap">
             <a href="/">HOME</a>
+            |  
+            <a>MEMBERS :</a> 
+            <a href="/member/memberSignUp_form">SIGN UP</a>
+            /
+            <a href="/member/memberSignIn_form">SIGN IN</a>
+            | 
+            <a>ADMIN :</a>
+            <a href="/admin/adminSignUp_form">SIGN UP</a>
+            /
+            <a href="/admin/adminSignIn_form">SIGN IN</a>
             |
-            <a href="/member/signup_form">SIGN-UP</a>
-            |
-            <a href="/member/signin_form">SIGN-IN</a>
         </div>
-    {% else %}
+    {% else %}  
         <div class="nav_wrap">
             <a href="/">HOME</a>
             |
-            <a href="/member/signout_confirm">SIGN-OUT</a>
+            <a href="/member/signOut_confirm">SIGN-OUT</a>
             |
-            <a href="/member/modify_form">MODIFY</a>
+            <a href="/member/memberModify_form">MODIFY</a>
             |
             <a href="/member/delete_confirm" onclick="return confirm('정말 탈퇴하시겠습니까?');">DELETE</a>
+            |
+            <a href="/admin/admin_key_page">ADMIN KEY</a>
             |
             <a href="/dashboard/">DASHBOARD</a>
         </div>
