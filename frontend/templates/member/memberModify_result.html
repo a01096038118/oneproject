@@ -11,6 +11,8 @@
     
 </head>
 <body>
+
+    {% include 'include/videos.html' %}
     
     <div class="main-content-overlay">
         {% include 'include/header.html' %}
@@ -20,7 +22,11 @@
     <article id="modify_wrap">
         
         <div class="modify_result">
-            <h3>MODIFY SUCCESS!!</h3>
+            {% if result == 'OK' %}
+                <h3>MODIFY SUCCESS!!</h3>
+            {% else %}
+                <h3>{{ result }}</h3>
+            {% endif %}
         </div>
 
     </article>

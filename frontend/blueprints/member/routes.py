@@ -354,3 +354,10 @@ def memberDelete_confirm():
     return render_template('memberDelete_result.html',
                            result = 'OK')
     
+@member_bp.route('/gateway', methods=['GET'])
+def member_gateway():
+    return render_template('member/member_gateway.html')
+
+@admin_bp.route('/gateway', methods=['GET'])
+def admin_gateway():
+    return render_template('member/admin_gateway.html')

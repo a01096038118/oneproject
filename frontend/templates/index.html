@@ -3,15 +3,12 @@
 <head>
     <meta charset="UTF-8">
     {% include 'include/title.html' %}
-
     <link href="{{ url_for('static', filename='css/common.css') }}" rel="stylesheet">
     <link href="{{ url_for('static', filename='css/index.css') }}" rel="stylesheet">
 </head>
 <body>
 
-    <video autoplay loop muted playsinline id="bg-video">
-        <source src="{{ url_for('static', filename='img/main_theme.mp4') }}" type="video/mp4">
-    </video>
+    {% include 'include/videos.html' %}
     
     <div class="main-content-overlay">
         {% include 'include/header.html' %}
