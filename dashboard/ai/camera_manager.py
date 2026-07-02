@@ -1,7 +1,7 @@
 import cv2
 import threading
 from ultralytics import YOLO
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, time
 import tempfile
 import os
 
@@ -21,6 +21,16 @@ DANGER_Y2 = 350
 
 def save_intrusion_log():
     pass
+
+def init_camera():
+    
+    global camera
+
+    if camera is None:
+        print("camera reconnecting...")
+        camera = cv2.VideoCapture(EXP32_STREAM_URL)
+        print("camera reconnected")
+
 
 def reconnect_camera():
 
@@ -182,3 +192,29 @@ def get_frame():
     
         return None
         
+def generate_frame():
+
+    while True:
+
+        frame = get_frame()
+
+        if frame is None:
+            time.sleep(0.1)
+            continue
+
+        ret, buffer = cv2.imencode(".jpg", frame)
+
+        if not ret:
+            time.sleep(0.1)
+            continue
+
+        frame_bytes = buffer.tobytes()
+
+        yield(
+            b'--frame\r\n'
+            b'Content-Type: image/jpeg\r\n\r\n'
+            + frame_bytes +
+            b'\r\n'
+        )
+
+        time.sleep(0.03)
