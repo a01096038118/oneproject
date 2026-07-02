@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    {% include 'include/title.html' %}
+    <link href="{{ url_for('static', filename='css/common.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/member/member.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/member/admin_gateway.css')}}" rel="stylesheet">
+
+</head>
+<body>
+    
+    {% include 'include/header.html' %}
+    {% include 'include/nav.html' %}
+
+    <article id="gateway_wrap">
+        <div class="gateway_container">
+            <h2 style="margin-bottom: 30px;">ADMIN PORTAL</h2>
+            <a href="/admin/adminSignIn_form" class="gateway_btn">ADMIN SIGN IN</a>
+            <a href="/admin/adminSignUp_form" class="gateway_btn">ADMIN SIGN UP</a>
+        </div>
+    </article>
+
+    {% include 'include/footer.html' %}
+
+</body>
+</html>

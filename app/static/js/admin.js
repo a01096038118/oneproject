@@ -12,7 +12,7 @@ function signupForm() {
     
 
     let mIdPattern = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z0-9]{4,20}$/;
-    let mPwPattern = /^(?=.*[A-Za-z])(?=.*\d)[^\s]{8,20}$/;
+    let mPwPattern = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[\W_])[^\s]{8,20}$/;
     let mMailPattern = /^[\w.-]+@[\w.-]+\.[A-Za-z]{2,5}$/;
     let mPhonePattern = /^\d{10,11}$/;
     
@@ -88,7 +88,7 @@ function signinForm() {
     let admin_key = form.admin_key.value.trim();
 
     let mIdPattern = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z0-9]{4,20}$/;
-    let mPwPattern = /^(?=.*[A-Za-z])(?=.*\d)[^\s]{8,20}$/;
+    let mPwPattern = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[\W_])[^\s]{8,20}$/;
     
     if (mId === "") {
         alert("PLEASE INPUT ADMIN ID");

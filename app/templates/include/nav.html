@@ -1,19 +1,13 @@
 <link href="{{ url_for('static', filename='css/include/nav.css') }}" rel="stylesheet">
 
 <nav>
-    {% if not session.get('signIntedmember') %}
+    {% if not session.get('signedInMemberId') and not session.get('signedIntedMember') %}
         <div class="nav_wrap">
             <a href="/">HOME</a>
             |  
-            <a>MEMBERS :</a> 
-            <a href="/member/memberSignUp_form">SIGN UP</a>
-            /
-            <a href="/member/memberSignIn_form">SIGN IN</a>
+            <a href="/member/gateway">MEMBERS</a> 
             | 
-            <a>ADMIN :</a>
-            <a href="/admin/adminSignUp_form">SIGN UP</a>
-            /
-            <a href="/admin/adminSignIn_form">SIGN IN</a>
+            <a href="/admin/gateway">ADMIN</a>
             |
         </div>
     {% else %}  
@@ -24,10 +18,11 @@
             |
             <a href="/member/memberModify_form">MODIFY</a>
             |
-            <a href="/member/delete_confirm" onclick="return confirm('정말 탈퇴하시겠습니까?');">DELETE</a>
+            <a href="/member/memberDelete_confirm" onclick="return confirm('정말 탈퇴하시겠습니까?');">DELETE</a>
+            |
+            <a href="/admin/admin_key_page">ADMIN KEY</a>
             |
             <a href="/dashboard/">DASHBOARD</a>
         </div>
     {% endif %}
-    
 </nav>
