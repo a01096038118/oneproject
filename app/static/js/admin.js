@@ -114,7 +114,10 @@ function signinForm() {
         alert("PLEASE INPUT ADMIN KEY");
         form.admin_key.focus();
 
-    } 
+    } else if (!admin_key.test(admin_key)) {
+        alert("KEY NUMBER NO MACTH")
+        form.admin_key.focus();
+    }
     else {
         alert("SIGNIN SUCCESS!!")
         form.submit();
