@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    {% include 'include/title.html' %}
+    <link href="{{ url_for('static', filename='css/common.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/member/member.css') }}" rel="stylesheet">
+</head>
+<body>
+
+    {% include 'include/videos.html' %}
+
+    <div class="main-content-overlay">
+        {% include 'include/header.html' %}
+        {% include 'include/nav.html' %}
+    </div>
+
+    <article id="admin_key_wrap">
+        <div class="modify_form">
+            <h2>관리자 키 생성</h2>
+            <p>아래 버튼을 누르면 UUID 기반 관리자 키를 생성합니다.</p>
+            <form action="{{ url_for('admin.generate_key') }}" method="POST">
+                <input class="input_button_basic_130" type="submit" value="키 생성">
+            </form>
+        </div>
+    </article>
+
+    {% include 'include/footer.html' %}
+</body>
+</html>

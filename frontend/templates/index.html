@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% include 'include/title.html' %}
+    <link href="{{ url_for('static', filename='css/common.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/index.css') }}" rel="stylesheet">
+</head>
+<body>
+
+    {% include 'include/videos.html' %}
+    
+    <div class="main-content-overlay">
+        {% include 'include/header.html' %}
+        {% include 'include/nav.html' %}
+        
+        <article class="main-hero-text">
+            <h1>&lt;AI 드론 기반 해양 위험구역 경보 시스템&gt;</h1>
+        </article>
+
+        {% include 'include/footer.html' %}
+    </div>
+
+</body>
+</html>
