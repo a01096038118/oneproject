@@ -10,7 +10,7 @@ function signupForm() {
     let mCareer = form.mCareer.value.trim();
 
     let mIdPattern = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z0-9]{4,20}$/;
-    let mPwPattern = /^(?=.*[A-Za-z])(?=.*\d)[^\s]{8,20}$/;
+    let mPwPattern = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[\W_])[^\s]{8,20}$/;
     let mMailPattern = /^[\w.-]+@[\w.-]+\.[A-Za-z]{2,5}$/;
     let mPhonePattern = /^\d{10,11}$/;
     let mCareerPattern = /^\d+개월$/;
@@ -65,7 +65,7 @@ function signupForm() {
     
         
     } else {
-        
+        alert("MEMBER SIGN UP SUCCESS!!")
         form.submit();
     }
 
@@ -80,7 +80,7 @@ function signinForm() {
     let mPw = form.mPw.value.trim();
 
     let mIdPattern = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z0-9]{4,20}$/;
-    let mPwPattern = /^(?=.*[A-Za-z])(?=.*\d)[^\s]{8,20}$/;
+    let mPwPattern = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[\W_])[^\s]{8,20}$/;
     
     if (mId === "") {
         alert("PLEASE INPUT MEMBER ID");

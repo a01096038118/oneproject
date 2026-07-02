@@ -22,22 +22,13 @@ member_bp = Blueprint(
 # 글자4개 이상
 id_pattern = r'^(?=.*[A-Za-z])(?=.*\d)[A-Za-z0-9]{4,20}$'
 # 글자&숫자 포함 8자 이상 20자 이하
-pw_pattern = r'^(?=.*[A-Za-z])(?=.*\d)[^\s]{8,20}$'
+pw_pattern = r'^(?=.*[A-Za-z])(?=.*\d)(?=.*[\W_])[^\s]{8,20}$'
 # '@'과'.' 존재 
 mail_pattern = r'^[\w.-]+@[\w.-]+\.[A-Za-z]{2,5}$'
 # 숫자 8자
 phone_pattern =r'^\d{10,11}$'
 # 경력 증명
 career_pattern = r'^\d+개월$'
-
-
-#  관리자 키 생성 페이지
-@admin_bp.route('/admin_key_page', methods = ['GET'])
-def admin_key_page():
-    if session.get('role') != 'ADMIN':
-        return '접근 불가! 관리자 전용입니다.'
-    
-    return render_template('member/admin_key_page.html')
 
 
 
@@ -62,7 +53,7 @@ def adminSignUp_confirm():
         return render_template('member/adminSignUp_result.html',
                                result = '아이디는 영문, 숫자 포함 4자 이상 20자 이하로 입력해주세요.')
    
-    # pw_pattern = r'^(?=.*[A-Za-z])(?=.*\d)[^\s]{8,20}$'
+    # pw_pattern = r'^(?=.*[A-Za-z])(?=.*\d)(?=.*[\W_])[^\s]{8,20}$'
     mPw = request.form['mPw']
     if not re.match(pw_pattern, mPw):
         return render_template('member/adminSignUp_result.html',
@@ -183,8 +174,8 @@ def memberSingup_comfirm():
     save_members(members)
 
     return render_template(
-        'member/memberSignUp_result.html', 
-        result = '회원가입 성공')
+        'member/memberSignIn_form.html', 
+        result = 'MEMBER SIGNUP SUCCESS!!')
 
 # 관리자 로그인 화면 
 @admin_bp.route('/adminSignIn_form', methods = ['GET'])
@@ -202,7 +193,6 @@ def adminSignIn_confirm():
     admin_key = request.form['admin_key']
 
     admin_keys = load_admin_keys()
-    
     
 
     # #  이미 사용된 키 확인
@@ -249,8 +239,21 @@ def memberSignIn_confirm():
         return render_template('member/memberSignIn_form.html', 
                                 result = '올바른 비밀번호가 아닙니다.')
                    
-    return render_template('member/memberSignIn_result.html',
-                        result = 'SIGNIN SUCCESS!!')
+    return render_template('/index.html', result = 'SIGNIN SUCCESS!!')
+
+
+# 1. MEMBERS 클릭 시 로그인/회원가입 선택 페이지 리턴
+@member_bp.route('/gateway', methods=['GET'])
+def member_gateway():
+    return render_template('member/member_gateway.html')
+
+
+# 2. ADMIN 클릭 시 관리자 로그인/회원가입 선택 페이지 리턴
+@admin_bp.route('/gateway', methods=['GET'])
+def admin_gateway():
+    # 파일이 templates/member 안에 들어있으므로 경로를 member/ 로 지정해야 오류가 나지 않습니다!
+    return render_template('member/admin_gateway.html')
+
 
 # 로그아웃
 @member_bp.route('/signOut_form', methods = ['GET'])

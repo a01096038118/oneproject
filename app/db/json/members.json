@@ -1,26 +1,10 @@
 {
     "gildong2": {
         "mId": "gildong2",
-        "mPw": "@rp5741rp213",
+        "mPw": "@gildong2",
         "mMail": "gildong@gmail.com",
         "mPhone": "01012345678",
-        "mCareer": "11개월",
-        "role": "MEMBER"
-    },
-    "gildong01": {
-        "mId": "gildong01",
-        "mPw": "gildong01",
-        "mMail": "gildong@gmail.com",
-        "mPhone": "01012345678",
-        "mCareer": "4개월",
-        "role": "MEMBER"
-    },
-    "gildong02": {
-        "mId": "gildong02",
-        "mPw": "gildong02",
-        "mMail": "gildong@naver.com",
-        "mPhone": "01012345678",
-        "mCareer": "4개월",
+        "mCareer": "3개월",
         "role": "MEMBER"
     }
 }
