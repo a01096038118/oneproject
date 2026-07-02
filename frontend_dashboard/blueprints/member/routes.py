@@ -78,10 +78,17 @@ def adminSignUp_confirm():
     if not re.match(id_pattern, mId):
         return render_template('member/adminSignUp_result.html',
                                result = '아이디는 영문, 숫자 포함 4자 이상 20자 이하로 입력해주세요.')
+    
     admins = load_admins()
 
-    for admin in admins:
-        if admin ['mId'] == mId:
+    # 1. ID 중복 체크 (기존 리스트 구조일 때의 안전한 체크)
+    if isinstance(admins, list):
+        for admin_item in admins:
+            if admin_item.get('mId') == mId:
+                return render_template('member/adminSignUp_result.html',
+                                       result = '중복된 ID 입니다. 다시 입력해주세요.')
+    elif isinstance(admins, dict):
+        if mId in admins:
             return render_template('member/adminSignUp_result.html',
                                    result = '중복된 ID 입니다. 다시 입력해주세요.')
     
@@ -96,11 +103,6 @@ def adminSignUp_confirm():
     if not re.match(mail_pattern, mMail):
         return render_template('member/adminSignUp_result.html',
                                result = '올바른 이메일 형식이 아닙니다.')
-    admin = load_admins()
-    for admin in admins:
-        if admin ['mId'] == mId:
-            return render_template('member/adminSignUp_result.html',
-                                   result = '중복된 EMAIL입니다.')
 
     # phone_pattern =r'^\d{10,11}$'
     mPhone = request.form['mPhone']
@@ -108,48 +110,42 @@ def adminSignUp_confirm():
         return render_template('member/adminSignUp_result.html',
                                result = '숫자만 입력해주세요.')
     
-    inputKey = request.form['admin_key']
+    # 🌟 [자동 생성] 고유한 UUID 관리자 키 생성
+    generated_admin_key = str(uuid.uuid4())
 
-    admin_key = load_admins_key()
-    print('admin_key:', admin_key)
-    admins = load_admins()
+    # 변수 이름이 겹치지 않게 새로 불러와 할당
+    current_admins = load_admins()
 
-    #  키 존재 확인
-    if inputKey not in admin_key:
-        return render_template(
-            'member/adminSignUp_result.html',
-            result = 'NG. 올바른 키번호가 아닙니다.')
+    # 데이터 저장 (기존 데이터가 딕셔너리 구조 {mId: {}} 인 경우)
+    if isinstance(current_admins, dict):
+        current_admins[mId] = {
+            'mId': mId,
+            'mPw': mPw,
+            'mMail': mMail,
+            'mPhone': mPhone,
+            'role': 'ADMIN',
+            'admin_key': generated_admin_key
+        }
+        save_admins(current_admins)
+        
+    # 데이터 저장 (기존 데이터가 리스트 구조 [{}] 인 경우도 함께 대응)
+    elif isinstance(current_admins, list):
+        new_admin_data = {
+            'mId': mId,
+            'mPw': mPw,
+            'mMail': mMail,
+            'mPhone': mPhone,
+            'role': 'ADMIN',
+            'admin_key': generated_admin_key
+        }
+        current_admins.append(new_admin_data)
+        save_admins(current_admins)
 
-    #  이미 사용된 키 확인
-    if admin_key[inputKey].get('used'):
-        return render_template(
-            'member/adminSignUp_result.html', 
-            result='NG . 이미 사용된 키입니다.')
-
-    if mId in admin:
-        return render_template(
-            'member/adminSignUp_result.html',
-            result = 'NG. 이미 존재하는 ID입니다.')
-    
-    admin [mId] = {
-        'mId': mId,
-        'mPw': mPw,
-        'mMail': mMail,
-        'mPhone': mPhone,
-        'role': 'ADMIN',
-        'admin_key': inputKey
-    }
-
-    admin_key[inputKey]['used'] = True
-
-    save_admins(admin)
-    save_admins_key(admin_key)
-
-
+    # 🌟 회원가입 성공 시 생성된 UUID 키(generated_key)를 결과 페이지로 확실히 전달
     return render_template(
         'member/adminSignUp_result.html',
-        result = 'OK')
-
+        result = 'OK',
+        generated_key = generated_admin_key)
     
 # 직원 회원가입 화면 이동
 @member_bp.route('/memberSignUp_form', methods = ['GET'])
@@ -354,3 +350,15 @@ def memberDelete_confirm():
     return render_template('memberDelete_result.html',
                            result = 'OK')
     
+
+
+# 1. MEMBERS 클릭 시 로그인/회원가입 선택 페이지 리턴
+@member_bp.route('/gateway', methods=['GET'])
+def member_gateway():
+    return render_template('member/member_gateway.html')
+
+# 2. ADMIN 클릭 시 관리자 로그인/회원가입 선택 페이지 리턴
+@admin_bp.route('/gateway', methods=['GET'])
+def admin_gateway():
+    # 파일이 templates/member 안에 들어있으므로 경로를 member/ 로 지정해야 오류가 나지 않습니다!
+    return render_template('member/admin_gateway.html')
