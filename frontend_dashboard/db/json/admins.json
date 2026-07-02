@@ -1,19 +1,10 @@
 {
-    "admin01" : {
-    "mId": "admin01",
-    "mPw": "securePw123!",
-    "mMail": "admin01@example.com",
-    "mPhone": "01012345678",
-    "role": "ADMIN",
-    "admin_key": "d3b07384-d113-4ec8-a533-2fc116075194"
-    },
-
-    "master1234": {
-        "mId": "master1234",
-        "mPw": "good1234567",
-        "mMail": "master1234@naver.com",
-        "mPhone": "01012341234",
+    "gildong": {
+        "mId": "gildong",
+        "mPw": "rlfehd123",
+        "mMail": "gildong@gmail.com",
+        "mPhone": "01012345678",
         "role": "ADMIN",
-        "admin_key": "c9a1a8cc-7009-4114-9988-333eeff110aa"
+        "admin_key": "41d15984-201f-49fd-951a-92c41e86f24b"
     }
 }
