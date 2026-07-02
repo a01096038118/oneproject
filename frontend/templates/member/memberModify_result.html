@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% include 'include/title.html' %}
+
+    <link href="{{ url_for('static', filename='css/common.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/index.css') }}" rel="stylesheet">
+
+    <script src="{{ url_for('static', filename='js/member.js') }}"></script>
+    
+</head>
+<body>
+    
+    <div class="main-content-overlay">
+        {% include 'include/header.html' %}
+        {% include 'include/nav.html' %}
+    </div>
+
+    <article id="modify_wrap">
+        
+        <div class="modify_result">
+            <h3>MODIFY SUCCESS!!</h3>
+        </div>
+
+    </article>
+
+    {% include 'include/footer.html' %}
+
+</body>
+</html>
