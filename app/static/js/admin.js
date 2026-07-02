@@ -58,11 +58,25 @@ function signupForm() {
         
     } 
     else {
-
         form.submit();
     }
-
 }
+
+
+window.onload = function () {
+    const keyInput = document.getElementById("adminKey");
+
+    console.log("keyInput:", keyInput);
+
+    if (!keyInput) {
+        console.log("adminKey 없음 → 팝업 안 뜸");
+        return;
+    }
+
+    alert("관리자 키: " + keyInput.value);
+}
+
+
 
 function signinForm() {
     console.log('signinForm() CALLED!!')

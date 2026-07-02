@@ -12,9 +12,6 @@ app.register_blueprint(admin_bp)
 def home():
     return render_template('index.html')
 
-@app.route("/adminSignIn_form", methods = ['GET'])
-def adminSignIn():
-    return render_template('adminSignIn_form.html')
 
 if __name__ == '__main__':
     app.run(

@@ -39,24 +39,7 @@ def admin_key_page():
     
     return render_template('member/admin_key_page.html')
 
-# 키 생성
-@admin_bp.route('/generate_key', methods = ['POST'])
-def generate_key():
-    if session.get('role') != 'ADMIN':
-        return '접근 불가! 관리자 전용입니다.'
-    
-    admin_key = load_admin_keys()
-    new_uuid = str(uuid.uuid4())
 
-    admin_key[new_uuid] = {
-        'used': False
-    }
-
-    save_admin_keys(admin_key)
-    return render_template(
-        'member/admin_key_result.html',
-        new_key=new_uuid
-    )
 
 # 관리자 회원가입 화면 이동
 @admin_bp.route('/adminSignUp_form', methods = ['GET'])
@@ -71,17 +54,14 @@ def adminSignUp_form():
 def adminSignUp_confirm():
     print('adminSignUp_confirm() CALLED')
 
+    admins = load_admins()
+     
     # id_pattern = r'^(?=.*[A-Za-z])[A-Za-z0-9]{4,20}$'
     mId = request.form['mId']
     if not re.match(id_pattern, mId):
         return render_template('member/adminSignUp_result.html',
                                result = '아이디는 영문, 숫자 포함 4자 이상 20자 이하로 입력해주세요.')
-    admin = load_admins()
-
-    if mId in admins:
-        return render_template('member/adminSignUp_result.html',
-                               result = '중복된 ID 입니다. 다시 입력해주세요.')
-    
+   
     # pw_pattern = r'^(?=.*[A-Za-z])(?=.*\d)[^\s]{8,20}$'
     mPw = request.form['mPw']
     if not re.match(pw_pattern, mPw):
@@ -94,58 +74,48 @@ def adminSignUp_confirm():
         return render_template('member/adminSignUp_result.html',
                                result = '올바른 이메일 형식이 아닙니다.')
     
-    admin = load_admins()
-    
-    for admin in admins.values():
-        if admin ['mMail'] == mMail:
-            return render_template('member/adminSignUp_form.html',
-                                    result = '중복된 EMAIL입니다.')
-
     # phone_pattern =r'^\d{10,11}$'
     mPhone = request.form['mPhone']
     if not re.match(phone_pattern, mPhone):
         return render_template('member/adminSignUp_result.html',
                                result = '숫자만 입력해주세요.')
     
-    inputUuid = request.form['admin_key']
+     # id 중복
+    if mId in admins:
+        return render_template('member/adminSignUp_form.html',
+                               result = '중복된 ID 입니다. 다시 입력해주세요.')
+    # email 중복
+    for admin in admins.values():
+        if admin ['mMail'] == mMail:
+            return render_template('member/adminSignUp_form.html',
+                                    result = '중복된 EMAIL입니다.')
+        
+    admin_keys = load_admin_keys()
+    new_uuid = str(uuid.uuid4())
 
-    admin_key = load_admin_keys()
-    admins = load_admins()
+    admin_keys[new_uuid] = {
+        'used': False
+    }
 
-    #  키 존재 확인
-    if inputUuid not in admin_key:
-        return render_template(
-            'member/adminSignUp_result.html',
-            result = 'NG')
+    save_admin_keys(admin_keys)
 
-    #  이미 사용된 키 확인
-    if admin_key[inputUuid].get('used'):
-        return render_template(
-            'member/adminSignUp_result.html', 
-            result='NG')
-
-    if mId in admin:
-        return render_template(
-            'member/adminSignUp_result.html',
-            result = 'NG')
-    
     admins [mId] = {
         'mId': mId,
         'mPw': mPw,
         'mMail': mMail,
         'mPhone': mPhone,
-        'role': 'ADMIN'
+        'role': 'ADMIN',
+        'admin_key': new_uuid
     }
 
-    admin_key[inputUuid]['used'] = True
-
     save_admins(admins)
-    save_admin_keys(admin_key)
+    save_admin_keys(admin_keys)
 
 
     return render_template(
         'member/adminSignUp_result.html',
-        result = 'OK')
+        result = 'ADMIN SIGNIN SUCCESS!!',
+        admin_key = new_uuid)
 
     
 # 직원 회원가입 화면 이동
@@ -229,21 +199,32 @@ def adminSignIn_confirm():
 
     mId = request.form['mId']
     mPw = request.form['mPw']
-    inputUuid = request.form['admin_uuid']
+    admin_key = request.form['admin_key']
+
+    admin_keys = load_admin_keys()
     
-    if mId in admins:
+    
+
+    # #  이미 사용된 키 확인
+    # if admin_keys[admin_key].get('used'):
+    #     return render_template(
+    #         'member/adminSignUp_result.html', 
+    #         result='NG')
+    
+    if mId not in admins:
         return render_template('member/adminSignIn_form.html',
                                    result = 'ID가 존재하지 않습니다.')
     if admins [mId]['mPw'] != mPw:
         return render_template('member/adminSignIn_form.html',
-                               result = '올바른 비밀번호가 아닙니다.')   
-                 
-    if inputUuid != admins['admin_uuid']:
-                return render_template('member/adminSignIn_form.html',
-                                    result = '올바른 키번호가 아닙니다.')
+                               result = '올바른 비밀번호가 아닙니다.') 
+    #  키 존재 확인
+    if admin_key not in admin_keys:
+        return render_template('member/adminSignUp_result.html',
+                               result = '올바른 키번호가 아닙니다.')  
+    
+    save_admin_keys(admin_keys)
         
-    return render_template('member/adminSignIn_result.html',
-                            result = 'SIGNIN SUCCESS!!')
+    return render_template('/index.html', result = 'SIGNIN SUCCESS!!')
 
     
 # member 로그인 화면

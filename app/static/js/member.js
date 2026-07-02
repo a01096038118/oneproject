@@ -98,7 +98,7 @@ function signinForm() {
         
     
     } else if (!mPwPattern.test(mPw)) {
-       alert("특수문자, 영문, 숫자 포함하여 8자리 이상 20자리 이하로 입력해주세요.")
+       alert("틀린 비밀번호입니다.")
        form.mPw.focus();
        
 

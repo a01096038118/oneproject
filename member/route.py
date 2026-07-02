@@ -79,10 +79,9 @@ def adminSignUp_confirm():
                                result = '아이디는 영문, 숫자 포함 4자 이상 20자 이하로 입력해주세요.')
     admin = load_admins()
 
-    for admin in admins:
-        if admin ['mId'] == mId:
-            return render_template('frontend/adminSignUp_result.html',
-                                   result = '중복된 ID 입니다. 다시 입력해주세요.')
+    if mId in admins:
+        return render_template('member/adminSignUp_form.html',
+                               result = '중복된 ID 입니다. 다시 입력해주세요.')
     
     # pw_pattern = r'^(?=.*[A-Za-z])(?=.*\d)(?=.*^[A-Za-z0-9])[^\s]{8,20}$'
     mPw = request.form['mPw']

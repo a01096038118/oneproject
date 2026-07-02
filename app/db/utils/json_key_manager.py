@@ -12,9 +12,9 @@ def load_admin_keys():
         return {}
     
 
-def save_admin_keys(keys):
+def save_admin_keys(admin_keys):
     with open(FILE,'w', encoding='utf-8') as f:
-        json.dump(keys,
+        json.dump(admin_keys,
                   f,
                   ensure_ascii= False,
                   indent=4
