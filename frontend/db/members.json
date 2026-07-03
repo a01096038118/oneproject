@@ -4,5 +4,19 @@
         "mPw": "1234",
         "mMail": "gildong@gmail.com",
         "mPhone": "010-1234-5678"
+    },
+    "member1": {
+        "mId": "member1",
+        "mPw": "member1234",
+        "mMail": "member1@naver.com",
+        "mPhone": "01022222222",
+        "role": "MEMBER"
+    },
+    "member2": {
+        "mId": "member2",
+        "mPw": "member1234",
+        "mMail": "member2@naver.com",
+        "mPhone": "01033333333",
+        "role": "MEMBER"
     }
 }

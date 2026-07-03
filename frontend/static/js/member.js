@@ -31,6 +31,19 @@ function signupForm() {
 
 }
 
+function selectModifyMember(button) {
+    const memberId = button.dataset.memberId || '';
+    const memberPw = button.dataset.memberPw || '';
+    const memberMail = button.dataset.memberMail || '';
+    const memberPhone = button.dataset.memberPhone || '';
+
+    document.getElementById('mIdInput').value = memberId;
+    document.getElementById('mIdText').value = memberId;
+    document.getElementById('mPwInput').value = memberPw;
+    document.getElementById('mMailInput').value = memberMail;
+    document.getElementById('mPhoneInput').value = memberPhone;
+}
+
 function signinForm() {
     console.log('signinForm() CALLED!!')
 

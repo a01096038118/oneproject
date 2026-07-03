@@ -9,8 +9,6 @@
 
 </head>
 <body>
-
-    {% include 'include/videos.html' %}
     
     <div class="main-content-overlay">
         {% include 'include/header.html' %}
@@ -19,7 +17,7 @@
 
     <article id="signin_wrap">
         <div class="signin_result">
-            {% if result %}
+            {% if result != "OK" %}
                 <h3>{{ result }}</h3>
             {% else %}
                 <h3>SIGNIN SUCCESS!!</h3>
