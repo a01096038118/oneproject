@@ -4,7 +4,7 @@
     {% if not session.get('signIntedMember') %}
         <div class="nav_wrap">
             <div class="nav_item">
-                <a href="/">HOME</a>
+                <a href="/">HOME</a> 
             </div>
             <div class="nav_item">
                 <a href="/member/gateway">MEMBERS</a>
@@ -21,15 +21,14 @@
             <div class="nav_item">
                 <a href="/member/signOut_confirm">SIGN-OUT</a>
             </div>
-            <div class="nav_item">
-                <a href="/member/memberModify_form">MODIFY</a>
-            </div>
-            <div class="nav_item">
-                <a href="/member/delete_confirm" onclick="return confirm('정말 탈퇴하시겠습니까?');">DELETE</a>
-            </div>
-            <div class="nav_item">
-                <a href="/admin/admin_key_page">ADMIN KEY</a>
-            </div>
+            {% if session.get('signIntedMember')['role'] == 'ADMIN' %}
+                <div class="nav_item">
+                    <a href="/member/memberModify_form">MODIFY</a>
+                </div>
+                <div class="nav_item">
+                    <a href="/member/delete_confirm" onclick="return confirm('정말 탈퇴하시겠습니까?');">DELETE</a>
+                </div>
+            {% endif %}
             <div class="nav_item">
                 <a href="/dashboard/">DASHBOARD</a>
             </div>

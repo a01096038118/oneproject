@@ -11,8 +11,6 @@
     
 </head>
 <body>
-
-    {% include 'include/videos.html' %}
     
     <div class="main-content-overlay">
         {% include 'include/header.html' %}
@@ -27,13 +25,36 @@
             </form>
         </div>
 
+        <div class="members_list">
+            <h2>회원 목록</h2>
+            {% if members %}
+            <ul class="member-list">
+                {% for member_id, member in members.items() %}
+                <li class="member-item">
+                    <button type="button"
+                            class="member-select-button"
+                            data-member-id="{{ member.mId }}"
+                            data-member-pw="{{ member.mPw }}"
+                            data-member-mail="{{ member.mMail }}"
+                            data-member-phone="{{ member.mPhone }}"
+                            onclick="selectModifyMember(this);">
+                        {{ member.mId }} / {{ member.mMail }} / {{ member.mPhone }}
+                    </button>
+                </li>
+                {% endfor %}
+            </ul>
+            {% else %}
+            <p>등록된 회원이 없습니다.</p>
+            {% endif %}
+        </div>
+
         <div class="modify_form">
             <form action="/member/memberModify_confirm" name="modify_form" method="POST">
-                <input type="hidden" name="mId" value="{{ member.mId }}">
-                <input class="input_basic" type="text" value="{{ member.mId }}" readonly disabled><br>
-                <input class="input_basic" type="password" name="mPw" value="{{ member.mPw }}" placeholder="Input member PW"><br>
-                <input class="input_basic" type="email" name="mMail" value="{{ member.mMail }}" placeholder="Input member MAIL"><br>
-                <input class="input_basic" type="text" name="mPhone" value="{{ member.mPhone }}" placeholder="Input member PHONE"><br>
+                <input type="hidden" id="mIdInput" name="mId" value="">
+                <input class="input_basic" id="mIdText" type="text" value="" readonly disabled><br>
+                <input class="input_basic" id="mPwInput" type="password" name="mPw" value="" placeholder="Input member PW"><br>
+                <input class="input_basic" id="mMailInput" type="email" name="mMail" value="" placeholder="Input member MAIL"><br>
+                <input class="input_basic" id="mPhoneInput" type="text" name="mPhone" value="" placeholder="Input member PHONE"><br>
                 <input class="input_button_basic_130" type="button" value="MODIFY" onclick="modifyForm();">
                 <input class="input_button_basic_130" type="reset" value="RESET">
             </form>

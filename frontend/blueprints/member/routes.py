@@ -78,10 +78,17 @@ def adminSignUp_confirm():
     if not re.match(id_pattern, mId):
         return render_template('member/adminSignUp_result.html',
                                result = '아이디는 영문, 숫자 포함 4자 이상 20자 이하로 입력해주세요.')
+    
     admins = load_admins()
 
-    for admin in admins:
-        if admin ['mId'] == mId:
+    # 1. ID 중복 체크 (기존 리스트 구조일 때의 안전한 체크)
+    if isinstance(admins, list):
+        for admin_item in admins:
+            if admin_item.get('mId') == mId:
+                return render_template('member/adminSignUp_result.html',
+                                       result = '중복된 ID 입니다. 다시 입력해주세요.')
+    elif isinstance(admins, dict):
+        if mId in admins:
             return render_template('member/adminSignUp_result.html',
                                    result = '중복된 ID 입니다. 다시 입력해주세요.')
     
@@ -96,11 +103,6 @@ def adminSignUp_confirm():
     if not re.match(mail_pattern, mMail):
         return render_template('member/adminSignUp_result.html',
                                result = '올바른 이메일 형식이 아닙니다.')
-    admin = load_admins()
-    for admin in admins:
-        if admin ['mId'] == mId:
-            return render_template('member/adminSignUp_result.html',
-                                   result = '중복된 EMAIL입니다.')
 
     # phone_pattern =r'^\d{10,11}$'
     mPhone = request.form['mPhone']
@@ -108,47 +110,29 @@ def adminSignUp_confirm():
         return render_template('member/adminSignUp_result.html',
                                result = '숫자만 입력해주세요.')
     
-    inputKey = request.form['admin_key']
+    # 🌟 [자동 생성] 고유한 UUID 관리자 키 생성
+    generated_admin_key = str(uuid.uuid4())
 
-    admin_key = load_admins_key()
-    print('admin_key:', admin_key)
-    admins = load_admins()
+    # 변수 이름이 겹치지 않게 새로 불러와 할당
+    current_admins = load_admins()
 
-    #  키 존재 확인
-    if inputKey not in admin_key:
-        return render_template(
-            'member/adminSignUp_result.html',
-            result = 'NG. 올바른 키번호가 아닙니다.')
+    # 데이터 저장 (기존 데이터가 딕셔너리 구조 {mId: {}} 인 경우)
+    if isinstance(current_admins, dict):
+        current_admins[mId] = {
+            'mId': mId,
+            'mPw': mPw,
+            'mMail': mMail,
+            'mPhone': mPhone,
+            'role': 'ADMIN',
+            'admin_key': generated_admin_key
+        }
+        save_admins(current_admins)
 
-    #  이미 사용된 키 확인
-    if admin_key[inputKey].get('used'):
-        return render_template(
-            'member/adminSignUp_result.html', 
-            result='NG . 이미 사용된 키입니다.')
-
-    if mId in admin:
-        return render_template(
-            'member/adminSignUp_result.html',
-            result = 'NG. 이미 존재하는 ID입니다.')
-    
-    admin [mId] = {
-        'mId': mId,
-        'mPw': mPw,
-        'mMail': mMail,
-        'mPhone': mPhone,
-        'role': 'ADMIN',
-        'admin_key': inputKey
-    }
-
-    admin_key[inputKey]['used'] = True
-
-    save_admins(admin)
-    save_admins_key(admin_key)
-
-
+    # 🌟 회원가입 성공 시 생성된 UUID 키(generated_key)를 결과 페이지로 확실히 전달
     return render_template(
         'member/adminSignUp_result.html',
-        result = 'OK')
+        result = 'OK',
+        generated_key = generated_admin_key)
 
     
 # 직원 회원가입 화면 이동
@@ -169,6 +153,7 @@ def memberSingup_comfirm():
     members = load_members()
 
     for member in members:
+        member = members[member]
         if member ['mId'] == mId:
             return render_template('member/adminSignUp_result.html',
                                    result = '중복된 ID입니다. 다시입력해주세요.')
@@ -188,6 +173,7 @@ def memberSingup_comfirm():
     members = load_members()
     
     for member in members:
+        member = members[member]
         if member ['mMail'] == mMail:
             return render_template('member/adminSignUp_result.html',
                                    result = '중복된 EMAIL입니다.')
@@ -197,24 +183,18 @@ def memberSingup_comfirm():
     if not re.match(phone_pattern, mPhone):
         return render_template('member/adminSignUp_result.html',
                                result = '숫자만 입력해주세요.')
-    
-    mCareer = request.form['mCareer']
-    if re.match(career_pattern, mCareer):
-        return render_template('member/adminSignUp_result.html',
-                               result = 'OK')
 
     members = load_members()
 
-    member [mId] = {
+    members [mId] = {
         'mId': mId,
         'mPw': mPw,
         'mMail': mMail,
         'mPhone': mPhone,
-        'mCareer': mCareer,
         'role': 'MEMBER'
     }
 
-    save_members(member)
+    save_members(members)
 
     return render_template(
         'member/memberSignUp_result.html', 
@@ -298,10 +278,8 @@ def signOut_confirm():
 def memberModify_form():
 
     members = load_members()
-    signedId = session.get('signIntedMember')
-    member = members[signedId]
 
-    return render_template('member/memberModify_form.html', member = member)
+    return render_template('member/memberModify_form.html', members = members)
 
 #  회원정보 수정 양식
 @member_bp.route('/memberModify_confirm', methods = ['POST'])
@@ -329,7 +307,6 @@ def memberModify_confirm():
         
     for member in members:
         if member['mId'] == mId:
-
             member['mPw'] = mPw
             member['mMail'] = mMail
             member['mPhone'] = mPhone
