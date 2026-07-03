@@ -19,6 +19,7 @@
         
         <div class="modify_form">
             <form action="/member/modify_confirm" name="modify_form" method="POST">
+                <input class="input_basic" name="admin_key" placeholder="Input admin key">
                 <input type="hidden" name="mId" value="{{ member.mId }}">
                 <input class="input_basic" type="text" value="{{ member.mId }}" readonly disabled><br>
                 <input class="input_basic" type="password" name="mPw" value="{{ member.mPw }}" placeholder="Input member PW"><br>

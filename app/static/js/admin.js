@@ -78,30 +78,16 @@ function copyToClipboard() {
     }
     }
 
-        // 구형 브라우저 환경을 위한 예외 처리용 임시 복사 방식
-        function fallbackCopy(text) {
-            const dummy = document.createElement("textarea");
-            document.body.appendChild(dummy);
-            dummy.value = text;
-            dummy.select();
-            document.execCommand("copy");
-            document.body.removeChild(dummy);
-            alert('관리자 키가 클립보드에 복사되었습니다!');
-        }
-
-// window.onload = function () {
-//     const keyInput = document.getElementById("adminKey");
-
-//     console.log("keyInput:", keyInput);
-
-//     if (!keyInput) {
-//         console.log("adminKey 없음 → 팝업 안 뜸");
-//         return;
-//     }
-
-//     alert("관리자 키: " + keyInput.value);
-// }
-
+// 구형 브라우저 환경을 위한 예외 처리용 임시 복사 방식
+function fallbackCopy(text) {
+    const dummy = document.createElement("textarea");
+    document.body.appendChild(dummy);
+    dummy.value = text;
+    dummy.select();
+    document.execCommand("copy");
+    document.body.removeChild(dummy);
+    alert('관리자 키가 클립보드에 복사되었습니다!');
+}
 
 
 function signinForm() {
@@ -179,3 +165,8 @@ function modifyForm() {
     }
 
 }
+
+function deleteForm() {
+     alert("MEMBER DELETE SUCCESS!!")
+     form.submit();
+    }

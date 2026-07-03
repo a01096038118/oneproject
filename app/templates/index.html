@@ -21,7 +21,17 @@
             <h1>&lt;AI 드론 기반 해양 위험구역 경보 시스템&gt;</h1>
         </article>
 
-        <a href="/member/logout">LOGOUT</a>
+        {% with messages = get_flashed_messages() %}
+
+        <!-- 로그아웃 메세지 -->
+            {% if messages %}
+                <script> 
+                    alert("{{ messages[0] }}");
+                </script>
+        
+            {% endif %}
+        
+        {% endwith %}
 
         {% include 'include/footer.html' %}
     </div>

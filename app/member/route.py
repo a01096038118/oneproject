@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, session
+from flask import Blueprint, render_template, request, redirect, session, flash
 import uuid
 from db.utils.json_admin_manager import load_admins, save_admins
 from db.utils.json_key_manager import load_admin_keys, save_admin_keys
@@ -119,12 +119,15 @@ def memberSignUp_form():
 def memberSingup_comfirm():
     print('memberSignUp_confirm() CALLED!!')
 
+    admins = load_admins()
+    members = load_members()
+
+
     # id_pattern = r'^(?=.*[A-Za-z])[A-Za-z0-9]{4,20}$'
     mId = request.form['mId']
     if not re.match(id_pattern, mId):
-        return render_template('member/memberSignUp_result.html',
+        return render_template('member/memberSignUp_form.html',
                                result = '아이디는 영문, 숫자 포함 4자 이상 20자 이하로 입력해주세요.')
-    members = load_members()
 
     if mId in members:
         return render_template('member/memberSignUp_form.html',
@@ -133,16 +136,14 @@ def memberSingup_comfirm():
     # pw_pattern = r'^(?=.*[A-Za-z])(?=.*\d)[^\s]{8,20}$'
     mPw = request.form['mPw']
     if not re.match(pw_pattern, mPw):
-        return render_template('member/memberSignUp_result.html',
+        return render_template('member/memberSignUp_form.html',
                                result = '비밀번호 특수문자, 영문, 숫자 포함하여 8자리 이상 20자리 이하로 입력해주세요.')
     
     # mail_pattern = r'^[\w.-]+@[\w.-]+\.[A-Za-z]{2,5}$'
     mMail = request.form['mMail']
     if not re.match(mail_pattern, mMail):
-        return render_template('member/memberSignUp_result.html',
+        return render_template('member/memberSignUp_form.html',
                                result = '올바른 이메일 형식이 아닙니다.')
-    
-    members = load_members()
     
     for member in members.values():
         if member['mMail'] == mMail:
@@ -152,12 +153,12 @@ def memberSingup_comfirm():
     # phone_pattern =r'^\d{10,11}$'
     mPhone = request.form['mPhone']
     if not re.match(phone_pattern, mPhone):
-        return render_template('member/memberSignUp_result.html',
+        return render_template('member/memberSignUp_form.html',
                                result = '숫자만 입력해주세요.')
     
     mCareer = request.form['mCareer']
     if not re.match(career_pattern, mCareer):
-        return render_template('member/memberSignUp_result.html',
+        return render_template('member/memberSignUp_form.html',
                                result = '형식에 맞게 작성해주세요.')
 
     members = load_members()
@@ -175,7 +176,7 @@ def memberSingup_comfirm():
 
     return render_template(
         'member/memberSignIn_form.html', 
-        result = 'MEMBER SIGNUP SUCCESS!!')
+        result = 'OK')
 
 # 관리자 로그인 화면 
 @admin_bp.route('/adminSignIn_form', methods = ['GET'])
@@ -213,6 +214,9 @@ def adminSignIn_confirm():
                                result = '올바른 키번호가 아닙니다.')  
     
     save_admin_keys(admin_keys)
+
+    session['signedInAdminId'] = mId
+    session['role'] = admins[mId]['role']
         
     return render_template('/index.html', result = 'SIGNIN SUCCESS!!')
 
@@ -230,6 +234,7 @@ def memberSignIn_confirm():
 
     mId = request.form['mId']
     mPw = request.form['mPw']
+    
 
     # 회원이 여러명이 경우 [mId] = X
     if mId not in members:
@@ -238,8 +243,12 @@ def memberSignIn_confirm():
     if members [mId]['mPw'] !=mPw:
         return render_template('member/memberSignIn_form.html', 
                                 result = '올바른 비밀번호가 아닙니다.')
+    
+    session['signedInMemberId'] = mId
+    session['role'] = members[mId]['role']
                    
     return render_template('/index.html', result = 'SIGNIN SUCCESS!!')
+
 
 
 # 1. MEMBERS 클릭 시 로그인/회원가입 선택 페이지 리턴
@@ -259,31 +268,51 @@ def admin_gateway():
 @member_bp.route('/signOut_form', methods = ['GET'])
 def signOut_form():
     
-    session.clear()
+    session.pop('signedInMemberId', None)
+    session.pop('signedInAdminId', None)
 
-    redirect('/')
+    session.pop('role', None)
+    
+    flash('로그아웃되었습니다.')
 
-# 회원정보 수정 화면
-@member_bp.route('/modify_form', methods = ['GET'])
-def modify_form():
-    return render_template('member/modify_form.html')
+    return redirect('/')
+
+
+# 회원정보 리스트
+@member_bp.route('/member_list', methods=['GET'])
+def member_list():
+
+    members = load_members()
+
+    return render_template(
+        'member/member_list.html',
+        members=members
+    )
+
+# 회원정보 수정 화면 
+@member_bp.route('/modify_form/<mId>', methods = ['GET'])
+def modify_form(mId):
+
+    members = load_members()
+
+    if mId not in members:
+        return('존재하지 않은 회원입니다.')
+    
+    member = members[mId]
+    
+    return render_template('member/modify_form.html',
+                           member = member)
 
 #  회원정보 수정 양식
-@member_bp.route('/modify_confirm.html', methods = ['POST'])
+@member_bp.route('/modify_confirm', methods = ['POST'])
 def modify_confirm():
 
-    admins = load_admins()
-    inputUuid = request.form['admin_key']
-    master_admin = False
-
-    for admin in admins:
-        if admin['admin_uuid'] == inputUuid:
-                master_admin = True
-                break
-        
-    if not master_admin:
-        return render_template('member/adminSignIn_form.html',
-                                result = '올바른 키번호가 아닙니다.')
+    admin_key = request.form['admin_key']
+    admin_keys = load_admin_keys()
+    
+    if admin_key not in admin_keys:
+        return render_template('member/adminSignUp_result.html',
+                               result = '올바른 키번호가 아닙니다.') 
     
     members = load_members()
 
@@ -292,30 +321,45 @@ def modify_confirm():
     mMail = request.form['mMail']
     mPhone = request.form['mPhone']
         
-    for member in members:
-        if member['mId'] == mId:
+    if mId in members:
 
-            member['mPw'] = mPw
-            member['mMail'] = mMail
-            member['mPhone'] = mPhone
+        # [mId]가 없으면 덮어쓰기가 아니라 mPw, mMail, mPhone이 새로 추가됨
+        members[mId]['mPw'] = mPw
+        members[mId]['mMail'] = mMail
+        members[mId]['mPhone'] = mPhone
 
-            save_members(members)
-            return render_template('member/modify_result.html',
-                                   result = 'MODIFY SUCCESS!!')
+        save_members(members)
+
+        return render_template('member/modify_result.html',
+                                result = 'MODIFY SUCCESS!!')
 
 
-@member_bp.route('/memberDelete_confirm', methods = ['GET'])
-def memberDelete_confirm():
+# member 삭제
+@member_bp.route('/delete_form/<mId>')
+def delete_form(mId):
+    return render_template('member/delete_form.html', mId = mId)
+    
+@member_bp.route('/delete_confirm', methods = ['POST'])
+def delete_confirm():
 
+    mId = request.form['mId']
+    admin_key = request.form['admin_key']
+
+    admin_keys = load_admin_keys()
+
+    #  키 존재 확인
+    if admin_key not in admin_keys:
+        return render_template('member/delete_form.html',
+                               mId = mId,
+                               result = '올바른 키번호가 아닙니다.') 
+    
     members = load_members()
+    
+    if mId in members:
+        del members[mId]
 
-    signIntedmember = session.get('signIntedmember')
-    del members[signIntedmember]
+        save_members(members)
+        
+    return redirect('/member/member_list')
 
-    save_members(members)
-
-    session.clear()
-
-    return render_template('member/delete_result.html',
-                           result = 'OK')
     

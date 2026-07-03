@@ -6,6 +6,7 @@
 
     <link href="{{ url_for('static', filename='css/common.css') }}" rel="stylesheet">
     <link href="{{ url_for('static', filename='css/member/member.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/member/modify.css') }}" rel="stylesheet">
 
     <script src="{{ url_for('static', filename='js/member.js') }}"></script>
     
@@ -19,7 +20,10 @@
         
         <div class="modify_result">
             <h3>MODIFY SUCCESS!!</h3>
+
+            <a href="{{ url_for('member.member_list') }}">회원목록</a>
         </div>
+
 
     </article>
 
