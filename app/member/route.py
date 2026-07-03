@@ -105,7 +105,7 @@ def adminSignUp_confirm():
 
     return render_template(
         'member/adminSignUp_result.html',
-        result = 'ADMIN SIGNIN SUCCESS!!',
+        result = 'OK',
         admin_key = new_uuid)
 
     

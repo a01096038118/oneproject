@@ -63,18 +63,44 @@ function signupForm() {
 }
 
 
-window.onload = function () {
-    const keyInput = document.getElementById("adminKey");
+function copyToClipboard() {
+    const keyText = document.getElementById('adminKey').innerText;
 
-    console.log("keyInput:", keyInput);
-
-    if (!keyInput) {
-        console.log("adminKey 없음 → 팝업 안 뜸");
-        return;
+    // 최신 브라우저 Clipboard API 지원 여부 확인 후 복사
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(keyText).then(() => {
+            alert('관리자 키가 클립보드에 복사되었습니다!\n안전한 곳에 붙여넣기(Ctrl+V)하여 저장하세요.');
+        }).catch(err => {
+            fallbackCopy(keyText);
+        });
+    } else {
+        fallbackCopy(keyText);
+    }
     }
 
-    alert("관리자 키: " + keyInput.value);
-}
+        // 구형 브라우저 환경을 위한 예외 처리용 임시 복사 방식
+        function fallbackCopy(text) {
+            const dummy = document.createElement("textarea");
+            document.body.appendChild(dummy);
+            dummy.value = text;
+            dummy.select();
+            document.execCommand("copy");
+            document.body.removeChild(dummy);
+            alert('관리자 키가 클립보드에 복사되었습니다!');
+        }
+
+// window.onload = function () {
+//     const keyInput = document.getElementById("adminKey");
+
+//     console.log("keyInput:", keyInput);
+
+//     if (!keyInput) {
+//         console.log("adminKey 없음 → 팝업 안 뜸");
+//         return;
+//     }
+
+//     alert("관리자 키: " + keyInput.value);
+// }
 
 
 

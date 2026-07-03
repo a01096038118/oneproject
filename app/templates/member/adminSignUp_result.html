@@ -1,12 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     {% include 'include/title.html' %}
-
     <link href="{{ url_for('static', filename='css/common.css') }}" rel="stylesheet">
     <link href="{{ url_for('static', filename='css/member/member.css') }}" rel="stylesheet">
-    <script src="{{ url_for('static', filename='js/admin.js') }}"> </script>
 
 </head>
 <body>
@@ -15,19 +13,31 @@
     {% include 'include/nav.html' %}
 
     <article id="signup_wrap">
-
-        
-
-        <div class="signup_result">
-            <h3>{{ result }}</h3>
+        <div class="signup_result" style="text-align: center; max-width: 500px; margin: 50px auto; padding: 40px; background: #fff; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
             
-            {% if admin_key %}
-
-                <input type="hidden" id="adminKey" value="{{ admin_key }}">
+            {% if result == 'OK' %}
+                <h3 style="color: #0f172a; margin-bottom: 15px;">SIGNUP SUCCESS!!</h3>
+                <p style="color: #64748b; font-size: 14px; line-height: 1.5;">
+                    관리자 회원가입이 완료되었습니다.<br>
+                    아래 발급된 <strong>관리자 인증 키(UUID)</strong>를 안전한 곳에 보관하세요.
+                </p>
                 
+                <div class="key-box" id="adminKey">{{ generated_key }}</div>
+                
+                <button class="copy-btn" onclick="copyToClipboard()">키 복사하기</button>
+                
+                <div style="margin-top: 35px;">
+                    <a href="/admin/adminSignIn_form" style="font-weight: bold; color: #0f172a; text-decoration: underline;">관리자 로그인하러 가기</a>
+                </div>
+            {% else %}
+                <h3 style="color: #dc2626; margin-bottom: 15px;">SIGNUP FAIL</h3>
+                <p style="color: #0f172a;">{{ result }}</p>
+                <div style="margin-top: 25px;">
+                    <a href="javascript:history.back();" style="color: #64748b; text-decoration: underline;">이전 단계로 돌아가기</a>
+                </div>
             {% endif %}
+            
         </div>
-        
     </article>
 
     {% include 'include/footer.html' %}
