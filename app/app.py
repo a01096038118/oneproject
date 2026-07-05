@@ -1,5 +1,6 @@
 from flask import Flask, render_template
 from member.route import member_bp, admin_bp
+from dashboard.blueprints.dashboard.routes import dashboard_bp
 
 
 app = Flask(__name__)
@@ -7,6 +8,7 @@ app.secret_key = "dw-aiot5th-20260622"
 
 app.register_blueprint(member_bp)
 app.register_blueprint(admin_bp)
+app.register_blueprint(dashboard_bp)
 
 @app.route("/")
 def home():

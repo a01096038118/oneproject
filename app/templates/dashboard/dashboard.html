@@ -4,19 +4,13 @@
     <meta charset="UTF-8">
     <!-- {% include 'include/title.html' %} -->
 
-    <!-- <link href="{{url_for ('static', filename = 'css/common.css') }}" rel="stylesheet">
-    <link href="{{url_for ('static', filename = 'css/dashboard/dashboard.css') }}" rel="stylesheet">
-    <link href="{{url_for ('static', filename = 'css/include/nav.css') }}" rel="stylesheet"> -->
-    <!-- <link href="/app/static/css/common.css" rel="stylesheet">
-    <link href="/app/static/css/dashboard/dashboard.css" rel="stylesheet">
-    <link href="/app/static/css/include/header.css" rel="stylesheet">
-    <link href="/app/static/css/include/nav.css" rel="stylesheet">
-    <link href="/app/static/css/include/footer.css" rel="stylesheet"> -->
-    <link href="../../static/css/common.css" rel="stylesheet">
+   
+    <!-- <link href="../../static/css/common.css" rel="stylesheet">
     <link href="../../static/css/dashboard/dashboard.css" rel="stylesheet">
-    <link href="../../static/css/include/footer.css" rel="stylesheet">
-
-    
+    <link href="../../static/css/include/footer.css" rel="stylesheet"> -->
+    <link href="{{ url_for('static', filename='css/common.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/dashboard/dashboard.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/include/footer.css') }}" rel="stylesheet">
     
 
 </head>
@@ -34,11 +28,11 @@
             |
             <a href="/dashboard/logs"> LIST </a>
             |
-            <a href="/dashboard/check_log/log_id">CHECK</a>
+            <a href="/dashboard/check_log/<log_id>">CHECK</a>
             |
-            <a href="/dashboard/external_img/filename">IMG</a>
+            <a href="/dashboard/external_img/<filename>">IMG</a>
             |
-            <a href="/dashboard/delete_log/log_id"> DELETE</a>
+            <a href="/dashboard/delete_log/<log_id>"> DELETE</a>
             |
             <a href="/app/templates/index.html"> SIGN_OUT </a>
             
