@@ -9,7 +9,7 @@
             | 
             <a href="/admin/gateway">ADMIN</a>
             |
-        </div>
+        </div> 
         
     {% elif session.get('role') == 'MEMBER' %}  
         <div class="member_wrap">
@@ -17,7 +17,9 @@
             |
             <a href="/member/signOut_form">SIGN-OUT</a>
             |
-            <a href="/dashboard/">DASHBOARD</a>
+            <a href="/dashboard/video_feed/">DASHBOARD</a>
+
+            <span class="member"> 👤 직원 : {{session['signedInMemberId'] }} </span>
         </div>
 
     {% elif session.get('role') == 'ADMIN' %}  
@@ -26,10 +28,12 @@
             |
             <a href="/member/signOut_form">SIGN-OUT</a>
             |
-            <a href="/member/member_list">LIST</a>
+            <a href="/member/member_list">MEMBER_LIST</a>
             |
-            <a href="/dashboard/">DASHBOARD</a>
+            <a href="/dashboard/video_feed/">DASHBOARD</a>
+
+            <span class="admin"> 👑 관리자 : {{ session['signedInAdminId']}}</span>
         </div>
-        
+
     {% endif %}
 </nav>
