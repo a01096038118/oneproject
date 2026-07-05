@@ -62,6 +62,7 @@ class CameraManager:
                 return None
 
             detected_zones = {}
+            detected_people = []
 
             # YOLO 객체 탐지 수행
             results = self.model(
@@ -91,6 +92,16 @@ class CameraManager:
 
                 center_x = (x1 + x2) // 2
                 center_y = (y1 + y2) // 2
+
+                detected_people.append({
+                    "x1": x1,
+                    "y1": y1,
+                    "x2": x2,
+                    "y2": y2,
+                    "center_x": center_x,
+                    "center_y": center_y,
+                    "confidence": confidence
+                })
 
                 for zone in config.DANGER_ZONES:
                     if (
@@ -137,32 +148,33 @@ class CameraManager:
 
             if detected_zones:
 
-                # 침입 객체 표시
-                cv2.rectangle(
-                    frame,
-                    (x1, y1),
-                    (x2, y2),
-                    (0, 255, 0),
-                    2
-                )
+                # 탐지된 모든 사람 표시
+                for person in detected_people:
+                    cv2.rectangle(
+                        frame,
+                        (person["x1"], person["y1"]),
+                        (person["x2"], person["y2"]),
+                        (0, 255, 0),
+                        2
+                    )
 
-                cv2.putText(
-                    frame,
-                    f'person{confidence: .2f}',
-                    (x1, y1 - 10),
-                    cv2.FONT_HERSHEY_SIMPLEX,
-                    0.7,
-                    (0, 255, 0),
-                    2
-                )
+                    cv2.putText(
+                        frame,
+                        f'person {person["confidence"]:.2f}',
+                        (person["x1"], person["y1"] - 10),
+                        cv2.FONT_HERSHEY_SIMPLEX,
+                        0.7,
+                        (0, 255, 0),
+                        2
+                    )
 
-                cv2.circle(
-                    frame,
-                    (center_x, center_y),
-                    5,
-                    (255, 0, 0),
-                    -1
-                )
+                    cv2.circle(
+                        frame,
+                        (person["center_x"], person["center_y"]),
+                        5,
+                        (255, 0, 0),
+                        -1
+                    )
             
                 # 침입 알림 표시 및 로그 저장
                 cv2.putText(
