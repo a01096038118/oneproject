@@ -5,6 +5,7 @@
     <title>LOG LIST</title>
 
     <link href="../../static/css/dashboard/log.css" rel="stylesheet">
+    <link href="{{ url_for('static, filename='css/dashboard/log.css') }}" rel="stylesheet">
 
 </head>
 <body>
@@ -12,15 +13,7 @@
     <article id="dashboard_wrap">
         
         <h3>위험구역 침입 감지 대시보드</h3>
-        
-        <div class="menu">
-            <a href="./dashboard.html"> HOME </a>
-            |
-            <a href="./log.html"> LOG_LIST </a>
-            |
-            <a> SIGN_OUT </a>
-            
-        </div>
+    
         <div class="data_box">
             <h4> [ 로그 기록 ] </h4>
             <ul>
