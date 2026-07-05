@@ -24,9 +24,9 @@ class CameraManager:
     def init_camera(self):
 
         if self.camera is None:
-            print("camera reconnecting...")
+            print("camera connecting...")
             self.camera = cv2.VideoCapture(config.ESP32_STREAM_URL)
-            print("camera reconnected")
+            print("camera connected")
 
 
     def reconnect_camera(self):
