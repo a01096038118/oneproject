@@ -45,7 +45,13 @@ def save_frame_image(frame):
     return db_relative_url
 
 # 로그 저장용 연결 함수
-def save_frame_logs(frame, detected_zone):
+def save_frame_logs(frame, detected_zone, person_count):
+    
+    if detected_zone is None:
+        return {
+            "success": False,
+            "message": "감지된 위험구역 정보가 없습니다."
+            }
     
     saved_image_url = save_frame_image(frame)
 
@@ -53,12 +59,6 @@ def save_frame_logs(frame, detected_zone):
         return {
             "success": False,
             "message": "이미지 저장 실패"
-            }
-    
-    if detected_zone is None:
-        return {
-            "success": False,
-            "message": "감지된 위험구역 정보가 없습니다."
             }
     
     # 기존 JSON 로그 읽기
@@ -81,6 +81,7 @@ def save_frame_logs(frame, detected_zone):
 
         "zone_id": detected_zone["zone_id"],
         "danger_zone": detected_zone,
+        "person_count": person_count,
 
         "captured_image_path": saved_image_url,
 
@@ -130,6 +131,7 @@ def _save_to_excel(new_log):
                 "감지 시각",
                 "구역 ID",
                 "위험구역",
+                "감지 인원",
                 "이미지 확인 링크",
                 "담당자",
                 "확인 시각"
@@ -142,6 +144,7 @@ def _save_to_excel(new_log):
             new_log["detected_time"],
             new_log["zone_id"],
             str(new_log["danger_zone"]),
+            new_log["person_count"],
             excel_hyperlink,
             new_log["manager"],
             new_log["checked_time"]

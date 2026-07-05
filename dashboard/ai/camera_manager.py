@@ -12,12 +12,12 @@ class CameraManager:
         self.camera = None
         self.camera_lock = threading.Lock()
         self.model = YOLO("yolov8n.pt")
-        self.last_intrusion_time = None
+        self.last_intrusion_time_by_zone = {}
 
     # 침입 감지 시 frame 로그 저장 연결 함수
-    def save_intrusion_log(self, frame, detected_zone):
+    def save_intrusion_log(self, frame, detected_zone, person_count):
 
-        result = save_frame_logs(frame, detected_zone)
+        result = save_frame_logs(frame, detected_zone, person_count)
 
         return result
 
@@ -61,9 +61,7 @@ class CameraManager:
             if not success:
                 return None
 
-            is_intrusion = False
-
-            detected_zone = None
+            detected_zones = {}
 
             # YOLO 객체 탐지 수행
             results = self.model(
@@ -100,22 +98,30 @@ class CameraManager:
                         and
                         zone["y1"] <= center_y <= zone["y2"]
                     ):
-                        is_intrusion = True
-                        detected_zone = zone
-                        break
-                
-            danger_color = (0, 0, 255)
+                        zone_id = zone["zone_id"]
 
-            if is_intrusion:
-                danger_color = (0, 255, 255)
+                        if zone_id not in detected_zones:
+                            detected_zones[zone_id] = {
+                                "zone": zone,
+                                "person_count": 0
+                            }
+
+                        detected_zones[zone_id]["person_count"] += 1
+                        break
 
             # 모든 위험구역 표시
             for zone in config.DANGER_ZONES:
+
+                zone_color = (0, 0, 255)
+
+                if zone["zone_id"] in detected_zones:
+                    zone_color = (0, 255, 255)
+
                 cv2.rectangle(
                     frame,
                     (zone["x1"], zone["y1"]),
                     (zone["x2"], zone["y2"]),
-                    danger_color,
+                    zone_color,
                     3
                 )
 
@@ -125,11 +131,11 @@ class CameraManager:
                     (zone["x1"], zone["y1"] - 10),
                     cv2.FONT_HERSHEY_SIMPLEX,
                     0.8,
-                    danger_color,
+                    zone_color,
                     2
                 )
 
-            if is_intrusion:
+            if detected_zones:
 
                 # 침입 객체 표시
                 cv2.rectangle(
@@ -172,15 +178,22 @@ class CameraManager:
                 # 마지막 저장 이후 5초 경과 여부 확인
                 now = datetime.now()
 
-                if(
-                    self.last_intrusion_time is None
-                    or
-                    now - self.last_intrusion_time >
-                    timedelta(seconds=5)
-                ):
-                    self.save_intrusion_log(frame, detected_zone)
+                for zone_data in detected_zones.values():
+                    zone_id = zone_data["zone"]["zone_id"]
 
-                    self.last_intrusion_time = now
+                    last_time = self.last_intrusion_time_by_zone.get(zone_id)
+
+                    if(
+                        last_time is None
+                        or now - last_time > timedelta(seconds=5)
+                    ):
+                        self.save_intrusion_log(
+                            frame,
+                            zone_data["zone"],
+                            zone_data["person_count"]
+                        )
+
+                        self.last_intrusion_time_by_zone[zone_id] = now
 
             return frame    
 
