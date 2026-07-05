@@ -16,3 +16,15 @@ nav > div.admin_wrap a {
     padding: 0 10px;
 
 }
+nav > div.member_wrap span {
+    margin-left:40px;
+    color: red;
+    font-weight: bold;
+    font-size: 0.8em;
+}
+nav > div.admin_wrap span {
+    margin-left:20px;
+    color: blue;
+    font-weight: bold;
+    font-size: 0.8em;
+}
