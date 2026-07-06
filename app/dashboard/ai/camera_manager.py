@@ -3,8 +3,8 @@ import threading
 from ultralytics import YOLO
 from datetime import datetime, timedelta
 import time
-import config
-from utils.log_manager import save_frame_logs
+from dashboard import config
+from dashboard.utils.log_manager import save_frame_logs
 
 class CameraManager:
 

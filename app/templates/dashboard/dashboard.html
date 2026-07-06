@@ -4,18 +4,13 @@
     <meta charset="UTF-8">
     <!-- {% include 'include/title.html' %} -->
 
-   
-    <!-- <link href="../../static/css/common.css" rel="stylesheet">
-    <link href="../../static/css/dashboard/dashboard.css" rel="stylesheet">
-    <link href="../../static/css/include/footer.css" rel="stylesheet"> -->
     <link href="{{ url_for('static', filename='css/common.css') }}" rel="stylesheet">
     <link href="{{ url_for('static', filename='css/dashboard/dashboard.css') }}" rel="stylesheet">
     <link href="{{ url_for('static', filename='css/include/footer.css') }}" rel="stylesheet">
-    
+    <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
 
 </head>
 <body>
-    
     
     <article id="dashboard_wrap">
         
@@ -24,70 +19,59 @@
         <div class="menu">
             <a href="/"> HOME </a>
             |
-            <a href="/dashboard/video_feed">LIVE_STREAN</a>
-            |
-            <a href="/dashboard/logs"> LIST </a>
-            |
-            <a href="/dashboard/check_log/<log_id>">CHECK</a>
-            |
-            <a href="/dashboard/external_img/<filename>">IMG</a>
-            |
-            <a href="/dashboard/delete_log/<log_id>"> DELETE</a>
-            |
-            <a href="/app/templates/index.html"> SIGN_OUT </a>
+            <a href="/member/signOut_form"> SIGN_OUT </a>
             
         </div>
         
         <div class="main_layout">
 
             <div class="camera_view">
-                <!-- <img 
+                <img 
                 id="video_img" 
                 src="/dashboard/video_feed" 
-                width="800"> -->
-                <video class="dron"  autoplay muted loop controls>
-                    <source src="../../static/img/sea_dron.mp4" type="video/mp4">
-                </video>
+                width="800" alt="실시간 영상">
             </div>
 
             <!-- 관제와 블럭사이 점선 표시 START -->
             <div class="divider"></div>
             <!-- 관제와 블럭사이 점선 표시 END -->
             
-            <div class="side_panel"> 
-                <div class="status_box">
-                    <h4>현재 인원 수: </h4>
-                    <p id="person_count">0명</p>
-                    <h4>감지된 시간: </h4>
-                    <p>datetime: now</p>
-                </div>
-                
-                <div class="danger_box">
-                    <h4>위험구역 상태</h4>
-                    <p id="danger_status">정상 </p>
-                </div>
-                
-                <div class="data_box">
-                    <h4> 로그 기록 </h4>
-                    <p>data1</p>
-                    <p>data2</p>
-                    <p>data3</p>
-                </div>
+           
+            <div class="status_box">
+                <h4>감지 인원:</h4>
+                <p id="person_count">-</p>
+                <h4>감지된 시간:</h4>
+                <p id="detected_time">-</p>
+            </div>
+
+            <div class="manager_box">
+                <h4>담당자:</h4>
+                <p id="manager">-</p>
+
+                <h4>확인 시간:</h4>
+                <p id="checked_time">-</p>
+            </div>
+            
+            <div class="danger_box">
+                <h4>위험구역</h4>
+                <p id="danger_status"></p>
+            </div>
+            
+            
+            <div id="log_box">
+                <h4>로그 목록</h4>
             </div>
         </div>
 
+        <div id="log_detail">
+            <h4>로그 상세</h4>
+        </div>
         
-        <div class="log_box">
-            <h4> 경고 로그 </h4>
-            <p>현재 인원 수: </p>    
-                <p>현재 시간: </p>    
-            </div>
-            
-            
-            <div class="warning">
-                <h4>⚠ 위험구역 침입 감지</h4>    
-                <div class="alert-overlay"></div>
-            </div>  
+        <div class="warning">
+            <h4>⚠ 위험구역 침입 감지</h4>    
+            <div class="alert-overlay"></div>
+        </div> 
+         
     </article>
     
     {% include 'include/footer.html' %}

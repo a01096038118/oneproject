@@ -2,20 +2,27 @@ from flask import (Blueprint,
                    Response,
                    jsonify,
                    send_from_directory,
-                   request)
-from ai.camera_manager import generate_frame
-from utils.log_manager import (
+                   request,
+                   render_template,
+                   session)
+from dashboard.ai.camera_manager import generate_frame
+from dashboard.utils.log_manager import (
     get_logs,
     delete_log,
     check_log
 )
-import config
+
+from dashboard import config
 
 dashboard_bp = Blueprint(
     'dashboard',
     __name__,
     url_prefix="/dashboard"
 )
+
+@dashboard_bp.route('/main')
+def main():
+    return render_template('dashboard/dashboard.html')
 
 # OpenCV 실시간 영상을 웹으로 스트리밍
 @dashboard_bp.route('/video_feed')
@@ -65,7 +72,7 @@ def check_dashboard_log(log_id):
             "message": "요청 데이터가 없습니다."
         }), 400
 
-    manager = data.get("manager")
+    manager = session.get("signedInMemberId") or session.get("signedInAdminId") or "임시_관리자"
 
     if not manager:
         return jsonify({
@@ -73,9 +80,24 @@ def check_dashboard_log(log_id):
             "message": "담당자 정보가 없습니다."
         }), 400
 
+    data = request.get_json(silent=True) or {}
+    
     result = check_log(log_id, manager)
 
     if not result["success"]:
         return jsonify(result), 404
 
-    return jsonify(result), 200
+    # return jsonify(result), 200
+    actual_log_data = result.get("checked_log", {})
+
+   
+    return jsonify({
+        "success": True,
+        "log_id": actual_log_data.get("log_id"),
+        "manager": actual_log_data.get("manager"),
+        "checked_time": actual_log_data.get("checked_time"),
+        "detected_time": actual_log_data.get("detected_time"),
+        "person_count": actual_log_data.get("person_count"),
+        "captured_image_path": actual_log_data.get("captured_image_path"),
+        "status": actual_log_data.get("message")  # "위험구역 침범 감지" 문자열
+    }), 200
