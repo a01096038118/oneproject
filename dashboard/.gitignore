@@ -22,3 +22,8 @@ __pycache__/
 # 폴더 통째로 제외 (예: media 폴더나 images 폴더 전체)
 media/
 images/
+
+# Local test files
+app_test.py
+test_cv2_stream.py
+_legacy/
