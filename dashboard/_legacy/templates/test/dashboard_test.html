@@ -2,26 +2,95 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Document</title>
+    <!-- {% include 'include/title.html' %} -->
+
+   
+    <!-- <link href="../../static/css/common.css" rel="stylesheet">
+    <link href="../../static/css/dashboard/dashboard.css" rel="stylesheet">
+    <link href="../../static/css/include/footer.css" rel="stylesheet"> -->
+    <link href="{{ url_for('static', filename='css/common.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/dashboard/dashboard.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/include/footer.css') }}" rel="stylesheet">
+    
+
 </head>
 <body>
     
-<h1>Dashboard Test</h1>
+    
+    <article id="dashboard_wrap">
+        
+        <h3>위험구역 침입 감지 대시보드</h3>
+        
+        <div class="menu">
+            <a href="/"> HOME </a>
+            |
+            <a href="/dashboard/video_feed">LIVE_STREAN</a>
+            |
+            <a href="/dashboard/logs"> LIST </a>
+            |
+            <a href="/dashboard/check_log/<log_id>">CHECK</a>
+            |
+            <a href="/dashboard/external_img/<filename>">IMG</a>
+            |
+            <a href="/dashboard/delete_log/<log_id>"> DELETE</a>
+            |
+            <a href="/app/templates/index.html"> SIGN_OUT </a>
+            
+        </div>
+        
+        <div class="main_layout">
 
-<div>
-  <h3>Camera Area</h3>
-  <img src="/dashboard/video_feed">
-</div>
+            <div class="camera_view">
+                <!-- <img 
+                id="video_img" 
+                src="/dashboard/video_feed" 
+                width="800"> -->
+                <video class="dron"  autoplay muted loop controls>
+                    <source src="../../static/img/sea_dron.mp4" type="video/mp4">
+                </video>
+            </div>
 
-<div>
-  <h3>Log Area</h3>
-  <p>log test</p>
-</div>
+            <!-- 관제와 블럭사이 점선 표시 START -->
+            <div class="divider"></div>
+            <!-- 관제와 블럭사이 점선 표시 END -->
+            
+            <div class="side_panel"> 
+                <div class="status_box">
+                    <h4>현재 인원 수: </h4>
+                    <p id="person_count">0명</p>
+                    <h4>감지된 시간: </h4>
+                    <p>datetime: now</p>
+                </div>
+                
+                <div class="danger_box">
+                    <h4>위험구역 상태</h4>
+                    <p id="danger_status">정상 </p>
+                </div>
+                
+                <div class="data_box">
+                    <h4> 로그 기록 </h4>
+                    <p>data1</p>
+                    <p>data2</p>
+                    <p>data3</p>
+                </div>
+            </div>
+        </div>
 
-<div>
-  <h3>Status Area</h3>
-  <p>status test</p>
-</div>
+        
+        <div class="log_box">
+            <h4> 경고 로그 </h4>
+            <p>현재 인원 수: </p>    
+                <p>현재 시간: </p>    
+            </div>
+            
+            
+            <div class="warning">
+                <h4>⚠ 위험구역 침입 감지</h4>    
+                <div class="alert-overlay"></div>
+            </div>  
+    </article>
+    
+    {% include 'include/footer.html' %}
     
 </body>
 </html>

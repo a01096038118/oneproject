@@ -3,15 +3,25 @@ import threading
 from ultralytics import YOLO
 from datetime import datetime, timedelta
 import time
-import config
 from utils.log_manager import save_frame_logs
+import config
+
+SWIMMER_CLASS_ID = 0
+
+CLASS_NAMES = {
+    0: "swimmer",
+    1: "boat",
+    2: "jetski",
+    3: "life_saving_appliances",
+    4: "buoy"
+}
 
 class CameraManager:
 
     def __init__(self):
         self.camera = None
         self.camera_lock = threading.Lock()
-        self.model = YOLO("yolov8n.pt")
+        self.model = YOLO("ai/models/best.pt")
         self.last_intrusion_time_by_zone = {}
 
     # 침입 감지 시 frame 로그 저장 연결 함수
@@ -25,7 +35,14 @@ class CameraManager:
 
         if self.camera is None:
             print("camera connecting...")
+            # test용 코드
+            print("ESP32 URL:", config.ESP32_STREAM_URL)
+
             self.camera = cv2.VideoCapture(config.ESP32_STREAM_URL)
+
+            # test용 코드
+            print("camera opened:", self.camera.isOpened())
+
             print("camera connected")
 
 
@@ -77,11 +94,10 @@ class CameraManager:
                 class_id = int(box.cls[0])
                 confidence = float(box.conf[0])
 
-                if class_id != 0:
-                    continue
-
                 if confidence < 0.8:
                     continue
+
+                class_name = self.model.names[class_id]
 
                 x1, y1, x2, y2 = box.xyxy[0]
 
@@ -100,10 +116,14 @@ class CameraManager:
                     "y2": y2,
                     "center_x": center_x,
                     "center_y": center_y,
-                    "confidence": confidence
+                    "confidence": confidence,
+                    "class_name": class_name
                 })
 
-                for zone in config.DANGER_ZONES:
+                if class_name != "swimmer":
+                    continue
+
+                for zone in config.DANGER_ZONES: 
                     if (
                         zone["x1"] <= center_x <= zone["x2"]
                         and
@@ -160,7 +180,7 @@ class CameraManager:
 
                     cv2.putText(
                         frame,
-                        f'person {person["confidence"]:.2f}',
+                        f'{person["class_name"]} {person["confidence"]:.2f}',
                         (person["x1"], person["y1"] - 10),
                         cv2.FONT_HERSHEY_SIMPLEX,
                         0.7,
@@ -179,7 +199,7 @@ class CameraManager:
                 # 침입 알림 표시 및 로그 저장
                 cv2.putText(
                     frame,
-                    "PERSON INTRUSION",
+                    "SWIMMER INTRUSION",
                     (30, 50),
                     cv2.FONT_HERSHEY_SIMPLEX,
                     1,
