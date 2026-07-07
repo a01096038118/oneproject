@@ -101,54 +101,10 @@ def save_frame_logs(frame, detected_zone, person_count):
             indent=4
         )
 
-    # CSV 파일에 로그 기록
-    _save_to_excel(new_log)
-
     return {
         "success": True,
         "log_data": new_log
     }
-
-# CSV 파일에 로그 기록
-def _save_to_excel(new_log):
-
-    file_exists = os.path.exists(EXCEL_REPORT_PATH)
-    
-    # 상대 경로에서 파일명만 추출
-    filename = new_log["captured_image_path"].split("/")[-1]
-    
-    # 엑셀 하이퍼링크 수식 조합 (C:\ocean_rescue_images 폴더 기반)
-    excel_hyperlink = f'=HYPERLINK("C:\\ocean_rescue_images\\{filename}", "사진 열기 (클릭)")'
-    
-    with open(EXCEL_REPORT_PATH, mode="a", encoding="utf-8-sig", newline="") as f:
-        writer = csv.writer(f)
-        
-        # 파일이 처음 생성될 때만 헤더 생성
-        if not file_exists:
-            writer.writerow([
-                "로그 ID",
-                "메시지",
-                "감지 시각",
-                "구역 ID",
-                "위험구역",
-                "감지 인원",
-                "이미지 확인 링크",
-                "담당자",
-                "확인 시각"
-            ])
-            
-        # 데이터 행 기록
-        writer.writerow([
-            new_log["log_id"],
-            new_log["message"],
-            new_log["detected_time"],
-            new_log["zone_id"],
-            str(new_log["danger_zone"]),
-            new_log["person_count"],
-            excel_hyperlink,
-            new_log["manager"],
-            new_log["checked_time"]
-        ])
 
 # 저장된 로그 전체 조회   
 def get_logs():
@@ -193,6 +149,42 @@ def delete_log(log_id):
         "message": "로그 삭제 완료",
         "deleted_log_id": log_id
     }
+
+def create_csv_report():
+    logs = get_logs()
+
+    with open(EXCEL_REPORT_PATH, mode="w", encoding="utf-8-sig", newline="") as f:
+        writer = csv.writer(f)
+
+        writer.writerow([
+            "로그 ID",
+            "메시지",
+            "감지 시각",
+            "구역 ID",
+            "위험구역",
+            "감지 인원",
+            "이미지 확인 링크",
+            "담당자",
+            "확인 시각"
+        ])
+
+        for log in logs:
+            filename = log["captured_image_path"].split("/")[-1]
+            image_path = os.path.join(config.OCEAN_RESCUE_DIR, filename)
+
+            writer.writerow([
+                log["log_id"],
+                log["message"],
+                log["detected_time"],
+                log["zone_id"],
+                str(log["danger_zone"]),
+                log["person_count"],
+                image_path,
+                log["manager"],
+                log["checked_time"]
+            ])
+
+    return EXCEL_REPORT_PATH
 
 # log_id 기준 로그 확인 처리
 def check_log(log_id, manager):

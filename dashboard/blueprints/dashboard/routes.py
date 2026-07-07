@@ -2,12 +2,16 @@ from flask import (Blueprint,
                    Response,
                    jsonify,
                    send_from_directory,
-                   request)
+                   request,
+                   send_file,
+                   render_template
+                   )
 from ai.camera_manager import generate_frame
 from utils.log_manager import (
     get_logs,
     delete_log,
-    check_log
+    check_log,
+    create_csv_report
 )
 import config
 
@@ -23,6 +27,14 @@ def video_feed():
     return Response(
         generate_frame(),
         mimetype='multipart/x-mixed-replace; boundary=frame'
+    )
+
+# 로그 조회 페이지
+@dashboard_bp.route('/log_list', methods=['GET'])
+def log_list():
+
+    return render_template(
+        'dashboard/log.html'
     )
 
 # 로그 조회
@@ -51,6 +63,18 @@ def serve_rescue_image(filename):
     return send_from_directory(
         config.OCEAN_RESCUE_DIR,
         filename
+    )
+
+# CSV 보고서 다운로드
+@dashboard_bp.route('/download_report', methods=['GET'])
+def download_report():
+
+    report_path = create_csv_report()
+
+    return send_file(
+        report_path,
+        as_attachment=True,
+        download_name="rescue_report.csv"
     )
 
 # 로그 확인 처리
