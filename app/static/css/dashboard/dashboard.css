@@ -4,9 +4,9 @@
 body {
     margin: 0;
     padding: 0;
-    background: #19213b;
+    background: #0b0f1a;
     color: #e5e7eb;
-    font-family: 'Malgun Gothic', Arial, sans-serif;
+    font-family: Arial, sans-serif;
 }
 
 #dashboard_wrap {
@@ -16,30 +16,30 @@ body {
     box-sizing: border-box;
 }
 
-#dashboard_wrap h3 {
+#dashboard_wrap > h3 {
     text-align: center;
-    font-size: 26px;
-    font-weight: 600;
-    margin-top: 0;
+    font-size: 32px;
     margin-bottom: 20px;
-    color: #ffffff;
+    text-shadow: 1px 1px 1px; color:#3198d4;
+    
 }
+
 
 .menu {
     text-align: right;
-    margin-bottom: 25px;
-    padding: 10px 20px;
-    background: rgba(17, 24, 39, 0.6);
-    border: 2px solid #1e293b;
+    margin-bottom: 80px;
+    font-size: 1.2em;
+    font-weight: bold;
+    box-shadow: 0 4px 10px rgba(219, 200, 200, 0.35);
     border-radius: 8px;
-    font-size: 14px;
+    padding: 10px 20px;
 }
 
 .menu a {
-    color: #d6d9e0;
+    text-shadow: 0 1px 1px; color: #e5e7eb;
     text-decoration: none;
     margin: 0 10px;
-    font-weight: bold;
+    transition: 0.2s;
 }
 
 .menu a:hover {
@@ -60,7 +60,8 @@ body {
 /* 공통 카드 스타일 */
 .camera_view, .manager_box, .danger_box, #log_box, #log_detail {
     background: #111827;
-    border: 2px solid #d6d9e0;
+    box-shadow: 1px 4px 8px rgba(219, 200, 200, 0.35);
+    /* border: 2px solid #434c63; */
     border-radius: 24px; /* 시안처럼 부드럽고 둥근 모서리 */
     padding: 22px;
     box-sizing: border-box;
@@ -107,23 +108,34 @@ body {
     color: #ffffff;
     
     background: #111827;
-    border: 2px solid #d6d9e0;
+    box-shadow: 1px 4px 8px rgba(219, 200, 200, 0.35);
     border-radius: 24px;
     padding: 22px;
     box-sizing: border-box;
 
-    /* ⭐ 핵심: 세로 내용이 넘치면 스크롤바를 자동으로 생성 */
     overflow-y: auto;       
-    /* 가로 스크롤은 발생하지 않도록 방지 */
     overflow-x: hidden;
 }
+.log_box ::-webkit-scrollbar {
+    width: 8px;
+}
+.log_box::-webkit-scrollbar-track {
+    background: #111827;
+    border-radius: 10px;
+}
 
-/* 구분선 (시안에 없으므로 투명 처리 혹은 숨김) */
+.log_box::-webkit-scrollbar-thumb {
+    background: #274db8;
+    border-radius: 10px;
+}
+
+.log_box::-webkit-scrollbar-thumb:hover {
+    background: #217094;
+}
+
 .divider {
     display: none;
 }
-
-/* [하단 가로 정렬] 카드 3형제 (2행에 각각 순서대로 배치) */
 
 .danger_box {
     grid-column: 3 / 4;
@@ -288,33 +300,3 @@ body {
     pointer-events: auto;
 }
 
-
-.triggerAlert {
-    padding: 12px 24px; 
-    background: #ef4444; 
-    color: white; 
-    border: none; 
-    border-radius: 8px; 
-    cursor: pointer; 
-    font-weight: bold; 
-    font-size: 1.1rem;
-    box-shadow: 0 4px 15px rgba(239, 68, 68, 0.2);
-    transition: background 0.2s;
-    pointer-events: auto;
-}
-.triggerAlert:hover { background: #dc2626; } 
-
-.clearAlert {
-    padding: 12px 24px; 
-    background: #4b5563; 
-    color: white; 
-    border: none; 
-    border-radius: 8px; 
-    cursor: pointer; 
-    font-weight: bold; 
-    font-size: 1.1rem; 
-    box-shadow: 0 4px 15px rgba(75, 85, 99, 0.2);
-    transition: background 0.2s;
-    pointer-events: auto;
-}
-.clearAlert:hover { background: #374151; } */

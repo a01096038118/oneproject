@@ -1,128 +1,149 @@
+/* =========================
+   전체
+========================= */
 body {
     margin: 0;
     padding: 0;
-    background: #19213b;
+    background: #0b0f1a;
     color: #e5e7eb;
-    font-family: 'Malgun Gothic', Arial, sans-serif;
+    font-family: Arial, sans-serif;
 }
 
 #dashboard_wrap {
-    width: 1400px; /* 대화면 관제를 위한 넓은 고정폭 유지 */
+    width: 1400px; /* 대화면 관제를 위한 넓은 고정폭 */
     margin: 0 auto;
     padding: 30px 20px;
-    box-sizing: border-box;
 }
-
-#dashboard_wrap h3 {
+/* =========================
+   제목
+========================= */
+#dashboard_wrap > h3 {
     text-align: center;
-    font-size: 26px;
-    font-weight: 600;
-    margin-top: 0;
+    font-size: 32px;
+    /* color: #38bdf8; */
     margin-bottom: 20px;
-    color: #ffffff;
+    text-shadow: 1px 1px 1px; color:#3198d4;
+    
 }
 
-/* 상단 메뉴 스타일 정의 */
+/* =========================
+   메뉴
+========================= */
 .menu {
     text-align: right;
-    margin-bottom: 20px;
-    color: #94a3b8;
+    margin-bottom: 80px;
+    font-size: 1.2em;
+    font-weight: bold;
+    box-shadow: 0 4px 10px rgba(219, 200, 200, 0.35);
+    border-radius: 8px;
+    padding: 10px 20px;
 }
+
 .menu a {
-    color: #38bdf8;
+    text-shadow: 0 1px 1px; color: #e5e7eb;
     text-decoration: none;
-    font-weight: bold;
     margin: 0 10px;
+    transition: 0.2s;
 }
 
-/* ==========================================================================
-   2. 데이터 박스 & 반복형 리스트 행 (Row) 구조 정렬
-   ========================================================================== */
-.data_box {
-    background: #111827; /* 기존 카드와 동일한 다크 그레이 */
-    border: 2px solid #d6d9e0;
-    border-radius: 24px; /* 기존 컨셉의 부드러운 모서리 */
-    padding: 24px;
-    box-sizing: border-box;
-}
-
-.data_box > h4 {
-    margin-top: 0;
-    margin-bottom: 20px;
-    color: #38bdf8; /* 기존 시안 블루 포인트 */
-    font-size: 18px;
-    font-weight: 600;
-}
-
-/* 로그가 한 줄씩 세로로 누적될 때 각 한 줄에 대한 가로 정렬 처리 */
-.log_data_row {
-    display: flex !important;
-    align-items: stretch;
-    justify-content: space-between;
-    gap: 15px;
-    width: 100%;
-    margin-bottom: 15px; /* 로그 행 사이의 수직 여백 */
-    padding: 0;
-}
-
-/* 기존 th > td 디자인을 유지한 순수 CSS 로그 번호 블록 */
-.log_id_block {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background: rgba(25, 33, 59, 0.6);
-    border: 1px solid #334155;
-    border-radius: 14px;
-    padding: 15px;
-    min-width: 110px;
-    text-align: center;
-    box-sizing: border-box;
-}
-.log_id_block span {
-    font-size: 12px;
-    color: #94a3b8;
-    margin-bottom: 4px;
-}
-.log_id_block strong {
-    font-size: 18px;
+.menu a:hover {
     color: #38bdf8;
 }
 
-/* ==========================================================================
-   3. 카드형 아이템 스타일 (위험구역 & 인포 아이템)
-   ========================================================================== */
-.danger_box, .info_item {
-    flex: 1; /* 가로 공간을 균등하게 나누어 가짐 */
-    background: rgba(17, 24, 39, 0.8);
-    border: 1px solid #334155;
-    border-radius: 14px;
-    padding: 15px 20px;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+/* =========================
+   로그 박스
+========================= */
+.data_box {
+    background: #111827;
+    border: 1px solid #1f2937;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 4px 15px rgba(219, 200, 200, 0.35);
+    max-height: 500px;
+    overflow-y: auto;
 }
 
-/* 아이템 내부 제목 (위험구역, 감지된 시간 등) */
-.danger_box h4, .info_item h4 {
-    margin: 0 0 8px 0;
-    font-size: 14px;
-    color: #94a3b8; /* 메탈릭 그레이 톤으로 라벨 처리 */
-    border-left: 3px solid #38bdf8; /* 기존 디자인의 시안 블루 포인트 선 */
-    padding-left: 6px;
-    font-weight: 600;
+.data_box h4 {
+    margin: 0 0 20px;
+    text-shadow: 0 1px 1px; color:#38bdf8;
+    font-size: 22px;
 }
 
-/* 데이터 텍스트 값들 기본 세팅 */
-.danger_box p, .info_item p {
-    margin: 0;
-    font-size: 18px;
-    color: #ffffff;
+/* =========================
+   테이블
+========================= */
+.log_table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+/* 헤더 */
+.log_table thead {
+    background: #1e3a8a;
+}
+
+.log_table th {
+    padding: 15px;
+    color: white;
+    font-size: 16px;
     font-weight: bold;
+    border-bottom: 2px solid #2563eb;
 }
 
-/* [특별 관리] 위험 구역이나 강조가 필요한 실시간 데이터 변경 값 색상 */
-.highlight_red {
-    color: #f87171 !important; /* 위험을 인지할 수 있는 옅은 레드 */
+/* 데이터 */
+.log_table td {
+    padding: 14px;
+    border-bottom: 1px solid #374151;
+    color: #e5e7eb;
+    font-size: 15px;
+}
+
+/* 홀수 줄 */
+.log_table tbody tr:nth-child(odd) {
+    background: #172033;
+}
+
+/* 짝수 줄 */
+.log_table tbody tr:nth-child(even) {
+    background: #111827;
+}
+
+/* 마우스 올렸을 때 */
+.log_table tbody tr:hover {
+    background: #1d4ed8;
+    transition: 0.2s;
+}
+
+/* =========================
+   반응형
+========================= */
+@media screen and (max-width: 1000px) {
+
+    .data_box {
+        overflow-x: auto;
+    }
+
+    .log_table {
+        min-width: 900px;
+    }
+}
+.data_box::-webkit-scrollbar {
+    width: 8px;
+}
+
+.data_box::-webkit-scrollbar-track {
+    background: #111827;
+    border-radius: 10px;
+}
+
+.data_box::-webkit-scrollbar-thumb {
+    background: #274db8;
+    border-radius: 10px;
+}
+
+.data_box::-webkit-scrollbar-thumb:hover {
+    background: #217094;
 }

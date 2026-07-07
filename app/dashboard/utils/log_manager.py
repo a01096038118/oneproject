@@ -118,7 +118,8 @@ def _save_to_excel(new_log):
     filename = new_log["captured_image_path"].split("/")[-1]
     
     # 엑셀 하이퍼링크 수식 조합 (C:\ocean_rescue_images 폴더 기반)
-    excel_hyperlink = f'=HYPERLINK("C:\\ocean_rescue_images\\{filename}", "사진 열기 (클릭)")'
+    # excel_hyperlink = f'=HYPERLINK("C:\\ocean_rescue_images\\{filename}", "사진 열기 (클릭)")'
+    excel_hyperlink = os.path.join(config.OCEAN_RESCUE_DIR, filename)
     
     with open(EXCEL_REPORT_PATH, mode="a", encoding="utf-8-sig", newline="") as f:
         writer = csv.writer(f)
