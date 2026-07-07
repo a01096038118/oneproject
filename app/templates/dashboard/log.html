@@ -4,8 +4,11 @@
     <meta charset="UTF-8">
     <title>LOG LIST</title>
 
-    <link href="../../static/css/dashboard/log.css" rel="stylesheet">
-    <link href="{{ url_for('static, filename='css/dashboard/log.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/common.css') }}" rel="stylesheet"> 
+    <link href="{{ url_for('static', filename='css/dashboard/log.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/include/footer.css') }}" rel="stylesheet">
+    <script src="{{ url_for('static', filename='js/list.js') }}"></script>
+    
 
 </head>
 <body>
@@ -13,19 +16,47 @@
     <article id="dashboard_wrap">
         
         <h3>위험구역 침입 감지 대시보드</h3>
-    
-        <div class="data_box">
-            <h4> [ 로그 기록 ] </h4>
-            <ul>
-                <li> datetime.now() 위험지역 진입 </li>
 
-            </ul>
+        <div class="menu">
+            <a href="/">HOME</a>
+            |
+            <a href="../dashboard/main"> DASHBOARD </a>
+            |
+            <a href="/member/signOut_form"> SIGN_OUT </a>
+            
         </div>
 
-        <div class="warning">
-                <h4>⚠ 위험구역 침입 감지</h4>    
-                <div class="alert-overlay"></div>
-            </div> 
+        <div class="data_box">
+            <h4> [ 로그 기록 ] </h4>
+            <th>
+                <div id="log_box">
+                    <h4>로그 번호</h4>
+                </div>
+
+                <div class="danger_box">
+                    <h4>위험 구역</h4>
+                    <p id="danger_zone">-</p>
+                </div>
+                
+                <div class="info_item">
+                    <h4>감지 인원</h4>
+                    <p id="person_count">-</p>
+                </div>
+                <div class="info_item">
+                    <h4>감지된 시간</h4>
+                    <p id="detected_time">-</p>
+                </div>
+                <div class="info_item">
+                    <h4>담당자</h4>
+                    <p id="manager">-</p>
+                </div>
+                <div class="info_item">
+                    <h4>확인 시간</h4>
+                    <p id="checked_time">-</p>
+                </div>
+            </th>
+
+    {% include 'include/footer.html' %}
 
 </body>
 </html>
