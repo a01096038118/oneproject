@@ -440,5 +440,158 @@
         "captured_image_path": "external_img/2026-07-07_151654_rescue_485eac1d.jpg",
         "manager": null,
         "checked_time": null
+    },
+    {
+        "log_id": "LOG_9CA5E791",
+        "message": "위험구역 침범 감지",
+        "detected_time": "2026-07-07 16:44:33",
+        "zone_id": "ZONE_001",
+        "danger_zone": {
+            "zone_id": "ZONE_001",
+            "x1": 250,
+            "y1": 100,
+            "x2": 550,
+            "y2": 350
+        },
+        "person_count": 1,
+        "captured_image_path": "external_img/2026-07-07_164433_rescue_392f274f.jpg",
+        "manager": null,
+        "checked_time": null
+    },
+    {
+        "log_id": "LOG_A064B02B",
+        "message": "위험구역 침범 감지",
+        "detected_time": "2026-07-07 16:44:38",
+        "zone_id": "ZONE_001",
+        "danger_zone": {
+            "zone_id": "ZONE_001",
+            "x1": 250,
+            "y1": 100,
+            "x2": 550,
+            "y2": 350
+        },
+        "person_count": 1,
+        "captured_image_path": "external_img/2026-07-07_164438_rescue_62ddbd7d.jpg",
+        "manager": "gildong2",
+        "checked_time": "2026-07-07 16:44:44"
+    },
+    {
+        "log_id": "LOG_0A25871A",
+        "message": "위험구역 침범 감지",
+        "detected_time": "2026-07-07 16:46:41",
+        "zone_id": "ZONE_001",
+        "danger_zone": {
+            "zone_id": "ZONE_001",
+            "x1": 250,
+            "y1": 100,
+            "x2": 550,
+            "y2": 350
+        },
+        "person_count": 1,
+        "captured_image_path": "external_img/2026-07-07_164641_rescue_f6891565.jpg",
+        "manager": null,
+        "checked_time": null
+    },
+    {
+        "log_id": "LOG_CCF09266",
+        "message": "위험구역 침범 감지",
+        "detected_time": "2026-07-07 16:46:46",
+        "zone_id": "ZONE_001",
+        "danger_zone": {
+            "zone_id": "ZONE_001",
+            "x1": 250,
+            "y1": 100,
+            "x2": 550,
+            "y2": 350
+        },
+        "person_count": 1,
+        "captured_image_path": "external_img/2026-07-07_164646_rescue_b760a974.jpg",
+        "manager": "gildong2",
+        "checked_time": "2026-07-07 16:52:21"
+    },
+    {
+        "log_id": "LOG_8611D5AA",
+        "message": "위험구역 침범 감지",
+        "detected_time": "2026-07-07 16:52:10",
+        "zone_id": "ZONE_001",
+        "danger_zone": {
+            "zone_id": "ZONE_001",
+            "x1": 250,
+            "y1": 100,
+            "x2": 550,
+            "y2": 350
+        },
+        "person_count": 1,
+        "captured_image_path": "external_img/2026-07-07_165210_rescue_7fa38c6d.jpg",
+        "manager": null,
+        "checked_time": null
+    },
+    {
+        "log_id": "LOG_72801C3E",
+        "message": "위험구역 침범 감지",
+        "detected_time": "2026-07-07 16:52:15",
+        "zone_id": "ZONE_001",
+        "danger_zone": {
+            "zone_id": "ZONE_001",
+            "x1": 250,
+            "y1": 100,
+            "x2": 550,
+            "y2": 350
+        },
+        "person_count": 2,
+        "captured_image_path": "external_img/2026-07-07_165215_rescue_7eaf27c8.jpg",
+        "manager": "gildong2",
+        "checked_time": "2026-07-07 17:21:24"
+    },
+    {
+        "log_id": "LOG_0657C106",
+        "message": "위험구역 침범 감지",
+        "detected_time": "2026-07-07 17:20:42",
+        "zone_id": "ZONE_001",
+        "danger_zone": {
+            "zone_id": "ZONE_001",
+            "x1": 250,
+            "y1": 100,
+            "x2": 550,
+            "y2": 350
+        },
+        "person_count": 1,
+        "captured_image_path": "external_img/2026-07-07_172042_rescue_6c33ce40.jpg",
+        "manager": "gildong2",
+        "checked_time": "2026-07-07 17:28:02"
+    },
+    {
+        "log_id": "LOG_33296118",
+        "message": "위험구역 침범 감지",
+        "detected_time": "2026-07-07 17:21:40",
+        "zone_id": "ZONE_001",
+        "danger_zone": {
+            "zone_id": "ZONE_001",
+            "x1": 250,
+            "y1": 100,
+            "x2": 550,
+            "y2": 350
+        },
+        "person_count": 1,
+        "captured_image_path": "external_img/2026-07-07_172140_rescue_180d00b3.jpg",
+        "manager": null,
+        "checked_time": null
+    },
+    {
+        "log_id": "LOG_4A6E26D3",
+        "message": "위험구역 침범 감지",
+        "detected_time": "2026-07-07 17:21:46",
+        "zone_id": "ZONE_001",
+        "danger_zone": {
+            "zone_id": "ZONE_001",
+            "x1": 250,
+            "y1": 100,
+            "x2": 550,
+            "y2": 350
+        },
+        "person_count": 1,
+        "captured_image_path": "external_img/2026-07-07_172146_rescue_11954abc.jpg",
+        "manager": "gildong2",
+        "checked_time": "2026-07-07 17:21:52"
     }
 ]

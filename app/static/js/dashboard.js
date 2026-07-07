@@ -156,39 +156,3 @@ function triggerAlert() {
     alertLayer.classList.add('active');
 }
 
-// 침입 해제 시 (CSS transition에 의해 스르륵 꺼짐)
-function clearAlert() {
-    alertLayer.classList.remove('active');
-}
-
-const audio = document.getElementById('sirenAudio');
-        let fadeInterval = null; // Fade-out 타이머 저장용 변수
-
-// [침입 발생] 소리 즉시 재생
-function triggerAlert() {
-    // 혹시 작동 중이던 Fade-out 타이머가 있다면 초기화
-    clearInterval(fadeInterval); 
-    
-    audio.volume = 1.0; // 음량을 최대(100%)로 설정
-    audio.play().catch(error => {
-        alert("브라우저 보안 정책상, 화면을 한 번 클릭한 뒤 버튼을 눌러주세요!");
-    });
-}
-
-// [상황 해제] 소리가 자연스럽게 스르륵 꺼짐 (Fade-out)
-function clearAlert() {
-    // 이미 음량이 0이거나 일시정지 상태면 무시
-    if (audio.paused || audio.volume === 0) return;
-
-    // 0.05초(50ms)마다 음량을 조금씩 줄이는 타이머 가동
-    fadeInterval = setInterval(() => {
-        if (audio.volume > 0.05) {
-            audio.volume -= 0.05; // 음량을 5%씩 감소
-        } else {
-            // 음량이 거의 0에 도달하면 완전히 끄고 타이머 종료
-            audio.volume = 0;
-            audio.pause();
-            clearInterval(fadeInterval);
-        }
-    }, 50); // 50밀리초 주기 (약 1초 동안 부드럽게 사라짐)
-}

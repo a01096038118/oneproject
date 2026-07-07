@@ -27,34 +27,24 @@
         </div>
 
         <div class="data_box">
-            <h4> [ 로그 기록 ] </h4>
-            <th>
-                <div id="log_box">
-                    <h4>로그 번호</h4>
-                </div>
+            <h4>[ 로그 기록 ]</h4>
+            
+        <table class="log_table">
+            <thead>
+                <tr>
+                    <th>로그번호</th>
+                    <th>위험구역</th>
+                    <th>감지인원</th>
+                    <th>감지시간</th>
+                    <th>담당자</th>
+                    <th>확인시간</th>
+                </tr>
+            </thead>
 
-                <div class="danger_box">
-                    <h4>위험 구역</h4>
-                    <p id="danger_zone">-</p>
-                </div>
-                
-                <div class="info_item">
-                    <h4>감지 인원</h4>
-                    <p id="person_count">-</p>
-                </div>
-                <div class="info_item">
-                    <h4>감지된 시간</h4>
-                    <p id="detected_time">-</p>
-                </div>
-                <div class="info_item">
-                    <h4>담당자</h4>
-                    <p id="manager">-</p>
-                </div>
-                <div class="info_item">
-                    <h4>확인 시간</h4>
-                    <p id="checked_time">-</p>
-                </div>
-            </th>
+            <tbody id="log_list_container"></tbody>
+        
+        </table>
+</div>
 
     {% include 'include/footer.html' %}
 
