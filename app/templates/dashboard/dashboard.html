@@ -19,6 +19,8 @@
         <div class="menu">
             <a href="/"> HOME </a>
             |
+            <a href="../dashboard/log_list">LOG_LIST</a>
+            |
             <a href="/member/signOut_form"> SIGN_OUT </a>
             
         </div>
@@ -32,29 +34,33 @@
                 width="800" alt="실시간 영상">
             </div>
 
-            <!-- 관제와 블럭사이 점선 표시 START -->
-            <div class="divider"></div>
-            <!-- 관제와 블럭사이 점선 표시 END -->
             
-           
-            <div class="status_box">
-                <h4>감지 인원:</h4>
-                <p id="person_count">-</p>
-                <h4>감지된 시간:</h4>
-                <p id="detected_time">-</p>
-            </div>
-
             <div class="manager_box">
-                <h4>담당자:</h4>
-                <p id="manager">-</p>
+                <div class="info_item">
+                    <h4>감지 인원</h4>
+                    <p id="person_count">-</p>
+                </div>
 
-                <h4>확인 시간:</h4>
-                <p id="checked_time">-</p>
+                <div class="info_item">
+                    <h4>담당자</h4>
+                    <p id="manager">-</p>
+                </div>
+
+                <div class="info_item">
+                    <h4>감지된 시간</h4>
+                    <p id="detected_time">-</p>
+                </div>
+
+                <div class="info_item">
+                    <h4>확인 시간</h4>
+                    <p id="checked_time">-</p>
+                </div>
+
             </div>
             
             <div class="danger_box">
-                <h4>위험구역</h4>
-                <p id="danger_status"></p>
+                <h4>위험 구역</h4>
+                <p id="danger_zone">-</p>
             </div>
             
             
@@ -67,10 +73,20 @@
             <h4>로그 상세</h4>
         </div>
         
-        <div class="warning">
-            <h4>⚠ 위험구역 침입 감지</h4>    
-            <div class="alert-overlay"></div>
-        </div> 
+        <div class="warning" id="intrusionAlert"></div>
+        <div class="alert-overlay"></div>
+    </div>
+    
+    <div class="warning-top-bar">
+        <h4>⚠ 위험구역 침입 감지</h4>    
+        
+        <button class="triggerAlert" onclick="triggerAlert()">
+            🔊 침입 발생 (사이렌 ON)
+        </button>
+        <button class="clearAlert" onclick="clearAlert()">
+            🔇 상황 해제 (Fade-out OFF)
+        </button>
+    </div> 
          
     </article>
     

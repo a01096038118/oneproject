@@ -2,7 +2,7 @@
 # 집에서는 테스트 불가
 # 월요일 학원에서 ESP32 카메라 IP 주소로 변경 필요
 # 예: "http://192.168.xxx.xxx:81/stream"
-ESP32_STREAM_URL = "http://192.168.137.103:81/stream"
+ESP32_STREAM_URL = "http://192.168.137.133:81/stream"
 
 # 위험구역 설정
 DANGER_ZONES = [

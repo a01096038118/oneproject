@@ -24,6 +24,10 @@ dashboard_bp = Blueprint(
 def main():
     return render_template('dashboard/dashboard.html')
 
+@dashboard_bp.route('/log_list')
+def log_list():
+    return render_template('dashboard/log.html')
+
 # OpenCV 실시간 영상을 웹으로 스트리밍
 @dashboard_bp.route('/video_feed')
 def video_feed():
@@ -66,13 +70,14 @@ def check_dashboard_log(log_id):
 
     data = request.get_json()
 
-    if not data:
+    # if not data: 정상적인데이터인데도 계속 오류메세지 떠서 바꿈!
+    if data is None:
         return jsonify({
             "success": False,
             "message": "요청 데이터가 없습니다."
         }), 400
 
-    manager = session.get("signedInMemberId") or session.get("signedInAdminId") or "임시_관리자"
+    manager = session.get("signedInMemberId") or session.get("signedInAdminId")
 
     if not manager:
         return jsonify({
@@ -80,24 +85,10 @@ def check_dashboard_log(log_id):
             "message": "담당자 정보가 없습니다."
         }), 400
 
-    data = request.get_json(silent=True) or {}
     
     result = check_log(log_id, manager)
 
     if not result["success"]:
         return jsonify(result), 404
 
-    # return jsonify(result), 200
-    actual_log_data = result.get("checked_log", {})
-
-   
-    return jsonify({
-        "success": True,
-        "log_id": actual_log_data.get("log_id"),
-        "manager": actual_log_data.get("manager"),
-        "checked_time": actual_log_data.get("checked_time"),
-        "detected_time": actual_log_data.get("detected_time"),
-        "person_count": actual_log_data.get("person_count"),
-        "captured_image_path": actual_log_data.get("captured_image_path"),
-        "status": actual_log_data.get("message")  # "위험구역 침범 감지" 문자열
-    }), 200
+    return jsonify(result), 200
