@@ -26,4 +26,5 @@ images/
 # Local test files
 app_test.py
 test_cv2_stream.py
+test_requests_stream.py
 _legacy/
