@@ -30,7 +30,7 @@ function renderLogList(log_list) {
 
         row.innerHTML = `
             <td>${log.log_id}</td>
-            <td>${log.danger_zone}</td>
+            <td>${log.danger_zone.zone_id}</td>
             <td>${log.person_count} 명</td>
             <td>${log.detected_time}</td>
             <td>${log.manager || "-"}</td>
@@ -39,4 +39,9 @@ function renderLogList(log_list) {
 
         container.appendChild(row);
     });
+}
+
+
+function downloadLogs() {
+    window.location.href = "/dashboard/download_report";
 }

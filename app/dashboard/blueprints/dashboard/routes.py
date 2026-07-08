@@ -3,13 +3,15 @@ from flask import (Blueprint,
                    jsonify,
                    send_from_directory,
                    request,
+                   send_file,
                    render_template,
                    session)
 from dashboard.ai.camera_manager import generate_frame
 from dashboard.utils.log_manager import (
     get_logs,
     delete_log,
-    check_log
+    check_log,
+    create_csv_report
 )
 
 from dashboard import config
@@ -62,6 +64,18 @@ def serve_rescue_image(filename):
     return send_from_directory(
         config.OCEAN_RESCUE_DIR,
         filename
+    )
+
+# CSV 보고서 다운로드
+@dashboard_bp.route('/download_report', methods=['GET'])
+def download_report():
+
+    report_path = create_csv_report()
+
+    return send_file(
+        report_path,
+        as_attachment=True,
+        download_name="rescue_report.csv"
     )
 
 # 로그 확인 처리

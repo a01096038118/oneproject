@@ -1,6 +1,3 @@
-/* =========================
-   전체
-========================= */
 body {
     margin: 0;
     padding: 0;
@@ -10,20 +7,20 @@ body {
 }
 
 #dashboard_wrap {
-    width: 1400px; /* 대화면 관제를 위한 넓은 고정폭 */
+    width: 1400px;
     margin: 0 auto;
     padding: 30px 20px;
 }
+
 /* =========================
    제목
 ========================= */
 #dashboard_wrap > h3 {
     text-align: center;
     font-size: 32px;
-    /* color: #38bdf8; */
     margin-bottom: 20px;
-    text-shadow: 1px 1px 1px; color:#3198d4;
-    
+    text-shadow: 1px 1px 1px;
+    color: #3198d4;
 }
 
 /* =========================
@@ -40,7 +37,7 @@ body {
 }
 
 .menu a {
-    text-shadow: 0 1px 1px; color: #e5e7eb;
+    color: #e5e7eb;
     text-decoration: none;
     margin: 0 10px;
     transition: 0.2s;
@@ -63,10 +60,41 @@ body {
     overflow-y: auto;
 }
 
-.data_box h4 {
-    margin: 0 0 20px;
-    text-shadow: 0 1px 1px; color:#38bdf8;
+/* =========================
+   로그 제목 + 다운로드 버튼
+========================= */
+.log_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.log_header h4 {
+    margin: 0;
+    color: #38bdf8;
     font-size: 22px;
+    text-shadow: 0 1px 1px;
+}
+
+.log_header a {
+    margin-left: auto;
+}
+
+.download_btn {
+    padding: 8px 18px;
+    border: none;
+    border-radius: 6px;
+    background: #2563eb;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.download_btn:hover {
+    background: #1d4ed8;
 }
 
 /* =========================
@@ -76,8 +104,8 @@ body {
     width: 100%;
     border-collapse: collapse;
     text-align: center;
-    overflow: hidden;
     border-radius: 10px;
+    overflow: hidden;
 }
 
 /* 헤더 */
@@ -111,7 +139,7 @@ body {
     background: #111827;
 }
 
-/* 마우스 올렸을 때 */
+/* 마우스 오버 */
 .log_table tbody tr:hover {
     background: #1d4ed8;
     transition: 0.2s;
@@ -130,6 +158,10 @@ body {
         min-width: 900px;
     }
 }
+
+/* =========================
+   스크롤바
+========================= */
 .data_box::-webkit-scrollbar {
     width: 8px;
 }
