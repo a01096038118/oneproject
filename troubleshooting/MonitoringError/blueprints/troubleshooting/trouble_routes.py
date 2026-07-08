@@ -16,9 +16,9 @@ trouble_bp = Blueprint(
 @trouble_bp.route('/new_critical_error_form', methods=['GET'])
 def new_critical_error_form():
 
-    mId = session.get('signed_member_Id')
+    mId = session.get('signedInMemberId')
     if not mId:
-        return redirect(url_for('member.signin_form'))
+        return redirect(url_for('member.memberSignIn_form'))
 
     eNum = str(uuid.uuid4())    
 
@@ -28,10 +28,10 @@ def new_critical_error_form():
 @trouble_bp.route('/new_critical_error_confirm', methods=['POST'])
 def new_critical_error_confirm():
 
-    mId = session.get('signed_member_Id')
+    mId = session.get('signedInMemberId')
 
     if not mId:
-        return redirect(url_for('/member.signin_form'))
+        return redirect(url_for('/member.memberSignIn_form'))
     
     regdatetime = time.getCurrentDateTime()
     
@@ -66,10 +66,10 @@ def new_critical_error_confirm():
 @trouble_bp.route('/error_modify_confirm', methods=['POST'])
 def error_modify_confirm():
      
-    mId  = session['signed_member_Id']
+    mId  = session['signedInMemberId']
     
     if not mId:
-        return redirect(url_for('member.signin_form'))
+        return redirect(url_for('member.memberSignIn_form'))
     
     critical_errors = load_errors()
     
@@ -100,10 +100,10 @@ def error_modify_confirm():
 @trouble_bp.route('/error_list', methods=['GET'])
 def error_list_view():
     
-    mId  = session['signed_member_Id']
+    mId  = session['signedInMemberId']
    
     if not mId:
-        return redirect(url_for('member.signin_form'))
+        return redirect(url_for('member.memberSignIn_form'))
     
     critical_errors = load_errors()
      
@@ -131,9 +131,9 @@ def error_list_view():
 @trouble_bp.route('/error_info/<eNum>', methods=['GET'])
 def error_infos(eNum):
 
-    mId = session.get('signed_member_Id')
+    mId = session.get('signedInMemberId')
     if not mId:
-        return redirect(url_for('member.signin_form'))
+        return redirect(url_for('member.memberSignIn_form'))
     
     critical_errors = load_errors()
 
