@@ -1,0 +1,18 @@
+{
+    "admin2": {
+        "mId": "admin2",
+        "mPw": "admin1234",
+        "mMail": "admin2@naver.com",
+        "mPhone": "01087654321",
+        "role": "ADMIN",
+        "admin_key": "3d8904e8-0a12-4303-9aa4-2ee9c24437df"
+    },
+    "admin3": {
+        "mId": "admin3",
+        "mPw": "admin1234",
+        "mMail": "admin3@naver.com",
+        "mPhone": "01032462365",
+        "role": "ADMIN",
+        "admin_key": "26a9fbdc-8c48-4f92-8424-2ada9a6e6c4d"
+    }
+}

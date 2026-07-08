@@ -1,39 +1,38 @@
 <link href="{{ url_for('static', filename='css/include/nav.css') }}" rel="stylesheet">
 
 <nav>
-    {% if not session.get('signedInMemberId') and not session.get('signedInAdminId') %}
+    {% if not session.get('signIntedMember') %}
         <div class="nav_wrap">
-            <a href="/">HOME</a>
-            |  
-            <a href="/member/gateway">MEMBERS</a> 
-            | 
-            <a href="/admin/gateway">ADMIN</a>
-            |
-        </div> 
-        
-    {% elif session.get('role') == 'MEMBER' %}  
-        <div class="member_wrap">
-            <a href="/">HOME</a>
-            |
-            <a href="/member/signOut_form">SIGN-OUT</a>
-            |
-            <a href="../dashboard/main">DASHBOARD</a>
-
-            <span class="member"> 👤 직원 : {{session['signedInMemberId'] }} </span>
+            <div class="nav_item">
+                <a href="/">HOME</a> 
+            </div>
+            <div class="nav_item">
+                <a href="/member/gateway">MEMBERS</a>
+            </div>
+            <div class="nav_item">
+                <a href="/admin/gateway">ADMIN</a>
+            </div>
         </div>
-
-    {% elif session.get('role') == 'ADMIN' %}  
-        <div class="admin_wrap">
-            <a href="/">HOME</a>
-            |
-            <a href="/member/signOut_form">SIGN-OUT</a>
-            |
-            <a href="/member/member_list">MEMBER_LIST</a>
-            |
-            <a href="../dashboard/main">DASHBOARD</a>
-
-            <span class="admin"> 👑 관리자 : {{ session['signedInAdminId']}}</span>
+    {% else %}  
+        <div class="nav_wrap">
+            <div class="nav_item">
+                <a href="/">HOME</a>
+            </div>
+            <div class="nav_item">
+                <a href="/member/signOut_confirm">SIGN-OUT</a>
+            </div>
+            {% if session.get('signIntedMember')['role'] == 'ADMIN' %}
+                <div class="nav_item">
+                    <a href="/member/memberModify_form">MODIFY</a>
+                </div>
+                <div class="nav_item">
+                    <a href="/member/delete_confirm" onclick="return confirm('정말 탈퇴하시겠습니까?');">DELETE</a>
+                </div>
+            {% endif %}
+            <div class="nav_item">
+                <a href="/dashboard/">DASHBOARD</a>
+            </div>
         </div>
-
     {% endif %}
+    
 </nav>

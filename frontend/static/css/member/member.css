@@ -16,6 +16,25 @@
     text-align: center;
 }
 
+.main-content-overlay h1, 
+.main-content-overlay h2, 
+.main-content-overlay p, 
+.main-content-overlay a, 
+.main-content-overlay span,
+.main-content-overlay div,
+.main-content-overlay li {
+    color: #ffffff !important;
+    font-weight: bold !important;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6) !important;
+}
+
+/* 🌟 네비게이션 및 메뉴 링크 스타일 추가 강조 */
+.main-content-overlay a {
+    font-weight: 800 !important; /* 메뉴 링크는 더욱 더 두껍게 설정 */
+    display: inline-block;
+    padding: 0 4px;
+}
+
 /* 틀렸을 때 나오는 에러 메시지 스타일 */
 #signin_wrap .signin_result {
     color: #df2020;

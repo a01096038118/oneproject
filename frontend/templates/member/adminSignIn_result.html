@@ -10,15 +10,20 @@
 </head>
 <body>
     
-    {% include 'include/header.html' %}
-    {% include 'include/nav.html' %}
+    <div class="main-content-overlay">
+        {% include 'include/header.html' %}
+        {% include 'include/nav.html' %}
+    </div>
 
-    <article id="delete_wrap">
-
-        <div class="delete_result">
-            <h3>DELETE SUCCESS!!</h3>
+    <article id="signin_wrap">
+        <div class="signin_result">
+            {% if result == 'OK' %}
+                <h3>SIGNIN SUCCESS!!</h3>
+            {% else %}
+                <h3>{{ result }}</h3>
+            {% endif %}
         </div>
-        
+
     </article>
 
     {% include 'include/footer.html' %}
