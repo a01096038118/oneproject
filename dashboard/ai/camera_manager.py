@@ -60,6 +60,8 @@ class CameraManager:
             success, frame = self.camera.read()
 
         if not success:
+            print("camera frame read failed")
+            self.reconnect_camera()
             return None
 
         return frame

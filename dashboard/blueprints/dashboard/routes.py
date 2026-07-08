@@ -4,7 +4,8 @@ from flask import (Blueprint,
                    send_from_directory,
                    request,
                    send_file,
-                   render_template
+                   render_template,
+                   session
                    )
 from ai.camera_manager import generate_frame
 from utils.log_manager import (
@@ -20,6 +21,14 @@ dashboard_bp = Blueprint(
     __name__,
     url_prefix="/dashboard"
 )
+
+@dashboard_bp.route('/main')
+def main():
+    return render_template('dashboard/dashboard.html')
+
+@dashboard_bp.route('/log_list')
+def log_list():
+    return render_template('dashboard/log.html')
 
 # OpenCV 실시간 영상을 웹으로 스트리밍
 @dashboard_bp.route('/video_feed')
@@ -83,13 +92,13 @@ def check_dashboard_log(log_id):
 
     data = request.get_json()
 
-    if not data:
+    if data is None:
         return jsonify({
             "success": False,
             "message": "요청 데이터가 없습니다."
         }), 400
 
-    manager = data.get("manager")
+    manager = session.get("signedInMemberId") or session.get("signedInAdminId")
 
     if not manager:
         return jsonify({
