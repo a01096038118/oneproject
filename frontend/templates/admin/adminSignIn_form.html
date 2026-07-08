@@ -12,20 +12,23 @@
 </head>
 <body>
     
-    <div class="main-content-overlay">
-        {% include 'include/header.html' %}
-        {% include 'include/nav.html' %}
-    </div>
+    {% include 'include/header.html' %}
+    {% include 'include/nav.html' %}
 
-    <article id="signup_wrap">
+    <article id="signin_wrap">
         
-        <div class="signup_form">
-            <form action="/admin/adminSignUp_confirm" name="signup_form" method="POST">
+        {% if result == 'fail' %}
+        <p class="signin_result">
+            아이디 또는 비밀번호가 틀렸습니다.
+        </p>
+        {% endif %}
+
+        <div class="signin_form">
+            <form action="/admin/adminSignIn_confirm" name="signin_form" method="POST">
                 <input class="input_basic" type="text" name="mId" placeholder="Input new member ID"><br>
                 <input class="input_basic" type="password" name="mPw" placeholder="Input new member PW"><br>
-                <input class="input_basic" type="email" name="mMail" placeholder="Input new member MAIL"><br>
-                <input class="input_basic" type="text" name="mPhone" placeholder="Input new member PHONE"><br>
-                <input class="input_button_basic_130" type="button" value="SIGN UP" onclick="signupForm();">
+                <input class="input_basic" type="password" name="admin_key" placeholder="Input ADMIN KEY"><br>
+                <input class="input_button_basic_130" type="button" value="SIGN IN" onclick="signinForm();">
                 <input class="input_button_basic_130" type="reset" value="RESET">
             </form>
         </div>

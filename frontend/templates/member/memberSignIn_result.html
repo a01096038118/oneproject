@@ -10,14 +10,12 @@
 </head>
 <body>
     
-    <div class="main-content-overlay">
-        {% include 'include/header.html' %}
-        {% include 'include/nav.html' %}
-    </div>
+    {% include 'include/header.html' %}
+    {% include 'include/nav.html' %}
 
     <article id="signin_wrap">
         <div class="signin_result">
-            {% if result != "OK" %}
+            {% if result %}
                 <h3>{{ result }}</h3>
             {% else %}
                 <h3>SIGNIN SUCCESS!!</h3>
