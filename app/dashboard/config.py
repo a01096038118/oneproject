@@ -1,5 +1,5 @@
 # ESP32 카메라 설정
-ESP32_STREAM_URL = "http://192.168.137.133:81/stream"
+ESP32_STREAM_URL = "http://192.168.137.89:81/stream"
 
 # YOLO 모델 설정
 YOLO_MODEL_PATH = "ai/models/best.pt"
