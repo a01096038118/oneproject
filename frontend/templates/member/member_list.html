@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% include 'include/title.html' %}
+
+    <link href="{{ url_for('static', filename='css/common.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/member/member.css') }}" rel="stylesheet">
+
+    <link href="{{ url_for('static', filename='css/include/header.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/include/nav.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/include/footer.css') }}" rel="stylesheet">
+
+    <link href="{{ url_for('static', filename='css/member/list.css') }}" rel="stylesheet">
+
+    <script src="/static/js/admin.js"></script>
+    
+</head>
+<body>
+    
+    {% include 'include/header.html' %}
+    {% include 'include/nav.html' %}
+
+    <article id="list_wrap">
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>EMAIL</th>
+                <th>PHONE</th>
+                <th>관리</th>
+            </tr>
+
+    {% for mId, member in members.items() %}
+            <tr>
+                <td>{{ member.mId }}</td>
+                <td>{{ member.mMail }}</td>
+                <td>{{ member.mPhone }}</td>
+                <td>
+                    <a href="/member/modify_form/{{ mId }}">MODIFY</a>
+                    |
+                    <a href="/member/delete_form/{{ mId }}">DELETE</a>
+                </td>
+            </tr>
+    {% endfor %}
+        </table>
+
+    </article>
+
+    {% include 'include/footer.html' %}
+
+</body>
+</html>

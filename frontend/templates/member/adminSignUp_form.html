@@ -7,15 +7,18 @@
     <link href="{{ url_for('static', filename='css/common.css') }}" rel="stylesheet">
     <link href="{{ url_for('static', filename='css/member/member.css') }}" rel="stylesheet">
 
-    <script src="{{ url_for('static', filename='js/member.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/admin.js') }}"></script>
     
+
+    {% if result %}
+    <script> alert("{{ result }}"); </script>
+    {% endif %}
+
 </head>
 <body>
     
-    <div class="main-content-overlay">
-        {% include 'include/header.html' %}
-        {% include 'include/nav.html' %}
-    </div>
+    {% include 'include/header.html' %}
+    {% include 'include/nav.html' %}
 
     <article id="signup_wrap">
         

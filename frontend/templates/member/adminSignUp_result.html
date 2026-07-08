@@ -5,38 +5,8 @@
     {% include 'include/title.html' %}
     <link href="{{ url_for('static', filename='css/common.css') }}" rel="stylesheet">
     <link href="{{ url_for('static', filename='css/member/member.css') }}" rel="stylesheet">
-    <style>
-        /* 발급된 UUID 키 스타일 상자 */
-        .key-box {
-            background-color: #f8fafc;
-            border: 1px solid #cbd5e1;
-            padding: 15px;
-            border-radius: 6px;
-            font-family: monospace;
-            font-size: 16px;
-            color: #0f172a;
-            word-break: break-all;
-            margin: 15px 0;
-            font-weight: bold;
-        }
-        /* 클립보드 복사 버튼 스타일 */
-        .copy-btn {
-            background-color: #0f172a;
-            color: #ffffff;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-weight: bold;
-            font-size: 14px;
-            transition: background 0.2s;
-            width: 100%;
-            max-width: 200px;
-        }
-        .copy-btn:hover {
-            background-color: #1e293b;
-        }
-    </style>
+    <script src="{{ url_for('static', filename='js/admin.js') }}"></script>
+
 </head>
 <body>
     
@@ -44,7 +14,9 @@
     {% include 'include/nav.html' %}
 
     <article id="signup_wrap">
-        <div class="signup_result" style="text-align: center; max-width: 500px; margin: 50px auto; padding: 40px; background: #fff; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+        <div class="signup_result" style="text-align: center; max-width: 500px; 
+        margin: 50px auto; padding: 40px; background: #fff; 
+        border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
             
             {% if result == 'OK' %}
                 <h3 style="color: #0f172a; margin-bottom: 15px;">SIGNUP SUCCESS!!</h3>
@@ -53,9 +25,9 @@
                     아래 발급된 <strong>관리자 인증 키(UUID)</strong>를 안전한 곳에 보관하세요.
                 </p>
                 
-                <div class="key-box" id="adminKey">{{ generated_key }}</div>
+                <div class="key-box" id="adminKey">{{ admin_key }}</div>
                 
-                <button class="copy-btn" onclick="copyToClipboard()">키 복사하기</button>
+                <button class="copy-btn" type="button" onclick="copyToClipboard()">키 복사하기</button>
                 
                 <div style="margin-top: 35px;">
                     <a href="/admin/adminSignIn_form" style="font-weight: bold; color: #0f172a; text-decoration: underline;">관리자 로그인하러 가기</a>
@@ -72,34 +44,6 @@
     </article>
 
     {% include 'include/footer.html' %}
-
-    <script>
-        function copyToClipboard() {
-            const keyText = document.getElementById('adminKey').innerText;
-            
-            // 최신 브라우저 Clipboard API 지원 여부 확인 후 복사
-            if (navigator.clipboard && navigator.clipboard.writeText) {
-                navigator.clipboard.writeText(keyText).then(() => {
-                    alert('관리자 키가 클립보드에 복사되었습니다!\n안전한 곳에 붙여넣기(Ctrl+V)하여 저장하세요.');
-                }).catch(err => {
-                    fallbackCopy(keyText);
-                });
-            } else {
-                fallbackCopy(keyText);
-            }
-        }
-
-        // 구형 브라우저 환경을 위한 예외 처리용 임시 복사 방식
-        function fallbackCopy(text) {
-            const dummy = document.createElement("textarea");
-            document.body.appendChild(dummy);
-            dummy.value = text;
-            dummy.select();
-            document.execCommand("copy");
-            document.body.removeChild(dummy);
-            alert('관리자 키가 클립보드에 복사되었습니다!');
-        }
-    </script>
 
 </body>
 </html>

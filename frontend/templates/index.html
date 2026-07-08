@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     {% include 'include/title.html' %}
+
     <link href="{{ url_for('static', filename='css/common.css') }}" rel="stylesheet">
     <link href="{{ url_for('static', filename='css/index.css') }}" rel="stylesheet">
 </head>
@@ -17,6 +18,18 @@
         <article class="main-hero-text">
             <h1>&lt;AI 드론 기반 해양 위험구역 경보 시스템&gt;</h1>
         </article>
+
+        {% with messages = get_flashed_messages() %}
+
+        <!-- 로그아웃 메세지 -->
+            {% if messages %}
+                <script> 
+                    alert("{{ messages[0] }}");
+                </script>
+        
+            {% endif %}
+        
+        {% endwith %}
 
         {% include 'include/footer.html' %}
     </div>

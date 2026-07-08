@@ -5,46 +5,13 @@
     {% include 'include/title.html' %}
     <link href="{{ url_for('static', filename='css/common.css') }}" rel="stylesheet">
     <link href="{{ url_for('static', filename='css/member/member.css') }}" rel="stylesheet">
-    <style>
-        .gateway_container {
-            text-align: center;
-            margin: 100px auto;
-            padding: 40px;
-            background: #ffffff;
-            max-width: 400px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-        .gateway_btn {
-            display: block;
-            width: 100%;
-            margin: 15px 0;
-            padding: 12px;
-            font-size: 16px;
-            font-weight: bold;
-            color: #ffffff;
-            /* 🌟 member와 동일한 차분한 다크 슬레이트(#0f172a) 색상으로 변경 */
-            background-color: #0f172a; 
-            border: none;
-            border-radius: 4px;
-            text-align: center;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-        .gateway_btn:hover {
-            /* 🌟 마우스 올렸을 때도 member와 동일하게 부드러운 톤(#1e293b)으로 변경 */
-            background-color: #1e293b;
-            text-decoration: none;
-            color: #ffffff;
-        }
-    </style>
+    <link href="{{ url_for('static', filename='css/member/admin_gateway.css')}}" rel="stylesheet">
+
 </head>
 <body>
     
-    <div class="main-content-overlay">
-        {% include 'include/header.html' %}
-        {% include 'include/nav.html' %}
-    </div>
+    {% include 'include/header.html' %}
+    {% include 'include/nav.html' %}
 
     <article id="gateway_wrap">
         <div class="gateway_container">
