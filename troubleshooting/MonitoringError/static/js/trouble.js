@@ -19,16 +19,13 @@ function submitCriticalErrorForm() {
     }
 }
 
-
 function openModal(eNum) {
     console.log('errorModifyForm')
 
     currentEnum = eNum
 
     document.getElementById('modal_test').style.display = 'flex'; 
-
 }
-
 
 function closeModal() { 
     document.getElementById('modal_test').style.display = 'none'; 
