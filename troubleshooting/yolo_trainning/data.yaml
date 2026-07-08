@@ -1,0 +1,7 @@
+path: C:\Alot1team\project\troubleshooting\yolo_trainning\dataset
+train: images/train
+val: images/val
+
+nc: 4
+names: ['victim', 'boat', 'jetski', 'buoy']
+

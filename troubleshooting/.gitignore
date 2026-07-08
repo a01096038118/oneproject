@@ -1,0 +1,25 @@
+venv/
+__pycache__/
+*.pyc
+.DS_Store
+.vscode/
+yolo_env/
+
+# 데이터셋 통째로 (이미지+라벨+캐시 전부 해결)
+dataset/
+media/
+
+# YOLO 학습 산출물
+runs/
+*.pt
+*.onnx
+*.cache
+
+# 미디어 파일 (dataset 밖에 흩어진 것 대비)
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.mp4
+*.mov
+*.avi

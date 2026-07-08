@@ -7,34 +7,72 @@
     <link href="{{url_for('static', filename='css/trouble_common.css')}}" rel="stylesheet">
     <link href="{{url_for('static', filename='css/trouble.css')}}" rel="stylesheet">
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+
+    <script src="{{url_for('static', filename='js/trouble.js')}}"></script>
+
 </head>
 <body>
     
-    {% include 'include/bank_nav.html' %}
+    {% include 'include/trouble_nav.html' %}
 
-    <article id="account_list_wrap">
-        <table class="account_list_table">
+    <article id="Critical_Error_List_wrap">
+           <h2>CRITICAL ERRORS</h2>
+                <div style="text-align: right; margin-bottom: 10px;">
+                    <a href="/trouble/download_excel" class="btn_excel_download">
+                        EXCEL
+                    </a>
+                </div>
+        <table class="error_lnfo_table">
             <thead>
                 <tr>
                     <th>No.</th>
-                    <th>ACCOUNT NUMBER</th>
-                    <th>BALANCE</th>
+                    <th>ID</th>
+                    <th>Error_Num</th>
+                    <th>CATEGORY</th>
                     <th>CREATED DATE</th>
+                    <th>Action/Modify</th>
                 </tr>
             </thead>
             <tbody>
-                {% for aNum, info in accounts %}
-                <tr>
-                    <td>{{ loop.index }}</td>
-                    <td><a href="{{ url_for('bank.account_infos', aNum=aNum) }}">{{ aNum }}</a></td>
-                    <td>{{ info.bal }}</td>
-                    <td>{{ info.date }}</td>
-                </tr>
-                {% endfor %}
-    </tbody>
-</table>
+                    {% for info in all_error_list %}
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td id="list_staff_id">{{ info.staff_id }}</td>
+                        <td id="list_error_num_td"><a href="{{ url_for('trouble.error_infos', eNum=info.error_num) }}">{{ info.error_num }}</a></td>
+                        <td id="list_category">{{ info.category }}</td>
+                        <td>{{ info.date }}</td>
+                        <td>
+                            <button class="open_modal" onclick="openModal('{{ eNum }}');">
+                                MODIFY
+                            </button>
+                        </td>
+                    </tr>
+                    {% endfor %}                   
+            </tbody>
+        </table>
+            <div id="modal_test">
+                <div class="resolution_modal">
+                    <h3>Resolution(in details)</h3>
+                    <textarea id="resolutionInput" rows="5" cols="50"></textarea>
+                    <select id="progressInput" type="text" name="progress">
+                        <option value="Problem Solved">
+                        Problem Solved
+                        </option>
+                        <option value="Emergency fix">
+                        Emergency fix
+                        </option>          
+                    </select>    
+                    <button class="save_modal" onclick="saveModalform();">
+                        SAVE
+                    </button>
+                    <button class="cancel_modal" onclick="closeModal();">
+                        CLOSE
+                    </button> 
+                </div>
+            </div>
     </article>
-
-  
 </body>
 </html>

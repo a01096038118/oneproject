@@ -7,38 +7,73 @@
     <link href="{{url_for('static', filename='css/trouble_common.css')}}" rel="stylesheet">
     <link href="{{url_for('static', filename='css/trouble.css')}}" rel="stylesheet">
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+
 </head>
 <body>
     
-    {% include 'include/bank_nav.html' %}
+    {% include 'include/trouble_nav.html' %}
 
-    <article id="account_info_wrap">
-        <h2>N0. {{ account.aNum }}</h2>
+    <article id="error_info_wrap">    
+        <br><br>
+        <h2> DETAIL INFO</h2>
         <br>  
-        <h3>Deposit and Withdrawal History</h3>
-        <br>
-        <table class="account_info">
+        <table class="error_info">
             <thead>
                 <tr>
-                    <th>Date/Time</th>
-                    <th>Current Balance</th>
-                    <th>Deposit</th>
-                    <th>Withdrawal</th>
+                    <th>Date/Time </th>
+                    <th>Person in charge </th>
+                    <th>Category </th>         
                 </tr>
         </thead>
-        <tbody>
-            {% for date, info in account.history.items() %}
-                {% for datetime, value in info.items() %}
+        <tbody>          
                     <tr>
-                        <td>{{ datetime }}</td>
-                        <td>{{ account.bal }}</td>
-                        <td>{{ value.dAmount }}</td>
-                        <td>{{ value.wAmount }}</td>
-                    </tr>
-                {% endfor %}    
-            {% endfor %}
+                        <td>{{ target_error.date }}</td>
+                        <td>{{ target_error.staff_id }}</td>
+                        <td>{{ target_error.category }}</td>
+                    </tr>  
+        </tbody>
+        <table class="error_code">
+            <thead>
+                <tr>
+                    <th>Error Code</th>          
+                </tr>
+        </thead>
+        <tbody>          
+                <tr>
+                    <td>{{ target_error.error_code }}</td>
+                </tr>  
         </tbody>
         </table>
+        </table>
+        <table class="error_issue">
+            <thead>
+                <tr>
+                    <th>Reason</th>        
+                </tr>
+        </thead>
+        <tbody>          
+                <tr>
+                    <td>{{ target_error.issue }}</td>
+                </tr>  
+        </tbody>
+        </table>
+        <table class="error_resolution">
+            <thead>
+                <tr>
+                    <th>Resolution</th>          
+                </tr>
+        </thead>
+        <tbody>          
+                <tr>
+                    <td>{{ target_error.resolution }}</td>
+                </tr>  
+        </tbody>
+        </table>
+        <br><br>
+        <h3 id="eNum_in_info"> N0. {{ eNum }} </h3>
     </article>
 
   
