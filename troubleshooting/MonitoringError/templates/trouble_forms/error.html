@@ -10,7 +10,7 @@
 </head>
 <body>
     
-    {% include 'include/bank_nav.html' %}
+    {% include 'include/trouble_nav.html' %}
 
 
     <article id="error_wrap">
@@ -21,7 +21,7 @@
                 {% if error_msg %}
                 <p>{{ error_msg }}</p>
                 {% endif %}
-                <a href="{{ url_for('bank.accList_view') }}" class="btn_home">Go to Account List</a>
+                <a href="{{ url_for('trouble.error_list_view') }}" class="btn_home">Go to Account List</a>
         </div>
     </article>
 

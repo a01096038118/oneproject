@@ -16,11 +16,15 @@
     {% include 'include/trouble_nav.html' %}
 
     <article id="new_critical_error_wrap">
-        <div class="new_critical_error_result">
-                <h2> NEW CRITICAL ERROR REGISTERED</h2>
-        </div>                                                                             
-
-    </article>
+    <!-- 두 요소를 묶는 컨테이너 생성 -->
+    <div class="result_container">
+        <h2>NEW ERROR REGISTERED</h2>
+        <div class="button_group">
+            <a href="/trouble/new_critical_error_form" class="input_button_basic_140">Additional Input</a>
+            <a href="/trouble/error_list" class="input_button_basic_145">Check List</a>
+        </div>
+    </div>
+</article>
 
 </body>
 </html>

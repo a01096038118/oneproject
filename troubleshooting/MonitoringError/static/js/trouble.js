@@ -1,7 +1,7 @@
 function submitCriticalErrorForm() {
     console.log('submitCriticalErrorForm')
 
-    // alert("");
+    alert("REGIST COMPLETE!");
 
     let form = document.newErrorForm;
 
@@ -19,75 +19,49 @@ function submitCriticalErrorForm() {
     }
 }
 
-function errorModifyForm() {
+
+function openModal(eNum) {
     console.log('errorModifyForm')
 
-    let form = document.Modify_form;
+    currentEnum = eNum
 
-    let resolution = form.resolution.value; 
-    
-    if (resolution === '') {
-        alert('Please input how to resolve!!')
-        form.resolution.focus();
-    } else {
-        form.submit();
-    }
+    document.getElementById('modal_test').style.display = 'flex'; 
+
 }
 
 
-function withdrawalForm() {
-    console.log('withdrawalForm')
-
-    let form = document.withdrawal_form;
-
-    let aPw = form.aPw.value.trim(); 
-    let wAmount = form.wAmount.value.trim();
-
-    console.log('wAmount:', wAmount)
-    
-    if (aPw === '') {
-        alert('Please input Account PW!!')
-        form.aPw.focus();
-    } else if (wAmount === '') {
-        alert('Please input WITHDRAWAL AMOUNT!!')
-        form.wAmount.focus();
-    }  else {
-        form.submit();
-    }
+function closeModal() { 
+    document.getElementById('modal_test').style.display = 'none'; 
 }
 
 
-function accModifyForm() {
-    console.log('accModifyForm')
+function saveModalform() {
+    console.log('saveModalform')
 
-    let form = document.Modify_form;
+    let form = document.saveModalform;
 
-    let aPw = form.aPw.value.trim();
+    const newResolution = document.getElementById('resolutionInput').value
+    const newProgress = document.getElementById('progressInput').value
 
-    console.log('aPw:', aPw)
-
-    if  (aPw === '') {
-         alert('Please input New Account PW!!')
-         form.aPw.focus();
-    } else {
-        form.submit();
-    }
-}
-
-function accDeleteForm() {
-    console.log('accDeleteForm')
-
-    let form = document.Delete_form;
-
-    let aNum = form.aNum.value.trim();
-
-    console.log('aNum', aNum)
-
-    if  (aNum === '') {
-         alert('Please input Account Num!!')
-         form.aNum.focus();
-    } else {
-        form.submit();
+    const dataToSend = {
+        resolution : newResolution,
+        progress : newProgress,
+        errorid : currentEnum
     }
 
+    fetch('/trouble/error_modify_confirm', {
+        method: 'POST', 
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(dataToSend)   // 자바스크립트 객체를 "문자열(String) 형태의 JSON"으로 변환
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("SERVER:", data);
+        alert("SAVE COMPLETE!");
+        document.getElementById('resolutionInput').value = '';
+        closeModal();
+    })
+    .catch(error => console.error("ERROR:", error));
 }

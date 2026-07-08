@@ -17,30 +17,32 @@
     <article id="new_critical_error_wrap">
         <div class="new_critical_error_form">
             <form action="/trouble/new_critical_error_confirm"  method="post" name="newErrorForm">
+
+                <input class="input_basic_eNum" type="text" name="eNum" value="{{ eNum }}" readonly>
                 
                 <select class="select_basic" type="text" name="category">
                     <option value="python">
                         UNKNOWN
                     </option>
-                    <option value="git">
-                        Git
+                    <option value="GIT">
+                        GIT
                     </option>
-                    <option value="html">
+                    <option value="HTML">
                         HTML 
                     </option>
-                    <option value="json">
+                    <option value="JSON">
                         JSON 
                     </option>
-                    <option value="yolo">
+                    <option value="YOLO">
                         FLASK(YOLO)
                     </option>
-                    <option value="cam">
+                    <option value="CAM">
                         ESP32-CAM
                     </option >
-                    <option value="frontend">
+                    <option value="FRONTEND">
                         JS/CSS
                     </option>
-                    <option value="python">
+                    <option value="PYTHON">
                         FLASK(PYTHON)
                     </option>
                 </select>    
@@ -60,7 +62,7 @@
                         Needs Review 
                     </option>          
                 </select>    
-                <input class="input_button_basic_130" type="button" value="REGIST" onclick="submitCriticalErrorForm();">
+                <input class="input_button_basic_130" type="button" value="SUBMIT" onclick="submitCriticalErrorForm();">
                 <input class="input_button_basic_130" type="reset" value="RESET">
             </form>
         </div>
@@ -71,5 +73,4 @@
 
      
             
-            <br>
          
