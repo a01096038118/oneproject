@@ -1,8 +1,7 @@
 from flask import Flask, render_template
-from users.member import member_bp
-from users.admin import admin_bp
-from users.common import common_bp
-from dashboard.blueprints.dashboard.routes import dashboard_bp
+from blueprints.users import member_bp, admin_bp, common_bp
+from blueprints.dashboard.routes import dashboard_bp
+from blueprints.trouble.trouble_routes import trouble_bp
 
 
 
@@ -13,6 +12,7 @@ app.register_blueprint(member_bp)
 app.register_blueprint(admin_bp)
 app.register_blueprint(dashboard_bp)
 app.register_blueprint(common_bp)
+app.register_blueprint(trouble_bp)
 
 @app.route("/")
 def home():
