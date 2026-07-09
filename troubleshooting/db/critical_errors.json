@@ -120,5 +120,15 @@
             "resolution": "",
             "date": "2026-07-02 15:15:21"
         }
+    },
+    "gildong88": {
+        "c55116fe-773c-494c-90dc-9c64d061b71d": {
+            "category": "HTML",
+            "error_code": "trouble.js:63 ERROR: SyntaxError: Unexpected token '<', \"<!doctype \"... is not valid JSON (anonymous)",
+            "issue": "modify_form 블루프린트함수 로직으로 연결시키는게 아니라 바로 confirm 함수쪽으로 넘겨서 바로 데이터 받아서 db에 저장하기 ",
+            "progress": "Resolved",
+            "resolution": "",
+            "date": "2026-07-08 16:55:56"
+        }
     }
 }

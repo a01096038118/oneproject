@@ -1,6 +1,6 @@
 import pandas as pd
 import io
-from flask import Blueprint, render_template, request, redirect, session, url_for, jsonify, send_file
+from flask import Blueprint, render_template, request, session, jsonify, send_file
 from utils.trouble_json_manager import load_errors, save_errors
 from utils import time
 import uuid
@@ -16,13 +16,13 @@ trouble_bp = Blueprint(
 @trouble_bp.route('/new_critical_error_form', methods=['GET'])
 def new_critical_error_form():
 
-    mId = session.get('signedInMemberId')
+    cId = session.get('signedInMemberId')
     admId = session.get('signedInAdminId')
 
-    current_id = mId if mId else admId
+    mId = cId if cId else admId
 
-    if not current_id:
-        return redirect(url_for('/'))
+    if not mId:
+        return jsonify({"status": "fail", "message": "Login required"}), 401 
 
     eNum = str(uuid.uuid4())    
 
@@ -32,13 +32,13 @@ def new_critical_error_form():
 @trouble_bp.route('/new_critical_error_confirm', methods=['POST'])
 def new_critical_error_confirm():
 
-    mId = session.get('signedInMemberId')
+    cId = session.get('signedInMemberId')
     admId = session.get('signedInAdminId')
 
-    current_id = mId if mId else admId
+    mId = cId if cId else admId
 
-    if not current_id:
-        return redirect(url_for('/'))
+    if not mId:
+        return jsonify({"status": "fail", "message": "Login required"}), 401 
     
     regdatetime = time.getCurrentDateTime()
     
@@ -50,10 +50,10 @@ def new_critical_error_confirm():
 
     critical_errors = load_errors()
 
-    if current_id not in critical_errors:
-        critical_errors[current_id] = {}
+    if mId not in critical_errors:
+        critical_errors[mId] = {}
 
-    staff_errors = critical_errors[current_id]
+    staff_errors = critical_errors[mId]
      
     staff_errors[eNum] = {
         'category': category,
@@ -68,24 +68,19 @@ def new_critical_error_confirm():
 
     return render_template('trouble/new_critical_error_result.html')
 
-
 #/error_modify_confirm
 @trouble_bp.route('/error_modify_confirm', methods=['POST'])
 def error_modify_confirm():
      
-    mId = session.get('signedInMemberId')
+    cId = session.get('signedInMemberId')
     admId = session.get('signedInAdminId')
 
-    current_id = mId if mId else admId
+    mId = cId if cId else admId
 
-    if not current_id:
-        return redirect(url_for('/'))
+    if not mId:
+        return jsonify({"status": "fail", "message": "Login required"}), 401 
     
     critical_errors = load_errors()
-    
-    if current_id not in critical_errors or not critical_errors[current_id]:
-   
-        return redirect(url_for('new_critical_error_form'))
 
     regdatetime = time.getCurrentDateTime()
 
@@ -96,33 +91,33 @@ def error_modify_confirm():
 
     eNum = errorid
 
-    staff_errors = critical_errors.get(current_id, {})
+    target = None
+    
+    for errors in critical_errors.values():
+        if eNum in errors:
+            target = errors[eNum]
+            target['resolution'] = resolution
+            target['date'] = regdatetime
+            target['progress'] = progress
+            break        
 
-    staff_errors[eNum]['resolution'] = resolution
-    staff_errors[eNum]['regdatetime'] = regdatetime
-    staff_errors[eNum]['progress'] = progress
-   
     save_errors(critical_errors)
     
-    return jsonify({"status": "success", "message": "SAVE COMPLETE!"})
+    return jsonify({"status": "success", "message": "Modified Complete!"})
 
 # /trouble/error_list_view
 @trouble_bp.route('/error_list', methods=['GET'])
 def error_list_view():
     
-    mId = session.get('signedInMemberId')
+    cId = session.get('signedInMemberId')
     admId = session.get('signedInAdminId')
 
-    current_id = mId if mId else admId
+    mId = cId if cId else admId
 
-    if not current_id:
-        return redirect(url_for('/'))
+    if not mId:
+        return jsonify({"status": "fail", "message": "Login required"}), 401 
     
     critical_errors = load_errors()
-     
-    if current_id not in critical_errors or not critical_errors[current_id]:
-        
-        return redirect(url_for('new_critical_error_form'))
 
     all_error_list = []
 
@@ -144,13 +139,13 @@ def error_list_view():
 @trouble_bp.route('/error_info/<eNum>', methods=['GET'])
 def error_infos(eNum):
 
-    mId = session.get('signedInMemberId')
+    cId = session.get('signedInMemberId')
     admId = session.get('signedInAdminId')
 
-    current_id = mId if mId else admId
+    mId = cId if cId else admId
 
-    if not current_id:
-        return redirect(url_for('/'))
+    if not mId:
+        return jsonify({"status": "fail", "message": "Login required"}), 401 
     
     critical_errors = load_errors()
 
@@ -167,6 +162,14 @@ def error_infos(eNum):
    
 @trouble_bp.route('/download_excel')
 def download_excel():
+
+    cId = session.get('signedInMemberId')
+    admId = session.get('signedInAdminId')
+
+    mId = cId if cId else admId
+
+    if not mId:
+        return jsonify({"status": "fail", "message": "Login required"}), 401 
   
     data = load_errors()
 
