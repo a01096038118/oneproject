@@ -1,5 +1,7 @@
 from flask import Flask, render_template
-from users.route import member_bp, admin_bp, common_bp
+from users.member import member_bp
+from users.admin import admin_bp
+from users.common import common_bp
 from dashboard.blueprints.dashboard.routes import dashboard_bp
 
 

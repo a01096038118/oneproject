@@ -14,7 +14,7 @@ admin_bp = Blueprint(
 )
 
 # 글자4개 이상
-id_pattern = r'^(?=.*[A-Za-z])(?=.*\d)[A-Za-z0-9]{4,20}$'
+id_pattern = r'^(?=.*[A-Za-z])[A-Za-z0-9]{4,20}$'
 # 글자&숫자 포함 8자 이상 20자 이하
 pw_pattern = r'^(?=.*[A-Za-z])(?=.*\d)(?=.*[\W_])[^\s]{8,20}$'
 # '@'과'.' 존재 
@@ -45,7 +45,7 @@ def adminSignUp_confirm():
     mId = request.form['mId']
     if not re.match(id_pattern, mId):
         return render_template('frontend/adminSignUp_result.html',
-                               result = '아이디는 영문, 숫자 포함 4자 이상 20자 이하로 입력해주세요.')
+                               result = '아이디는 4자 이상 20자 이하로 입력해주세요.')
    
     # pw_pattern = r'^(?=.*[A-Za-z])(?=.*\d)(?=.*[\W_])[^\s]{8,20}$'
     mPw = request.form['mPw']
@@ -155,7 +155,9 @@ def member_list():
 
     return render_template(
         'frontend/member_list.html',
-        members=members
+        members = members
+        # members(html에 사용할 이름) = members(python 변수)
+        # python 변수 members를 html에 사용할 이름 members에 전달한다.
     )
 
 # 회원정보 수정 화면 

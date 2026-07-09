@@ -9,7 +9,7 @@ member_bp = Blueprint(
 )
 
 # 글자4개 이상
-id_pattern = r'^(?=.*[A-Za-z])(?=.*\d)[A-Za-z0-9]{4,20}$'
+id_pattern = r'^(?=.*[A-Za-z])[A-Za-z0-9]{4,20}$'
 # 글자&숫자 포함 8자 이상 20자 이하
 pw_pattern = r'^(?=.*[A-Za-z])(?=.*\d)(?=.*[\W_])[^\s]{8,20}$'
 # '@'과'.' 존재 
@@ -39,7 +39,7 @@ def memberSingup_comfirm():
     mId = request.form['mId']
     if not re.match(id_pattern, mId):
         return render_template('frontend/memberSignUp_form.html',
-                               result = '아이디는 영문, 숫자 포함 4자 이상 20자 이하로 입력해주세요.')
+                               result = '아이디는 4자 이상 20자 이하로 입력해주세요.')
 
     if mId in members:
         return render_template('frontend/memberSignUp_form.html',

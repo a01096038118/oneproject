@@ -5,9 +5,9 @@
         <div class="nav_wrap">
             <a href="/">HOME</a>
             |  
-            <a href="/member/gateway">MEMBERS</a> 
+            <a href="{{ url_for('member.gateway') }}">MEMBERS</a> 
             | 
-            <a href="/admin/gateway">ADMIN</a>
+            <a href="{{ url_for('admin.gateway') }}">ADMIN</a>
             |
         </div> 
         
@@ -15,9 +15,9 @@
         <div class="member_wrap">
             <a href="/">HOME</a>
             |
-            <a href="/member/signOut_form">SIGN-OUT</a>
+            <a href="{{ ulr_for('member.signOut_form') }}">SIGN-OUT</a>
             |
-            <a href="../dashboard/main">DASHBOARD</a>
+            <a href="{{ url_for('dashboard.main') }}">DASHBOARD</a>
 
             <span class="member"> 👤 직원 : {{session['signedInMemberId'] }} </span>
         </div>
@@ -26,11 +26,11 @@
         <div class="admin_wrap">
             <a href="/">HOME</a>
             |
-            <a href="/member/signOut_form">SIGN-OUT</a>
+            <a href="{{ url_for('member.signOut.form') }}">SIGN-OUT</a>
             |
-            <a href="/member/member_list">MEMBER_LIST</a>
+            <a href="{{ url_for('member.member_list') }}">MEMBER_LIST</a>
             |
-            <a href="../dashboard/main">DASHBOARD</a>
+            <a href="{{ url_for('dashboard.main') }}">DASHBOARD</a>
 
             <span class="admin"> 👑 관리자 : {{ session['signedInAdminId']}}</span>
         </div>

@@ -20,9 +20,9 @@
         <div class="menu">
             <a href="/">HOME</a>
             |
-            <a href="../dashboard/main"> DASHBOARD </a>
+            <a href="{{ url_for('dashboard.main') }}"> DASHBOARD </a>
             |
-            <a href="/member/signOut_form"> SIGN_OUT </a>
+            <a href="{{ url_for('member.signOut_form') }}"> SIGN_OUT </a>
             
         </div>
 
@@ -31,7 +31,7 @@
 
                 <h4>[ 로그 기록 ]</h4>
                 
-                <a href="/dashboard/download_report">
+                <a href="{{ url_for('dashboard/download_report') }}">
                     <button type="button" class="download_btn">
                         DOWNLOAD
                     </button>

@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <!-- {% include 'include/title.html' %} -->
 
     <link href="{{ url_for('static', filename='css/common.css') }}" rel="stylesheet">
     <link href="{{ url_for('static', filename='css/dashboard/dashboard.css') }}" rel="stylesheet">
@@ -19,9 +18,9 @@
         <div class="menu">
             <a href="/"> HOME </a>
             |
-            <a href="../dashboard/log_list">LOG_LIST</a>
+            <a href="{{ url_for('dashboard.log_list') }}">LOG_LIST</a>
             |
-            <a href="/member/signOut_form"> SIGN_OUT </a>
+            <a href="{{ url_for('member.signOut_form') }}"> SIGN_OUT </a>
             
         </div>
         
@@ -30,8 +29,9 @@
             <div class="camera_view">
                 <img 
                 id="video_img" 
-                src="/dashboard/video_feed" 
-                width="800" alt="실시간 영상">
+                src="{{ url_for('dashboard.video_feed') }}"
+                width="800" 
+                alt="실시간 영상">
             </div>
 
             
