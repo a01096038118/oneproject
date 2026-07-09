@@ -26,10 +26,6 @@ dashboard_bp = Blueprint(
 def main():
     return render_template('dashboard/dashboard.html')
 
-@dashboard_bp.route('/log_list')
-def log_list():
-    return render_template('dashboard/log.html')
-
 # OpenCV 실시간 영상을 웹으로 스트리밍
 @dashboard_bp.route('/video_feed')
 def video_feed():
