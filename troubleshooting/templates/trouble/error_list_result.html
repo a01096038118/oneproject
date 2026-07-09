@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     {% include 'include/trouble_title.html' %}
 
-    <link href="{{url_for('static', filename='css/trouble_common.css')}}" rel="stylesheet">
-    <link href="{{url_for('static', filename='css/trouble.css')}}" rel="stylesheet">
+     <link href="{{url_for('static', filename='css/trouble/trouble_common.css')}}" rel="stylesheet">
+    <link href="{{url_for('static', filename='css/trouble/trouble.css')}}" rel="stylesheet">
+
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -45,7 +46,7 @@
                         <td id="list_category">{{ info.category }}</td>
                         <td>{{ info.date }}</td>
                         <td>
-                            <button class="open_modal" onclick="openModal('{{ eNum }}');">
+                            <button class="open_modal" onclick="openModal('{{ info.error_num  }}');">
                                 MODIFY
                             </button>
                         </td>

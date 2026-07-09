@@ -5,8 +5,8 @@
     
     {% include 'include/trouble_title.html' %}
 
-   <link href="{{url_for('static', filename='css/trouble_common.css')}}" rel="stylesheet">
-    <link href="{{url_for('static', filename='css/trouble.css')}}" rel="stylesheet">
+ <link href="{{url_for('static', filename='css/trouble/trouble_common.css')}}" rel="stylesheet">
+    <link href="{{url_for('static', filename='css/trouble/trouble.css')}}" rel="stylesheet">
 
     <script src="{{url_for('static', filename='js/trouble.js')}}"></script>
 
@@ -16,7 +16,7 @@
     {% include 'include/trouble_nav.html' %}
 
     <article id="new_critical_error_wrap">
-    <!-- 두 요소를 묶는 컨테이너 생성 -->
+   
     <div class="result_container">
         <h2>NEW ERROR REGISTERED</h2>
         <div class="button_group">
