@@ -1,0 +1,181 @@
+body {
+    margin: 0;
+    padding: 0;
+    background: #0b0f1a;
+    color: #e5e7eb;
+    font-family: Arial, sans-serif;
+}
+
+#dashboard_wrap {
+    width: 1400px;
+    margin: 0 auto;
+    padding: 30px 20px;
+}
+
+/* =========================
+   제목
+========================= */
+#dashboard_wrap > h3 {
+    text-align: center;
+    font-size: 32px;
+    margin-bottom: 20px;
+    text-shadow: 1px 1px 1px;
+    color: #3198d4;
+}
+
+/* =========================
+   메뉴
+========================= */
+.menu {
+    text-align: right;
+    margin-bottom: 80px;
+    font-size: 1.2em;
+    font-weight: bold;
+    box-shadow: 0 4px 10px rgba(219, 200, 200, 0.35);
+    border-radius: 8px;
+    padding: 10px 20px;
+}
+
+.menu a {
+    color: #e5e7eb;
+    text-decoration: none;
+    margin: 0 10px;
+    transition: 0.2s;
+}
+
+.menu a:hover {
+    color: #38bdf8;
+}
+
+/* =========================
+   로그 박스
+========================= */
+.data_box {
+    background: #111827;
+    border: 1px solid #1f2937;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 4px 15px rgba(219, 200, 200, 0.35);
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+/* =========================
+   로그 제목 + 다운로드 버튼
+========================= */
+.log_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.log_header h4 {
+    margin: 0;
+    color: #38bdf8;
+    font-size: 22px;
+    text-shadow: 0 1px 1px;
+}
+
+.log_header a {
+    margin-left: auto;
+}
+
+.download_btn {
+    padding: 8px 18px;
+    border: none;
+    border-radius: 6px;
+    background: #2563eb;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.download_btn:hover {
+    background: #1d4ed8;
+}
+
+/* =========================
+   테이블
+========================= */
+.log_table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+/* 헤더 */
+.log_table thead {
+    background: #1e3a8a;
+}
+
+.log_table th {
+    padding: 15px;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border-bottom: 2px solid #2563eb;
+}
+
+/* 데이터 */
+.log_table td {
+    padding: 14px;
+    border-bottom: 1px solid #374151;
+    color: #e5e7eb;
+    font-size: 15px;
+}
+
+/* 홀수 줄 */
+.log_table tbody tr:nth-child(odd) {
+    background: #172033;
+}
+
+/* 짝수 줄 */
+.log_table tbody tr:nth-child(even) {
+    background: #111827;
+}
+
+/* 마우스 오버 */
+.log_table tbody tr:hover {
+    background: #1d4ed8;
+    transition: 0.2s;
+}
+
+/* =========================
+   반응형
+========================= */
+@media screen and (max-width: 1000px) {
+
+    .data_box {
+        overflow-x: auto;
+    }
+
+    .log_table {
+        min-width: 900px;
+    }
+}
+
+/* =========================
+   스크롤바
+========================= */
+.data_box::-webkit-scrollbar {
+    width: 8px;
+}
+
+.data_box::-webkit-scrollbar-track {
+    background: #111827;
+    border-radius: 10px;
+}
+
+.data_box::-webkit-scrollbar-thumb {
+    background: #274db8;
+    border-radius: 10px;
+}
+
+.data_box::-webkit-scrollbar-thumb:hover {
+    background: #217094;
+}

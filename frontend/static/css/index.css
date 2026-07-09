@@ -1,0 +1,65 @@
+/* 1. 배경 동영상 전체화면 고정 (선명하고 밝은 세팅 유지) */
+#bg-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover; /* 화면 왜곡 없이 꽉 채움 */
+    z-index: -1; /* 콘텐츠 뒤로 배치 */
+    
+    /* 배경 영상 선명하게 유지 */
+    filter: brightness(0.7) contrast(1.1); 
+}
+
+/* 2. 영상 위에 배치될 전체 컨테이너 */
+.main-content-overlay {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* 3. 메인 화면 중앙 텍스트 스타일링 */
+.main-hero-text {
+    text-align: center;
+    /* 🌟 margin-top을 정중앙(auto) 대신 '25vh'(화면 높이의 25%) 등으로 지정하여 위로 끌어올립니다. */
+    margin-top: 10vh; 
+    margin-bottom: auto;
+    padding: 20px;
+}
+
+/* 🌟 글씨 굵기 및 색상 변경 
+   - 메인 페이지 전체 글자색을 완전 흰색(#ffffff)으로 변경합니다.
+   - 글자 굵기를 두껍게(bold) 만들고 미세한 그림자를 주어 흰 파도 위에서도 또렷하게 보이게 합니다. */
+.main-content-overlay h1, 
+.main-content-overlay h2, 
+.main-content-overlay p, 
+.main-content-overlay a, 
+.main-content-overlay span,
+.main-content-overlay div,
+.main-content-overlay li {
+    color: #ffffff !important;
+    font-weight: bold !important;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6) !important;
+}
+
+/* 🌟 네비게이션 및 메뉴 링크 스타일 추가 강조 */
+.main-content-overlay a {
+    font-weight: 800 !important; /* 메뉴 링크는 더욱 더 두껍게 설정 */
+    display: inline-block;
+    padding: 0 4px;
+}
+
+/* 서브 텍스트 역시 흰색 계열로 유지 */
+.main-content-overlay .scnd-font-color {
+    color: #f1f5f9 !important;
+}
+
+/* 푸터 하단 배경 투명 처리 */
+footer {
+    background: rgba(0, 0, 0, 0.2); /* 푸터 영역의 가독성을 위해 살짝 톤다운 */
+    padding: 15px 0;
+}

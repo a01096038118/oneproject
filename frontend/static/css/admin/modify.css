@@ -1,0 +1,99 @@
+/* 수정 폼 전체 */
+.modify_form {
+    width: 450px;
+    margin: 80px auto;
+    padding: 35px;
+    background-color: #80b9f1;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+/* 제목 */
+.modify_form h3 {
+    color: #0f172a;
+    margin-bottom: 20px;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+/* 입력창 */
+.modify_form .input_basic {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    font-size: 15px;
+    background: #ffffff;
+    color: #0f172a;
+    box-sizing: border-box;
+}
+
+/* 읽기 전용 ID */
+.modify_form input[readonly] {
+    background: #dbeafe;
+    font-weight: bold;
+}
+
+/* 버튼 */
+.modify_form .input_button_basic_130 {
+    width: 140px;
+    padding: 12px;
+    margin: 8px 5px 0;
+    background-color: #0f172a;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+/* 버튼 호버 */
+.modify_form .input_button_basic_130:hover {
+    background-color: #1e293b;
+}
+
+/* 결과 박스 */
+.modify_result {
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 50px 40px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* 성공 제목 */
+.modify_result h3 {
+    color: #0f172a;
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+
+/* 안내 문구 */
+.modify_result p {
+    color: #64748b;
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+/* 버튼 또는 링크 */
+.modify_result a {
+    display: inline-block;
+    background-color: #0f172a;
+    color: #ffffff;
+    text-decoration: none;
+    padding: 12px 28px;
+    border-radius: 6px;
+    font-weight: bold;
+    transition: background-color 0.2s;
+}
+
+/* Hover */
+.modify_result a:hover {
+    background-color: #1e293b;
+}

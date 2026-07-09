@@ -1,0 +1,30 @@
+/* 발급된 UUID 키 스타일 상자 */
+.key-box {
+    background-color: #80b9f1;
+    border: 1px solid #cbd5e1;
+    padding: 15px;
+    border-radius: 6px;
+    font-family: monospace;
+    font-size: 16px;
+    color: #0f172a;
+    word-break: break-all;
+    margin: 15px 0;
+    font-weight: bold;
+}
+/* 클립보드 복사 버튼 스타일 */
+.copy-btn {
+    background-color: #0f172a;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 14px;
+    transition: background 0.2s;
+    width: 100%;
+    max-width: 200px;
+}
+.copy-btn:hover {
+    background-color: #1e293b;
+}

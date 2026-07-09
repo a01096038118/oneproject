@@ -1,0 +1,30 @@
+nav > div.nav_wrap,
+nav > div.member_wrap,
+nav > div.admin_wrap {
+    width: 1000px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #dadada;
+    border-top: 1px solid #dadada;
+    font-weight: bold;
+}
+
+nav > div.nav_wrap a,
+nav > div.member_wrap a,
+nav > div.admin_wrap a {
+    padding: 0 10px;
+
+}
+nav > div.member_wrap span {
+    margin-left:40px;
+    color: red;
+    font-weight: bold;
+    font-size: 0.8em;
+}
+nav > div.admin_wrap span {
+    margin-left:20px;
+    color: blue;
+    font-weight: bold;
+    font-size: 0.8em;
+}

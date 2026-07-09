@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% include 'include/title.html' %}
+
+    <link href="{{ url_for('static', filename='css/common.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/member/member.css') }}" rel="stylesheet">
+
+    <script src="{{ url_for('static', filename='js/admin.js') }}"></script>
+    
+
+    {% if result %}
+    <script> alert("{{ result }}"); </script>
+    {% endif %}
+
+</head>
+<body>
+    
+    {% include 'include/header.html' %}
+    {% include 'include/nav.html' %}
+
+    <article id="signup_wrap">
+        
+        <div class="signup_form">
+            <form action="/admin/adminSignUp_confirm" name="signup_form" method="POST">
+                <input class="input_basic" type="text" name="mId" placeholder="Input new admin ID"><br>
+                <input class="input_basic" type="password" name="mPw" placeholder="Input new admin PW"><br>
+                <input class="input_basic" type="email" name="mMail" placeholder="Input new admin MAIL"><br>
+                <input class="input_basic" type="text" name="mPhone" placeholder="Input new admin PHONE"><br>
+                <input class="input_button_basic_130" type="button" value="SIGN UP" onclick="signupForm();">
+                <input class="input_button_basic_130" type="reset" value="RESET">
+            </form>
+        </div>
+
+    </article>
+
+    {% include 'include/footer.html' %}
+
+</body>
+</html>

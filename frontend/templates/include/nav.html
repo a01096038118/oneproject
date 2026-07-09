@@ -1,0 +1,39 @@
+<link href="{{ url_for('static', filename='css/include/nav.css') }}" rel="stylesheet">
+
+<nav>
+    {% if not session.get('signedInMemberId') and not session.get('signedInAdminId') %}
+        <div class="nav_wrap">
+            <a href="/">HOME</a>
+            |  
+            <a href="{{ url_for('member.gateway') }}">MEMBERS</a> 
+            | 
+            <a href="{{ url_for('admin.gateway') }}">ADMIN</a>
+            |
+        </div> 
+        
+    {% elif session.get('role') == 'MEMBER' %}  
+        <div class="member_wrap">
+            <a href="/">HOME</a>
+            |
+            <a href="{{ ulr_for('member.signOut_form') }}">SIGN-OUT</a>
+            |
+            <a href="{{ url_for('dashboard.main') }}">DASHBOARD</a>
+
+            <span class="member"> 👤 직원 : {{session['signedInMemberId'] }} </span>
+        </div>
+
+    {% elif session.get('role') == 'ADMIN' %}  
+        <div class="admin_wrap">
+            <a href="/">HOME</a>
+            |
+            <a href="{{ url_for('member.signOut.form') }}">SIGN-OUT</a>
+            |
+            <a href="{{ url_for('member.member_list') }}">MEMBER_LIST</a>
+            |
+            <a href="{{ url_for('dashboard.main') }}">DASHBOARD</a>
+
+            <span class="admin"> 👑 관리자 : {{ session['signedInAdminId']}}</span>
+        </div>
+
+    {% endif %}
+</nav>

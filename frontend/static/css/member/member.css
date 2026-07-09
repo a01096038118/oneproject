@@ -1,0 +1,52 @@
+/* 회원 관련 폼을 감싸는 전체 구역 레이아웃 및 중앙 정렬 */
+#signup_wrap .signup_form,
+#signup_wrap .signup_result,
+#signin_wrap .signin_form,
+#signin_wrap .signin_result,
+#modify_wrap .modify_form,
+#delete_wrap .modify_result,
+#delete_wrap .delete_result {
+    width: 450px; /* 너무 넓게 퍼지지 않도록 깔끔한 박스 사이즈로 조정 */
+    margin: 60px auto;
+    padding: 35px;
+    background-color: #ffffff; /* 폼이 들어가는 카드 영역은 완전 흰색 */
+    border: 1px solid #cbd5e1;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.03); /* 은은한 그림자 */
+    text-align: center;
+}
+
+/* 틀렸을 때 나오는 에러 메시지 스타일 */
+#signin_wrap .signin_result {
+    color: #df2020;
+    font-weight: bold;
+    margin-bottom: 15px;
+    border: none;
+    background: none;
+    box-shadow: none;
+    padding: 0;
+    width: auto;
+}
+
+/* 미니멀 컨셉에 맞춘 시그니처 다크 버튼 설정 */
+.input_button_basic_130[value="SIGN IN"],
+.input_button_basic_130[value="SIGN UP"],
+.input_button_basic_130[value="MODIFY"] {
+    background-color: #0f172a; /* 다크 차콜 버튼 바디 */
+    color: #ffffff; /* 흰색 글자 */
+    border: none;
+}
+.input_button_basic_130[value="SIGN IN"]:hover,
+.input_button_basic_130[value="SIGN UP"]:hover {
+    background-color: #1e293b; /* 마우스 올렸을 때 살짝 연해짐 */
+}
+
+/* 리셋(취소) 버튼은 연한 그레이 톤으로 매칭 */
+.input_button_basic_130[value="RESET"] {
+    background-color: #f1f5f9;
+    color: #475569;
+    border: 1px solid #cbd5e1;
+}
+.input_button_basic_130[value="RESET"]:hover {
+    background-color: #e2e8f0;
+}

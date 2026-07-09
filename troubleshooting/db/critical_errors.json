@@ -1,0 +1,134 @@
+{
+    "HyeonJeong": {
+        "534bcba2-442f-4b39-8668-3c18f6ab2354": {
+            "category": "GIT",
+            "error_code": "error: cannot delete branch 'feature/dashboard' used by worktree at 'C:/khj/first_pjt’",
+            "issue": "현재 작업 디렉토리에서 feature/dashboard 브랜치를 사용 중이어서 삭제할 수 없음",
+            "progress": "In_Progress",
+            "resolution": "",
+            "date": "2026-07-03 14:43:30"
+        },
+        "d8fd6849-846d-4acb-a40d-111396a40fec": {
+            "category": "GIT",
+            "error_code": "dev 합병 오류",
+            "issue": "각 팀원들이 각자의 feature/부서 브랜치로 push하고 dev로 병합요청할 때  자신들의 작업 폴더를 제외하고 전부 삭제한 채 단계별로 진행하여  dev에 정상적으로 병합이 안 되는 현상 발상",
+            "progress": "In_Progress",
+            "resolution": "",
+            "date": "2026-07-03 15:07:21"
+        }
+    },
+    "SungJin": {
+        "4b15fbd4-9c22-4e95-8f39-3f138156b749": {
+            "category": "HTML",
+            "error_code": "GET http://127.0.0.1:5000/static/css/trouble_css/include/trouble.css net::ERR_ABORTED 404 (NOT FOUND)",
+            "issue": "정적 파일 경로 오류 (Static File Path Error)",
+            "progress": "Resolved",
+            "resolution": "",
+            "date": "2026-07-01 15:09:06"
+        },
+        "d05b09b5-22cc-4f07-b22c-022171adeba2": {
+            "category": "YOLO",
+            "error_code": "raise RuntimeError(emojis(f\"Dataset '{clean_url(self.args.data)}' error ❌ {e}\")) from e RuntimeError: Dataset",
+            "issue": "data.yaml 파일경로 오류",
+            "progress": "Needs_Review",
+            "resolution": "",
+            "date": "2026-07-01 15:09:43"
+        },
+        "ff7e3a05-2076-4487-90e7-3dd5e6e8c0f7": {
+            "category": "HTML",
+            "error_code": "werkzeug.exceptions.BadRequestKeyError werkzeug.exceptions.BadRequestKeyError: 400 Bad Request: The browser (or proxy) sent a request that this server could not understand. KeyError: 'eNum'",
+            "issue": "INPUT 태그 설정 문제",
+            "progress": "Resolved",
+            "resolution": "",
+            "date": "2026-07-02 15:10:53"
+        },
+        "02689ac4-0ee8-47ca-832e-3bf21520e53a": {
+            "category": "FRONTEND",
+            "error_code": "trouble.js:8 Uncaught TypeError: Cannot read properties of undefined (reading 'error_code')     at submitCriticalErrorForm (trouble.js:8:27)     at HTMLInputElement.onclick (new_critical_error_form:69:121)",
+            "issue": "자바스크립트 함수 실행 오류",
+            "progress": "In_Progress",
+            "resolution": "",
+            "date": "2026-07-02 15:15:54"
+        },
+        "c1e63853-74c6-4088-b608-f05e2aac0e2f": {
+            "category": "FRONTEND",
+            "error_code": "Uncaught ReferenceError: openModal is not defined at HTMLButtonElement.onclick (error_list:51:75)",
+            "issue": "자바스크립트 연동 체크 미흡",
+            "progress": "Resolved",
+            "resolution": "",
+            "date": "2026-07-03 15:16:14"
+        }
+    },
+    "LeeYoon": {
+        "100a0bca-8e5b-4d63-9b02-82c0309ddd05": {
+            "category": "PYTHON",
+            "error_code": "function/logic issue",
+            "issue": "관리자 uuid 키 번호 발급 에러",
+            "progress": "In_Progress",
+            "resolution": "",
+            "date": "2026-07-01 15:11:31"
+        },
+        "af2d4f0e-ac30-4ccd-96e4-0180f3edb6c6": {
+            "category": "PYTHON",
+            "error_code": "html에 flask {{% link %}}입력하고 app.py에 register를 안해서 dashboard.html의 css가 적용이안됨",
+            "issue": "  {{%%}} 경로문제",
+            "progress": "In_Progress",
+            "resolution": "",
+            "date": "2026-07-02 15:12:26"
+        },
+        "406b5429-cdc2-4194-87d4-96f251875a63": {
+            "category": "GIT",
+            "error_code": "when someone push refs into dev from their branch, server was shut down and loss refs data.  ",
+            "issue": "브랜치 / HEAD commit 복구 오류",
+            "progress": "Resolved",
+            "resolution": "",
+            "date": "2026-07-03 15:19:21"
+        }
+    },
+    "Kwon Min": {
+        "c6d073b0-24a7-4ff3-bde2-26391fc12824": {
+            "category": "GIT",
+            "error_code": "GIT_WARN_EMPTY_DIR_IGNORED",
+            "issue": "json 폴더 push 오류",
+            "progress": "In_Progress",
+            "resolution": "",
+            "date": "2026-07-01 15:13:24"
+        },
+        "35082034-45a0-43e9-870d-a6830388ff6f": {
+            "category": "HTML",
+            "error_code": "jinja2.exceptions.TemplateNotFound",
+            "issue": "템플릿 엔진 렌더링 오류",
+            "progress": "Resolved",
+            "resolution": "",
+            "date": "2026-07-02 15:13:57"
+        }
+    },
+    "HyeonHo": {
+        "b0f611f6-b302-487a-ae09-f2fd795bdc21": {
+            "category": "GIT",
+            "error_code": "github merge issue(into dev from feature/departments",
+            "issue": "dev 합병 오류",
+            "progress": "Resolved",
+            "resolution": "",
+            "date": "2026-07-03 15:14:41"
+        },
+        "a9ca34f4-4f9c-4c4e-a7c6-1253c96f9118": {
+            "category": "HTML",
+            "error_code": "werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'error_lnfo' with values ['eNum']. Did you mean 'trouble.error_infos' instead? ",
+            "issue": "url_for 주소 대소문자 오타",
+            "progress": "Needs_Review",
+            "resolution": "",
+            "date": "2026-07-02 15:15:21"
+        }
+    },
+    "gildong88": {
+        "c55116fe-773c-494c-90dc-9c64d061b71d": {
+            "category": "HTML",
+            "error_code": "trouble.js:63 ERROR: SyntaxError: Unexpected token '<', \"<!doctype \"... is not valid JSON (anonymous)",
+            "issue": "modify_form 블루프린트함수 로직으로 연결시키는게 아니라 바로 confirm 함수쪽으로 넘겨서 바로 데이터 받아서 db에 저장하기 ",
+            "progress": "Resolved",
+            "resolution": "",
+            "date": "2026-07-08 16:55:56"
+        }
+    }
+}
