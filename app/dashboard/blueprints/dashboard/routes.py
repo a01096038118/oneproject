@@ -33,6 +33,8 @@ def log_list():
 # OpenCV 실시간 영상을 웹으로 스트리밍
 @dashboard_bp.route('/video_feed')
 def video_feed():
+    print("video_feed requested")
+    
     return Response(
         generate_frame(),
         mimetype='multipart/x-mixed-replace; boundary=frame'

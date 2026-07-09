@@ -3,10 +3,10 @@ import threading
 from ultralytics import YOLO
 from datetime import datetime, timedelta
 import time
-from utils.log_manager import save_frame_logs
-import config
-from ai.zone_manager import is_object_in_zone
-from ai.drawing_manager import (
+from dashboard.utils.log_manager import save_frame_logs
+from dashboard import config
+from dashboard.ai.zone_manager import is_object_in_zone
+from dashboard.ai.drawing_manager import (
     draw_danger_zones,
     draw_detected_objects,
     draw_intrusion_alert

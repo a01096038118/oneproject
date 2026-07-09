@@ -7,14 +7,14 @@ from flask import (Blueprint,
                    render_template,
                    session
                    )
-from ai.camera_manager import generate_frame
-from utils.log_manager import (
+from dashboard.ai.camera_manager import generate_frame
+from dashboard.utils.log_manager import (
     get_logs,
     delete_log,
     check_log,
     create_csv_report
 )
-import config
+from dashboard import config
 
 dashboard_bp = Blueprint(
     'dashboard',
@@ -26,25 +26,20 @@ dashboard_bp = Blueprint(
 def main():
     return render_template('dashboard/dashboard.html')
 
-@dashboard_bp.route('/log_list')
-def log_list():
-    return render_template('dashboard/log.html')
-
 # OpenCV 실시간 영상을 웹으로 스트리밍
 @dashboard_bp.route('/video_feed')
 def video_feed():
+    print("video_feed requested")
+
     return Response(
         generate_frame(),
         mimetype='multipart/x-mixed-replace; boundary=frame'
     )
 
 # 로그 조회 페이지
-@dashboard_bp.route('/log_list', methods=['GET'])
+@dashboard_bp.route('/log_list')
 def log_list():
-
-    return render_template(
-        'dashboard/log.html'
-    )
+    return render_template('dashboard/log.html')
 
 # 로그 조회
 @dashboard_bp.route('/logs', methods=['GET'])

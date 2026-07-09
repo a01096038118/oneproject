@@ -1,8 +1,8 @@
 # ESP32 카메라 설정
-ESP32_STREAM_URL = "http://192.168.137.52:81/stream"
+ESP32_STREAM_URL = "http://192.168.137.207:81/stream"
 
 # YOLO 모델 설정
-YOLO_MODEL_PATH = "ai/models/best.pt"
+YOLO_MODEL_PATH = "dashboard/ai/models/best.pt"
 YOLO_CONFIDENCE_THRESHOLD = 0.8
 DANGER_TARGET_CLASS = "victim"
 
