@@ -4,7 +4,7 @@ import os
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # ESP32 카메라 설정
-ESP32_STREAM_URL = "http://192.168.137.52:81/stream"
+ESP32_STREAM_URL = "http://192.168.137.25:81/stream"
 
 # YOLO 모델 설정
 YOLO_MODEL_PATH = os.path.join(
