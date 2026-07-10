@@ -26,7 +26,7 @@ def new_critical_error_form():
 
     eNum = str(uuid.uuid4())    
 
-    return render_template('../frontend/templates/trouble/new_critical_error_form.html', eNum = eNum)
+    return render_template('trouble/new_critical_error_form.html', eNum = eNum)
 
 #new_critical_error_confirm
 @trouble_bp.route('/new_critical_error_confirm', methods=['POST'])
@@ -66,7 +66,7 @@ def new_critical_error_confirm():
     
     save_errors(critical_errors)
 
-    return render_template('../frontend/templates/trouble/new_critical_error_result.html')
+    return render_template('trouble/new_critical_error_result.html')
 
 #/error_modify_confirm
 @trouble_bp.route('/error_modify_confirm', methods=['POST'])
@@ -158,7 +158,7 @@ def error_infos(eNum):
             target_error['eNum'] = eNum
             break 
 
-    return render_template('../frontend/templates/trouble/error_lnfo.html', eNum = eNum, target_error = target_error)
+    return render_template('trouble/error_info.html', eNum = eNum, target_error = target_error)
    
 @trouble_bp.route('/download_excel')
 def download_excel():
