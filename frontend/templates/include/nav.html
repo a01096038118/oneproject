@@ -31,6 +31,8 @@
             <a href="{{ url_for('admin.member_list') }}">MEMBER_LIST</a>
             |
             <a href="{{ url_for('dashboard.main') }}">DASHBOARD</a>
+            |
+            <a href="{{ url_for('trouble.new_critical_error_form') }}">TROUBLESHOOTING</a>
 
             <span class="admin"> 👑 관리자 : {{ session['signedInAdminId']}}</span>
         </div>

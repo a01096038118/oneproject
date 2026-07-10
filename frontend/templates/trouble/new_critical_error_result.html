@@ -5,10 +5,10 @@
     
     {% include 'include/trouble_title.html' %}
 
-    <link href="{{url_for('static', filename='../frontend/static/css/troubleshooting/trouble_common.css')}}" rel="stylesheet">
-    <link href="{{url_for('static', filename='../frontend/static/css/troubleshooting/trouble.css')}}" rel="stylesheet">
+    <link href="{{url_for('static', filename='css/troubleshooting/trouble_common.css')}}" rel="stylesheet">
+    <link href="{{url_for('static', filename='css/troubleshooting/trouble.css')}}" rel="stylesheet">
 
-    <script src="{{url_for('static', filename='../frontend/static/js/trouble.js')}}"></script>
+    <script src="{{url_for('static', filename='js/trouble.js')}}"></script>
 
 </head>
 <body>
@@ -20,8 +20,8 @@
     <div class="result_container">
         <h2>NEW ERROR REGISTERED</h2>
         <div class="button_group">
-            <a href="{{url_for('trouble/new_critical_error_form')}}" class="input_button_basic_140">Additional Input</a>
-            <a href="{{url_for('trouble/error_list')}}" class="input_button_basic_145">Check List</a>
+            <a href="{{url_for('trouble.new_critical_error_form')}}" class="input_button_basic_140">Additional Input</a>
+            <a href="{{url_for('trouble.error_list')}}" class="input_button_basic_145">Check List</a>
         </div>
     </div>
 </article>

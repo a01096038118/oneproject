@@ -36,9 +36,9 @@
                 <td>{{ member.mMail }}</td>
                 <td>{{ member.mPhone }}</td>
                 <td>
-                    <a href="/member/modify_form/">MODIFY</a>
+                    <a href="/admin/modify_form/{{ mId }}">MODIFY</a>
                     |
-                    <a href="/member/delete_form/">DELETE</a>
+                    <a href="/admin/delete_form/{{ mId }}">DELETE</a>
                 </td>
             </tr>
     {% endfor %}
