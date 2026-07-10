@@ -1,5 +1,7 @@
 from flask import Flask, render_template
-from blueprints.users import member_bp, admin_bp, common_bp
+from blueprints.users.member import member_bp
+from blueprints.users.admin import admin_bp
+from blueprints.users.common import common_bp
 from blueprints.dashboard.routes import dashboard_bp
 from blueprints.trouble.trouble_routes import trouble_bp
 
