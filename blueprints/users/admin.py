@@ -212,7 +212,7 @@ def modify_confirm():
 # member 삭제
 @admin_bp.route('/delete_form/<mId>')
 def delete_form(mId):
-    return render_template('delete_form.html', mId = mId)
+    return render_template('admin/delete_form.html', mId = mId)
     
 @admin_bp.route('/delete_confirm', methods = ['POST'])
 def delete_confirm():
@@ -235,6 +235,6 @@ def delete_confirm():
 
         save_members(members)
         
-    return redirect('/member_list')
+    return redirect('/admin/member_list')
 
     
