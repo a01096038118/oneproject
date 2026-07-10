@@ -1,8 +1,18 @@
+import os
+
+# config.py 파일이 있는 dashboard 폴더의 절대 경로
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
 # ESP32 카메라 설정
 ESP32_STREAM_URL = "http://192.168.137.52:81/stream"
 
 # YOLO 모델 설정
-YOLO_MODEL_PATH = "ai/models/best.pt"
+YOLO_MODEL_PATH = os.path.join(
+    BASE_DIR,
+    "ai",
+    "models",
+    "best.pt"
+)
 YOLO_CONFIDENCE_THRESHOLD = 0.8
 DANGER_TARGET_CLASS = "victim"
 
