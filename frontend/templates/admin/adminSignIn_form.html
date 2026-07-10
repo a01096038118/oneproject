@@ -24,7 +24,7 @@
         {% endif %}
 
         <div class="signin_form">
-            <form action="/admin/adminSignIn_confirm" name="signin_form" method="POST">
+            <form action="{{ url_for('admin.adminSignIn_form') }}" name="signin_form" method="POST">
                 <input class="input_basic" type="text" name="mId" placeholder="Input new member ID"><br>
                 <input class="input_basic" type="password" name="mPw" placeholder="Input new member PW"><br>
                 <input class="input_basic" type="password" name="admin_key" placeholder="Input ADMIN KEY"><br>

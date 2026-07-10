@@ -23,7 +23,7 @@ career_pattern = r'^\d+개월$'
 # 직원 회원가입 화면 이동
 @member_bp.route('/memberSignUp_form', methods = ['GET'])
 def memberSignUp_form():
-    return render_template('memberSignUp_form.html')
+    return render_template('member/memberSignUp_form.html')
     
 
 
@@ -38,39 +38,39 @@ def memberSignup_confirm():
     # id_pattern = r'^(?=.*[A-Za-z])[A-Za-z0-9]{4,20}$'
     mId = request.form['mId']
     if not re.match(id_pattern, mId):
-        return render_template('memberSignUp_form.html',
+        return render_template('member/memberSignUp_form.html',
                                result = '아이디는 4자 이상 20자 이하로 입력해주세요.')
 
     if mId in members:
-        return render_template('memberSignUp_form.html',
+        return render_template('member/memberSignUp_form.html',
                                result = '중복된 ID입니다. 다시입력해주세요.')
 
     # pw_pattern = r'^(?=.*[A-Za-z])(?=.*\d)[^\s]{8,20}$'
     mPw = request.form['mPw']
     if not re.match(pw_pattern, mPw):
-        return render_template('memberSignUp_form.html',
+        return render_template('member/memberSignUp_form.html',
                                result = '비밀번호 특수문자, 영문, 숫자 포함하여 8자리 이상 20자리 이하로 입력해주세요.')
     
     # mail_pattern = r'^[\w.-]+@[\w.-]+\.[A-Za-z]{2,5}$'
     mMail = request.form['mMail']
     if not re.match(mail_pattern, mMail):
-        return render_template('memberSignUp_form.html',
+        return render_template('member/memberSignUp_form.html',
                                result = '올바른 이메일 형식이 아닙니다.')
     
     for member in members.values():
         if member['mMail'] == mMail:
-            return render_template('memberSignUp_form.html',
+            return render_template('member/memberSignUp_form.html',
                                    result = '중복된 EMAIL입니다.')
 
     # phone_pattern =r'^\d{10,11}$'
     mPhone = request.form['mPhone']
     if not re.match(phone_pattern, mPhone):
-        return render_template('memberSignUp_form.html',
+        return render_template('member/memberSignUp_form.html',
                                result = '숫자만 입력해주세요.')
     
     mCareer = request.form['mCareer']
     if not re.match(career_pattern, mCareer):
-        return render_template('memberSignUp_form.html',
+        return render_template('member/memberSignUp_form.html',
                                result = '형식에 맞게 작성해주세요.')
 
 
@@ -86,14 +86,14 @@ def memberSignup_confirm():
     save_members(members)
 
     return render_template(
-        'memberSignIn_form.html', 
+        'member/memberSignIn_form.html', 
         result = 'OK')
 
 
 # member 로그인 화면
 @member_bp.route('/memberSignIn_form', methods = ['GET'])
 def memberSignIn_form():
-    return render_template('memberSignIn_form.html')
+    return render_template('member/memberSignIn_form.html')
 
 
 
@@ -109,10 +109,10 @@ def memberSignIn_confirm():
 
     # 회원이 여러명이 경우 [mId] = X
     if mId not in members:
-        return render_template('memberSignIn_form.html', 
+        return render_template('member/memberSignIn_form.html', 
                                result = 'ID가 존재하지않습니다.')
     if members [mId]['mPw'] !=mPw:
-        return render_template('memberSignIn_form.html', 
+        return render_template('member/memberSignIn_form.html', 
                                 result = '올바른 비밀번호가 아닙니다.')
     
     session['signedInMemberId'] = mId
@@ -123,7 +123,7 @@ def memberSignIn_confirm():
 
 @member_bp.route('/gateway', methods=['GET'])
 def member_gateway():
-    return render_template('member_gateway.html')
+    return render_template('member/member_gateway.html')
 
 
     
