@@ -1,5 +1,5 @@
 import cv2
-import config
+from dashboard import config
 
 def draw_danger_zones(frame, detected_zones):
     for zone in config.DANGER_ZONES:
