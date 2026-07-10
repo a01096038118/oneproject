@@ -62,3 +62,18 @@ function saveModalform() {
     })
     .catch(error => console.error("ERROR:", error));
 }
+
+try {
+    const res = await fetch('/api/data');
+    
+    if (!res.ok) {
+        throw new error(`Server Error (Status Code: ${res.status})`);
+    }
+
+    const data = await res.json(); 
+    alert(data.message);
+
+} catch (error) {
+    console.error("TroubleShooting Error:", error);
+    alert("Server Connection Error");
+}
