@@ -11,7 +11,7 @@
     <link href="{{ url_for('static', filename='css/include/nav.css') }}" rel="stylesheet">
     <link href="{{ url_for('static', filename='css/include/footer.css') }}" rel="stylesheet">
 
-    <link href="{{ url_for('static', filename='css/member/list.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/admin/list.css') }}" rel="stylesheet">
 
     <script src="/static/js/admin.js"></script>
     
@@ -36,9 +36,9 @@
                 <td>{{ member.mMail }}</td>
                 <td>{{ member.mPhone }}</td>
                 <td>
-                    <a href="/member/modify_form/{{ mId }}">MODIFY</a>
+                    <a href="/member/modify_form/">MODIFY</a>
                     |
-                    <a href="/member/delete_form/{{ mId }}">DELETE</a>
+                    <a href="/member/delete_form/">DELETE</a>
                 </td>
             </tr>
     {% endfor %}
