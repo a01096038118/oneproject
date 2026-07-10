@@ -22,7 +22,7 @@
             |
             <a href="{{ url_for('dashboard.main') }}"> DASHBOARD </a>
             |
-            <a href="{{ url_for('member.signOut_form') }}"> SIGN_OUT </a>
+            <a href="{{ url_for('common.signOut_form') }}"> SIGN_OUT </a>
             
         </div>
 
@@ -31,7 +31,7 @@
 
                 <h4>[ 로그 기록 ]</h4>
                 
-                <a href="{{ url_for('dashboard/download_report') }}">
+                <a href="{{ url_for('dashboard.download_report') }}">
                     <button type="button" class="download_btn">
                         DOWNLOAD
                     </button>

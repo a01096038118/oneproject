@@ -15,7 +15,7 @@
         <div class="member_wrap">
             <a href="/">HOME</a>
             |
-            <a href="{{ ulr_for('member.signOut_form') }}">SIGN-OUT</a>
+            <a href="{{ url_for('common.signOut_form') }}">SIGN-OUT</a>
             |
             <a href="{{ url_for('dashboard.main') }}">DASHBOARD</a>
 
@@ -26,9 +26,9 @@
         <div class="admin_wrap">
             <a href="/">HOME</a>
             |
-            <a href="{{ url_for('member.signOut.form') }}">SIGN-OUT</a>
+            <a href="{{ url_for('common.signOut_form') }}">SIGN-OUT</a>
             |
-            <a href="{{ url_for('member.member_list') }}">MEMBER_LIST</a>
+            <a href="{{ url_for('admin.member_list') }}">MEMBER_LIST</a>
             |
             <a href="{{ url_for('dashboard.main') }}">DASHBOARD</a>
 
