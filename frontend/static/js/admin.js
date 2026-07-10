@@ -11,7 +11,7 @@ function signupForm() {
     let mPhone = form.mPhone.value.trim();
     
 
-    let mIdPattern = /^(?=.*[A-Za-z])[A-Za-z0-9]{4,20}$/;
+    let mIdPattern = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z0-9]{4,20}$/;
     let mPwPattern = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[\W_])[^\s]{8,20}$/;
     let mMailPattern = /^[\w.-]+@[\w.-]+\.[A-Za-z]{2,5}$/;
     let mPhonePattern = /^\d{10,11}$/;
@@ -23,7 +23,7 @@ function signupForm() {
         
         
     } else if (!mIdPattern.test(mId)) {
-        alert("아이디: 4자 이상 20자 이하로 입력해주세요.")
+        alert("아이디: 영문, 숫자 포함 4자 이상 20자 이하로 입력해주세요.")
         form.mId.focus();
         
 
@@ -99,7 +99,7 @@ function signinForm() {
     let mPw = form.mPw.value.trim();
     let admin_key = form.admin_key.value.trim();
 
-    let mIdPattern = /^(?=.*[A-Za-z])[A-Za-z0-9]{4,20}$/;
+    let mIdPattern = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z0-9]{4,20}$/;
     let mPwPattern = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[\W_])[^\s]{8,20}$/;
     
     if (mId === "") {
