@@ -4,7 +4,7 @@ import os
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # ESP32 카메라 설정
-ESP32_STREAM_URL = "http://192.168.137.25:81/stream"
+ESP32_STREAM_URL = "http://192.168.137.40:81/stream"
 
 # YOLO 모델 설정
 YOLO_MODEL_PATH = os.path.join(
@@ -13,24 +13,24 @@ YOLO_MODEL_PATH = os.path.join(
     "models",
     "best.pt"
 )
-YOLO_CONFIDENCE_THRESHOLD = 0.8
+YOLO_CONFIDENCE_THRESHOLD = 0.6
 DANGER_TARGET_CLASS = "victim"
 
 # 위험구역 설정
 DANGER_ZONES = [
     {
         "zone_id": "ZONE_001",
-        "x1": 250,
-        "y1": 100,
-        "x2": 550,
-        "y2": 350
+        "x1": 30,
+        "y1": 240,
+        "x2": 340,
+        "y2": 470
     },
     {
         "zone_id": "ZONE_002",
-        "x1": 100,
-        "y1": 400,
-        "x2": 300,
-        "y2": 550
+        "x1": 360,
+        "y1": 30,
+        "x2": 610,
+        "y2": 240
     }
 ]
 

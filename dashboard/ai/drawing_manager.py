@@ -22,7 +22,7 @@ def draw_danger_zones(frame, detected_zones):
             zone["zone_id"],
             (zone["x1"], zone["y1"] - 10),
             cv2.FONT_HERSHEY_SIMPLEX,
-            0.8,
+            0.5,
             zone_color,
             config.TEXT_THICKNESS
         )
