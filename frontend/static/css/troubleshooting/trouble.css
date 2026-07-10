@@ -339,10 +339,10 @@ body {
 /* error_list table style*/
 
 .error_lnfo_table {
-    width: 80%; /* 전체 너비는 유지하되 */
+    width: 80%; 
     margin: 40px auto; 
     border-collapse: collapse;
-    table-layout: auto; /* 핵심: 내용을 기반으로 너비 자동 조절 */
+    table-layout: auto;  
     background-color: #fff;
     border-radius: 8px;
     overflow: hidden;
@@ -381,9 +381,14 @@ body {
 
 /* EXCEL 다운로드 버튼 */
 
+
+#excel_down {
+    display: flex;
+}
+
 .btn_excel_download {
     display: inline-block;
-    margin-right: 240px;
+    justify-content: flex-end;
     padding: 10px 20px;
     background-color: #217346; 
     color: white;
