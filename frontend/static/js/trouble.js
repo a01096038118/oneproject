@@ -67,7 +67,7 @@ try {
     const res = await fetch('/api/data');
     
     if (!res.ok) {
-        throw new error(`Server Error (Status Code: ${res.status})`);
+        throw new Error(`Server Error (Status Code: ${res.status})`);
     }
 
     const data = await res.json(); 
