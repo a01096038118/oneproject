@@ -1,103 +1,158 @@
-//  로그 기록
-window.onload = function() {
+window.onload = function () {
     loadLogs();
 };
 
-function loadLogs(){
+// =========================
+// 로그 목록 불러오기
+// =========================
+async function loadLogs() {
 
-    fetch("/dashboard/logs")
-    .then(response => response.json())
-    .then(data => {
-        
-            let html = "";
-            
-            data.forEach(log => {
-                html += `
-                    <p onclick="check_log('${log.log_id}')">
-                    ${log.log_id}</p>
-                    
-                    <small>${log.zone_id}</small>
-                    <hr>
-                `;
-            });
-            document.getElementById("log_box").innerHTML = html;
-        });
-    }
-        
-// check
-function check_log(logId){
-    
-    fetch(`/dashboard/check_log/${logId}`, 
-        { method: "POST", 
-        headers: {
-            "Content-Type":"application/json"
-        }, 
-        body: JSON.stringify({}) 
-        })
-        .then(res => res.json())
-        .then(data => {
-            console.log("backend data:", data);
- 
+    const response = await fetch("/dashboard/logs");
+    const logs = await response.json();
 
-        document.getElementById("manager").innerText = data.manager || "-";
-        
-        document.getElementById("detected_time").innerText = data.detected_time || "-";
+    const logBox = document.getElementById("log_box");
 
-        document.getElementById("person_count").innerText = data.person_count !== undefined ? data.person_count + "명" : "-";
-        const checkedTimeTarget = document.getElementById("checked_time")|| document.getElementById("cehcked_time");
-        if (checkedTimeTarget) {
-            checkedTimeTarget.innerText = data.checked_time || "-";
-        }
-        
-        const dangerStatusTarget = document.getElementById("danger_status");
-        if(dangerStatusTarget) {
-            dangerStatusTarget.innerText = data.status || "위험구역 감지";
-        }
+    logBox.innerHTML = "<h4>로그 목록</h4>";
 
-        let imgHtml = "";
-        if (data.captured_image_path){
-            const filename = data.captured_image_path.split("/").pop();
-            imgHtml = `<img src="/dashboard/external_img/${filename}" style="width:100%; max-width:400px; border-radius:10px; margin-top:10px;">`;
-        } else {
-            imgHtml = '<p style="color:#9ca3af; margin-top:10px;">[저장된 캡처 이미지가 없습니다]</p>';
-        }
+    logs.forEach(log => {
 
-        document.getElementById("log_detail").innerHTML = `
-            <h4> 로그 상세 내용</h4>
-            <p>상태: <span style="font-weight:bold; color:#ef4444;">${data.status}</span></p>
-            ${imgHtml}
+        logBox.innerHTML += `
+            <div class="log_item">
+
+                <div class="log_info"
+                     onclick="checkLog('${log.log_id}')">
+
+                    <b>${log.log_id}</b><br>
+                    <small>${log.detected_time}</small>
+
+                </div>
+
+                <button class="delete_btn"
+                    onclick="event.stopPropagation(); deleteLog('${log.log_id}')">
+                    🗑️
+                </button>
+
+            </div>
         `;
-    })
-        // // 5. 확인 시간 매핑
-        // const checkedTimeTarget = document.getElementById("checked_time");
-        // if (checkedTimeTarget) {
-        //     checkedTimeTarget.innerText = logData.checked_time || "-";
-        // }
+    });
 
-        // // 6. 이미지 및 상세 영역 처리
-        // const logDetailTarget = document.getElementById("log_detail");
-        // if (logDetailTarget) {
-        //     let imgHtml = "";
-            
-        //     if (logData.captured_image_path && typeof logData.captured_image_path === 'string') {
-        //         // "external_img/파일명.jpg" 구조에서 파일명만 추출
-        //         const filename = logData.captured_image_path.split("/").pop();
-                
-        //         if (filename) {
-        //             imgHtml = `<img src="/dashboard/external_img/${filename}" style="width:100%; max-width:400px; border-radius:10px; margin-top:10px;">`;
-        //         }
-        //     } else {
-        //         imgHtml = `<p style="color:#9ca3af; margin-top:10px;">[저장된 캡처 이미지가 없습니다]</p>`;
-        //     }
-
-        //     // JSON의 'message' 필드를 상태 텍스트로 활용 (예: 위험구역 침범 감지)
-        //     const statusText = logData.message || logData.status || "기록없음";
-
-        //     logDetailTarget.innerHTML = `
-        //         <h4>로그 상세 내용</h4>
-        //         <p>상태: <span style="font-weight:bold; color:#38bdf8;">${statusText}</span></p>
-        //         ${imgHtml}
-        //     `;
-        // }
-    
 }
+
+// =========================
+// 로그 클릭
+// =========================
+async function checkLog(logId){
+
+    const response = await fetch(
+        `/dashboard/check_log/${logId}`,
+        {
+            method:"POST",
+            headers:{
+                "Content-Type":"application/json"
+            },
+            body:JSON.stringify({})
+        }
+    );
+
+    const data = await response.json();
+
+    const log = data.checked_log;
+
+    if(!data.success){
+        alert(data.message);
+        return;
+    }
+
+    // 담당자
+    document.getElementById("manager").innerText =
+        log.manager ?? "미확인";
+
+    // 감지 인원
+    document.getElementById("person_count").innerText =
+        log.person_count + "명";
+
+    // 감지 시간
+    document.getElementById("detected_time").innerText =
+        log.detected_time;
+
+    // 확인 시간
+    document.getElementById("checked_time").innerText =
+        log.checked_time ?? "-";
+
+    // 위험구역
+    document.getElementById("danger_zone").innerText =
+        log.zone_id;
+
+    // 이미지
+    let imageHtml = "";
+
+    if(log.captured_image_path){
+
+        const filename =
+            log.captured_image_path.split("/").pop();
+
+        imageHtml =
+        `<img src="/dashboard/external_img/${filename}"
+              style="width:100%;
+                     max-width:500px;
+                     border-radius:10px;">`;
+
+    }
+
+    document.getElementById("log_detail").innerHTML = `
+        <h4>로그 상세</h4>
+
+        <p>
+            <b>상태 :</b>
+            ${log.message}
+        </p>
+
+        ${imageHtml}
+    `;
+
+}
+
+async function deleteLog(logId){
+
+    if(!confirm("삭제하시겠습니까?")){
+        return;
+    }
+
+    const response = await fetch(
+        `/dashboard/delete_log/${logId}`,
+        {
+            method:"DELETE"
+        }
+    );
+
+    const result = await response.json();
+
+    if(result.success){
+
+        alert("삭제되었습니다.");
+
+        // 로그 목록 새로고침
+        loadLogs();
+
+        // 상세 정보 초기화
+        document.getElementById("person_count").innerText = "-";
+        document.getElementById("manager").innerText = "-";
+        document.getElementById("detected_time").innerText = "-";
+        document.getElementById("checked_time").innerText = "-";
+        document.getElementById("danger_zone").innerText = "-";
+        document.getElementById("log_detail").innerHTML =
+            "<h4>로그 상세</h4>";
+
+    }else{
+
+        alert(result.message);
+    }
+
+}
+
+const alertLayer = document.getElementById('intrusionAlert');
+// 침입 감지 시 (즉시 켜짐)
+function triggerAlert() {
+    alertLayer.classList.add('active');
+}
+
