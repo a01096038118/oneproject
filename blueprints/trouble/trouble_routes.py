@@ -107,7 +107,7 @@ def error_modify_confirm():
 
 # /trouble/error_list_view
 @trouble_bp.route('/error_list', methods=['GET'])
-def error_list_view():
+def error_list():
     
     cId = session.get('signedInMemberId')
     admId = session.get('signedInAdminId')

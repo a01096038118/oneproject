@@ -15,18 +15,21 @@
     <script src="{{url_for('static', filename='js/trouble.js')}}"></script>
 
 </head>
-<body>
-    
+<body>  
+
     {% include 'include/trouble_nav.html' %}
 
     <article id="Critical_Error_List_wrap">
            <h2>CRITICAL ERRORS</h2>
-                <div id="excel_down" style="text-align: right; margin-bottom: 10px;">
-                    <a href="{{url_for('trouble.download_excel')}}" class="btn_excel_download">
-                        EXCEL
-                    </a>
-                </div>
-        <table class="error_lnfo_table">
+
+        <div class="table_toolbar">
+            <a href="{{url_for('trouble.download_excel')}}" class="btn_excel_download">
+                EXCEL
+            </a>
+        </div>
+                
+        <table class="error_lnfo_table">      
+                    
             <thead>
                 <tr>
                     <th>No.</th>
@@ -38,6 +41,7 @@
                 </tr>
             </thead>
             <tbody>
+
                     {% for info in all_error_list %}
                     <tr>
                         <td>{{ loop.index }}</td>
