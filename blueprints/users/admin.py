@@ -3,6 +3,7 @@ import uuid
 from db.utils.json_admin_manager import load_admins, save_admins
 from db.utils.json_key_manager import load_admin_keys, save_admin_keys
 from db.utils.json_member_manager import save_members, load_members
+from db.utils.json_member_manager import FILE
 import re
 
 
@@ -113,6 +114,9 @@ def adminSignIn_form():
 def adminSignIn_confirm():
 
     admins = load_admins()
+    print("FILE =", FILE)
+    print("admins =", admins)
+    print("mId =", request.form["mId"])
 
     mId = request.form['mId']
     mPw = request.form['mPw']
@@ -125,7 +129,7 @@ def adminSignIn_confirm():
         return render_template('admin/adminSignIn_form.html',
                                    result = 'ID가 존재하지 않습니다.')
     if admins [mId]['mPw'] != mPw:
-        return render_template('adminSignIn_form.html',
+        return render_template('admin/adminSignIn_form.html',
                                result = '올바른 비밀번호가 아닙니다.') 
     #  키 존재 확인
     if admin_key not in admin_keys:
@@ -137,7 +141,7 @@ def adminSignIn_confirm():
     session['signedInAdminId'] = mId
     session['role'] = admins[mId]['role']
         
-    return render_template('index.html', result = 'SIGNIN SUCCESS!!')
+    return render_template('/index.html', result = 'SIGNIN SUCCESS!!')
 
 
 #ADMIN 클릭 시 관리자 로그인/회원가입 선택 페이지 리턴
