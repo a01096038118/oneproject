@@ -6,8 +6,11 @@ from blueprints.dashboard.routes import dashboard_bp
 from blueprints.trouble.trouble_routes import trouble_bp
 
 
+app = Flask(__name__,
+            template_folder="frontend/templates",
+            static_folder="frontend/static"
+            )
 
-app = Flask(__name__)
 app.secret_key = "dw-aiot5th-20260622"
 
 app.register_blueprint(member_bp)
@@ -16,10 +19,10 @@ app.register_blueprint(dashboard_bp)
 app.register_blueprint(common_bp)
 app.register_blueprint(trouble_bp)
 
+
 @app.route("/")
 def home():
     return render_template('index.html')
-
 
 
 if __name__ == '__main__':
