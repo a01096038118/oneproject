@@ -158,7 +158,7 @@ def member_list():
     members = load_members()
 
     return render_template(
-        'member_list.html',
+        'admin/member_list.html',
         members = members
         # members(html에 사용할 이름) = members(python 변수)
         # python 변수 members를 html에 사용할 이름 members에 전달한다.
