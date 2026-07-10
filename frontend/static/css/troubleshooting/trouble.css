@@ -349,7 +349,6 @@ body {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); 
 }
 
-
 /* header design */
 .error_lnfo_table thead th {
     padding: 16px;
@@ -379,16 +378,18 @@ body {
 }
 
 
-/* EXCEL 다운로드 버튼 */
-
-
-#excel_down {
+.table_toolbar {
     display: flex;
+    justify-content: flex-end;
+    width: 73%;              
+    margin: 40px auto -10px; 
+    text-align: right;
 }
 
+/* EXCEL 다운로드 버튼 */
+
 .btn_excel_download {
-    display: inline-block;
-    justify-content: flex-end;
+    text-align: right;
     padding: 10px 20px;
     background-color: #217346; 
     color: white;

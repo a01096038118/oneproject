@@ -2,7 +2,7 @@ import json
 import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-FILE = os.path.join(BASE_DIR, 'db', "critical_errors.json")
+FILE = os.path.join(BASE_DIR, 'json', "critical_errors.json")
 
 def load_errors():
     try:
