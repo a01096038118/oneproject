@@ -18,6 +18,8 @@
             <a href="{{ url_for('common.signOut_form') }}">SIGN-OUT</a>
             |
             <a href="{{ url_for('dashboard.main') }}">DASHBOARD</a>
+            |
+            <a href="{{ url_for('trouble.new_critical_error_form') }}">TROUBLESHOOTING</a>
 
             <span class="member"> 👤 직원 : {{session['signedInMemberId'] }} </span>
         </div>
