@@ -7,14 +7,14 @@ from flask import (Blueprint,
                    render_template,
                    session
                    )
-from ai.camera_manager import generate_frame
-from utils.log_manager import (
+from dashboard.ai.camera_manager import generate_frame
+from db.utils.log_manager import (
     get_logs,
     delete_log,
     check_log,
     create_csv_report
 )
-import config
+from dashboard import config
 
 dashboard_bp = Blueprint(
     'dashboard',
