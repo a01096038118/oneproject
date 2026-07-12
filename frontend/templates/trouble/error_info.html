@@ -3,80 +3,55 @@
 <head>
     <meta charset="UTF-8">
     {% include 'include/trouble_title.html' %}
-
-    <link href="{{url_for('static', filename='css/troubleshooting/trouble_common.css')}}" rel="stylesheet">
-    <link href="{{url_for('static', filename='css/troubleshooting/trouble.css')}}" rel="stylesheet">
-
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
-
 </head>
 <body>
-    
+
     {% include 'include/trouble_nav.html' %}
 
-    <article id="error_info_wrap">    
-        <br><br>
-        <h2> DETAIL INFO</h2>
-        <br>  
-        <table class="error_info">
-            <thead>
-                <tr>
-                    <th>Date/Time </th>
-                    <th>Person in charge </th>
-                    <th>Category </th>         
-                </tr>
-        </thead>
-        <tbody>          
-                    <tr>
-                        <td>{{ target_error.date }}</td>
-                        <td>{{ target_error.staff_id }}</td>
-                        <td>{{ target_error.category }}</td>
-                    </tr>  
-        </tbody>
-        <table class="error_code">
-            <thead>
-                <tr>
-                    <th>Error Code</th>          
-                </tr>
-        </thead>
-        <tbody>          
-                <tr>
-                    <td>{{ target_error.error_code }}</td>
-                </tr>  
-        </tbody>
-        </table>
-        </table>
-        <table class="error_issue">
-            <thead>
-                <tr>
-                    <th>Reason</th>        
-                </tr>
-        </thead>
-        <tbody>          
-                <tr>
-                    <td>{{ target_error.issue }}</td>
-                </tr>  
-        </tbody>
-        </table>
-        <table class="error_resolution">
-            <thead>
-                <tr>
-                    <th>Resolution</th>          
-                </tr>
-        </thead>
-        <tbody>          
-                <tr>
-                    <td>{{ target_error.resolution }}</td>
-                </tr>  
-        </tbody>
-        </table>
-        <br><br>
-        <h3 id="eNum_in_info"> N0. {{ eNum }} </h3>
+    <article id="error_info_wrap">
+        <div class="detail_card">
+
+            <div class="detail_header">
+                <h2>ERROR DETAIL</h2>
+                <span class="detail_enum" title="Error ID">No. {{ eNum }}</span>
+            </div>
+
+            <div class="detail_meta">
+                <div class="meta_item">
+                    <span class="meta_label">Date / Time</span>
+                    <span class="meta_value">{{ target_error.date }}</span>
+                </div>
+                <div class="meta_item">
+                    <span class="meta_label">Person in charge</span>
+                    <span class="meta_value">{{ target_error.staff_id }}</span>
+                </div>
+                <div class="meta_item">
+                    <span class="meta_label">Category</span>
+                    <span class="meta_value meta_category">{{ target_error.category }}</span>
+                </div>
+            </div>
+
+            <section class="detail_section">
+                <h3>Error Code</h3>
+                <pre class="detail_code">{{ target_error.error_code }}</pre>
+            </section>
+
+            <section class="detail_section">
+                <h3>Reason</h3>
+                <p class="detail_text">{{ target_error.issue }}</p>
+            </section>
+
+            <section class="detail_section">
+                <h3>Resolution</h3>
+                <p class="detail_text">{{ target_error.resolution or 'No resolution registered yet.' }}</p>
+            </section>
+
+            <div class="detail_footer">
+                <a href="{{ url_for('trouble.error_list') }}" class="btn_back">&larr; BACK TO LIST</a>
+            </div>
+
+        </div>
     </article>
 
-  
 </body>
 </html>

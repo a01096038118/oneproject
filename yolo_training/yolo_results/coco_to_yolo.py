@@ -1,51 +1,60 @@
-"""
-COCO(json) -> YOLO(txt) 변환 스크립트
-- category_id == 0 (ignored) 는 제외
-- 나머지 클래스는 0부터 연속된 인덱스로 재매핑
-- train, val 각각 json/output_dir만 바꿔서 두 번 실행
-"""
-
 import json
 import os
+import sys
 
-# ==================== 여기만 수정하세요 ====================
-CONFIG = {
-    "json_path": "C:/Alot1team/project/troubleshooting/yolo_trainning/dataset/raw/instances_val.json",
-    "output_dir": "C:/Alot1team/project/troubleshooting/yolo_trainning/dataset/labels/val",
+
+BASE = "C:/Alot1team/project/troubleshooting/yolo_trainning/dataset"
+
+SPLITS = {
+    "train": {
+        "json_path": f"{BASE}/raw/instances_train.json",
+        "output_dir": f"{BASE}/labels/train",
+    },
+    "val": {
+        "json_path": f"{BASE}/raw/instances_val.json",
+        "output_dir": f"{BASE}/labels/val",
+    },
 }
-# ==========================================================
 
 # 제외할 카테고리 id (ignored)
-# 실제 annotation 데이터와 대조 검증한 결과, categories 필드에 적힌 그대로가 맞음:
-# category_id 0 = ignored (이 데이터셋 파일에는 실제로 0건 존재)
-# category_id 1 = swimmer (사람 크기 박스로 직접 확인됨 - 절대 제외하면 안 됨)
-IGNORE_CATEGORY_ID = 0
+IGNORE_CATEGORY_IDS = {0}
 
 
-def convert(json_path: str, output_dir: str):
+def build_id_map(categories):
+    """categories 정의 기준으로 YOLO class index 매핑 생성 (ignored 제외)"""
+    id_map = {}
+    new_idx = 0
+    for cat in sorted(categories, key=lambda c: c["id"]):
+        if cat["id"] in IGNORE_CATEGORY_IDS:
+            continue
+        id_map[cat["id"]] = new_idx
+        new_idx += 1
+    return id_map
+
+
+def convert(split_name, json_path, output_dir, expected_id_map=None):
+    print(f"\n{'=' * 50}")
+    print(f"[{split_name}] {json_path}")
+    print(f"{'=' * 50}")
+
     with open(json_path, "r", encoding="utf-8") as f:
         data = json.load(f)
 
-    # 1) categories 필드는 실제 데이터와 어긋나 있을 수 있으므로,
-    #    annotations에 "실제로 등장하는" category_id만 기준으로 재매핑한다.
-    actual_ids = sorted({ann["category_id"] for ann in data["annotations"]})
-    print(f"annotations에 실제로 존재하는 category_id 목록: {actual_ids}")
-
-    id_map = {}
-    new_idx = 0
-    for cid in actual_ids:
-        if cid == IGNORE_CATEGORY_ID:
-            continue
-        id_map[cid] = new_idx
-        new_idx += 1
-
-    print(f"제외 처리된 category_id: {IGNORE_CATEGORY_ID} (categories 필드 이름표가 아닌, "
-          f"실제 annotation 개수 확인 결과를 기준으로 지정된 값입니다)")
-    print("클래스 매핑 (원본 category_id -> YOLO class index):")
+    # 1) 클래스 매핑 (categories 정의 기준)
+    id_map = build_id_map(data["categories"])
     name_by_id = {c["id"]: c["name"] for c in data["categories"]}
+
+    print("클래스 매핑 (원본 category_id -> YOLO class index):")
     for old_id, new_id in id_map.items():
-        # 실제 데이터 기준으로는 categories 필드 이름과 1칸씩 밀려있을 수 있으니 참고용으로만 출력
-        print(f"  {old_id} (categories 필드상 이름: {name_by_id.get(old_id, '?')}) -> {new_id}")
+        print(f"  {old_id} ({name_by_id[old_id]}) -> {new_id}")
+
+    # 스플릿 간 매핑 일치 검증 (all 모드에서 자동 수행)
+    if expected_id_map is not None and id_map != expected_id_map:
+        raise ValueError(
+            f"[{split_name}] 클래스 매핑이 train과 다릅니다! "
+            f"json의 categories 정의가 스플릿마다 다른지 확인하세요.\n"
+            f"  train: {expected_id_map}\n  {split_name}: {id_map}"
+        )
 
     # 2) image_id -> 이미지 정보 매핑
     images = {img["id"]: img for img in data["images"]}
@@ -53,13 +62,22 @@ def convert(json_path: str, output_dir: str):
     # 3) image_id 별로 annotation 모으기 (ignored 제외)
     anns_by_image = {img_id: [] for img_id in images}
     skipped_ignored = 0
+    skipped_unknown = 0
     for ann in data["annotations"]:
-        if ann["category_id"] == IGNORE_CATEGORY_ID:
+        cid = ann["category_id"]
+        if cid in IGNORE_CATEGORY_IDS:
             skipped_ignored += 1
+            continue
+        if cid not in id_map:
+            # categories에 정의되지 않은 id가 annotation에 등장한 경우 (비정상 데이터)
+            skipped_unknown += 1
             continue
         anns_by_image[ann["image_id"]].append(ann)
 
-    print(f"\n제외된 ignored annotation 수: {skipped_ignored}")
+    print(f"제외된 ignored annotation 수: {skipped_ignored}")
+    if skipped_unknown:
+        print(f"[경고] categories에 정의되지 않은 category_id를 가진 "
+              f"annotation {skipped_unknown}개를 건너뜀 — 데이터 확인 필요!")
 
     # 4) 출력 폴더 생성
     os.makedirs(output_dir, exist_ok=True)
@@ -84,8 +102,25 @@ def convert(json_path: str, output_dir: str):
             f.write("\n".join(lines))
         written += 1
 
-    print(f"\n총 {written}개의 txt 라벨 파일 생성 완료 -> {output_dir}")
+    print(f"총 {written}개의 txt 라벨 파일 생성 완료 -> {output_dir}")
+    return id_map
+
+
+def main():
+    if len(sys.argv) != 2 or sys.argv[1] not in ("train", "val", "all"):
+        print("사용법: python coco_to_yolo.py [train | val | all]")
+        sys.exit(1)
+
+    target = sys.argv[1]
+
+    if target == "all":
+        # train을 기준 매핑으로 삼고, val이 일치하는지 자동 검증
+        train_map = convert("train", **SPLITS["train"])
+        convert("val", **SPLITS["val"], expected_id_map=train_map)
+        print("\n[OK] train/val 클래스 매핑 일치 확인 완료")
+    else:
+        convert(target, **SPLITS[target])
 
 
 if __name__ == "__main__":
-    convert(CONFIG["json_path"], CONFIG["output_dir"])
+    main()

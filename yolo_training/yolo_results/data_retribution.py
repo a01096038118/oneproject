@@ -9,7 +9,7 @@ labels_dir = os.path.join(base_dir, 'labels')
 train_dir = os.path.join(base_dir, 'train')
 val_dir = os.path.join(base_dir, 'val')
 
-# 2. train/val 폴더 초기화 (기존 데이터 삭제)
+# 2. train/val 폴더 초기화 
 for folder in [train_dir, val_dir]:
     if os.path.exists(folder):
         shutil.rmtree(folder)

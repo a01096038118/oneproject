@@ -11,9 +11,9 @@
         "d8fd6849-846d-4acb-a40d-111396a40fec": {
             "category": "GIT",
             "error_code": "dev 합병 오류",
-            "issue": "각 팀원들이 각자의 feature/부서 브랜치로 push하고 dev로 병합요청할 때  자신들의 작업 폴더를 제외하고 전부 삭제한 채 단계별로 진행하여  dev에 정상적으로 병합이 안 되는 현상 발상",
+            "issue": "dev에 정상적으로 병합이 안 되는 현상",
             "progress": "In_Progress",
-            "resolution": "",
+            "resolution": "각 팀원들이 feature/부서 브랜치로 push하고 dev로 병합요청할 때 다른 팀원파일을 수정하거나 삭제하지 않기",
             "date": "2026-07-03 15:07:21"
         }
     },
@@ -125,36 +125,11 @@
         "c55116fe-773c-494c-90dc-9c64d061b71d": {
             "category": "HTML",
             "error_code": "trouble.js:63 ERROR: SyntaxError: Unexpected token '<', \"<!doctype \"... is not valid JSON (anonymous)",
-            "issue": "modify_form 블루프린트함수 로직으로 연결시키는게 아니라 바로 confirm 함수쪽으로 넘겨서 바로 데이터 받아서 db에 저장하기 ",
+            "issue": "자바스크립트와 백엔드 서버 로직 간 충돌",
             "progress": "Resolved",
-            "resolution": "",
+            "resolution": "modify_form 블루프린트함수 로직으로 연결시키는게 아니라 바로 confirm 함수쪽으로 넘겨서 바로 데이터 받아서 db에 저장하기",
             "date": "2026-07-08 16:55:56"
         }
-    },
-    "gildong2": {
-        "2969b34c-22b3-4924-8333-66edf25a6c62": {
-            "category": "python",
-            "error_code": "trouble.js:63 ERROR: SyntaxError: Unexpected token '<', \"<!doctype \"... is not valid JSON (anonymous)",
-            "issue": "modify_form 블루프린트함수 로직으로 연결시키는게 아니라 바로 confirm 함수쪽으로 넘겨서 바로 데이터 받아서 db에 저장하기 ",
-            "progress": "Resolved",
-            "resolution": "",
-            "date": "2026-07-10 17:17:30"
-        },
-        "31298c09-cc00-45b6-81b3-f28526405842": {
-            "category": "GIT",
-            "error_code": "trouble.js:63 ERROR: SyntaxError: Unexpected token '<', \"<!doctype \"... is not valid JSON (anonymous)",
-            "issue": "modify_form 블루프린트함수 로직으로 연결시키는게 아니라 바로 confirm 함수쪽으로 넘겨서 바로 데이터 받아서 db에 저장하기 ",
-            "progress": "Problem Solved",
-            "resolution": "해결 완료",
-            "date": "2026-07-10 17:18:37"
-        },
-        "79b4bc95-ac9d-4db8-9a1c-24a487980521": {
-            "category": "python",
-            "error_code": "trouble.js:63 ERROR: SyntaxError: Unexpected token '<', \"<!doctype \"... is not valid JSON (anonymous)",
-            "issue": "modify_form 블루프린트함수 로직으로 연결시키는게 아니라 바로 confirm 함수쪽으로 넘겨서 바로 데이터 받아서 db에 저장하기 ",
-            "progress": "Resolved",
-            "resolution": "",
-            "date": "2026-07-10 17:23:17"
-        }
     }
+    
 }

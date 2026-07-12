@@ -1,54 +1,294 @@
+
+body {
+    min-height: 100vh;
+    margin: 24px 40px;
+    color: #242424;
+    background-color: #f6f7f8;
+    font-family: "Noto Sans KR", sans-serif;
+}
+
+/* 내비게이션  */
+
 .nav_wrap {
     text-align: center;
-    margin: 0 auto;
+    margin: 0 auto 10px;
     cursor: pointer;
 }
 
 .nav_wrap a {
-   display: inline-block;
-   font-size: 1.5em;
+    display: inline-block;
+    font-size: 1.4em;
 }
 
-.input_basic {
-    height: 100px;
+/* 등록 폼  */
+
+#new_critical_error_wrap {
+    display: flex;
+    justify-content: center;
+    padding: 48px 16px 60px;
+}
+
+.new_critical_error_form {
+    width: 100%;
+    max-width: 520px;
+    background: #ffffff;
+    border: 1px solid #e6e8eb;
+    border-top: 4px solid #c9403a; 
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(28, 33, 39, 0.07);
+    padding: 28px 32px 32px;
+}
+
+/* 카드 헤더 + eNum 배지 */
+
+.form_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-bottom: 18px;
+    margin-bottom: 22px;
+    border-bottom: 1px solid #eef0f2;
+}
+
+.form_eyebrow {
+    display: block;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #c9403a;
+    margin-bottom: 4px;
+}
+
+.form_title {
+    margin: 0;
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: #1c2127;
+    letter-spacing: -0.3px;
+}
+
+.enum_badge {
+    font-family: Consolas, "JetBrains Mono", monospace;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #495057;
+    background: #f1f3f5;
+    border: 1px solid #e6e8eb;
+    padding: 5px 12px;
+    border-radius: 999px;
+    white-space: nowrap;
+}
+
+/* 필드 */
+
+.field {
+    margin-bottom: 16px;
+}
+
+.field_label {
+    display: block;
+    font-size: 0.74rem;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: #868e96;
+    margin-bottom: 6px;
+}
+
+.input_basic, .select_basic {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #d7dbe0;
+    border-radius: 8px;
+    box-sizing: border-box;
+    font-size: 0.95rem;
+    font-family: inherit;
+    color: #1c2127;
+    background-color: #fff;
+    transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.input_basic:focus, .select_basic:focus {
+    outline: none;
+    border-color: #c9403a;
+    box-shadow: 0 0 0 3px rgba(201, 64, 58, 0.12);
+}
+
+.input_basic::placeholder {
+    color: #adb5bd;
+}
+
+.input_code {
+    font-family: Consolas, "JetBrains Mono", monospace;
+}
+
+.input_issue {
+    height: 110px;
+    resize: vertical;
+    line-height: 1.6;
+}
+
+.select_basic {
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23868e96' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    cursor: pointer;
+}
+
+/* 전송용 eNum */
+
+.input_basic_eNum {
+    display: none;
+}
+
+/* 버튼 */
+
+.form_actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 24px;
+}
+
+.input_button_basic_130 {
+    flex: 1;
+    padding: 13px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.btn_submit,
+.input_button_basic_130[value="SUBMIT"] {
+    background-color: #1c2127;
+    color: #fff;
+}
+
+.btn_submit:hover,
+.input_button_basic_130[value="SUBMIT"]:hover {
+    background-color: #c9403a;
+}
+
+.btn_reset,
+.input_button_basic_130[value="RESET"] {
+    background-color: #fff;
+    color: #495057;
+    border: 1px solid #d7dbe0;
+}
+
+.btn_reset:hover,
+.input_button_basic_130[value="RESET"]:hover {
+    background-color: #f1f3f5;
+    color: #1c2127;
+}
+
+/* 에러 리스트 페이지*/
+
+#Critical_Error_List_wrap {
     text-align: center;
 }
 
-
-body {
-    min-height: 100vh;
-    margin: 80px;
-    color: #242424;
-    background-color: #fff;
-    font-family: "Noto Sans KR", sans-serif;
+#Critical_Error_List_wrap h2 {
+    margin-top: 50px;
+    padding: 0 0 1px 0;          
+    display: inline-block;
+    background-color: transparent; 
+    color: #2b303a;              
+    font-size: 1.6rem;
+    font-weight: 800;            
+    letter-spacing: 1px;        
+    border-bottom: 3px solid #217346; 
 }
 
+.flash_success {
+    max-width: 80%;
+    margin: 20px auto -10px;
+    padding: 12px 20px;
+    background: #e6f4ea;
+    color: #1e7e34;
+    border: 1px solid #b7dfc2;
+    border-radius: 8px;
+    font-weight: 600;
+}
 
-.open_modal {
-    background-color: transparent;
-    color: #d6a955;
-    border: 1px solid #d6a955;
-    padding: 6px 12px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 0.9rem;
+.table_toolbar {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    width: 80%;                  
+    margin: 30px auto -10px;
+}
+
+.btn_excel_download, .btn_new_error {
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
     font-weight: bold;
-    transition: all 0.2s;
+    font-size: 0.9rem;
 }
 
-.open_modal:hover {
-    background-color: #d6a955;
+.btn_excel_download {
+    background-color: #217346;
     color: white;
 }
 
-
-#list_staff_id, #list_category {
-    background-color: transparent !important; 
-    color: #666;
+.btn_excel_download:hover {
+    background-color: #1a5c38;
+    text-decoration: none;
 }
 
+.btn_new_error {
+    background-color: #e2df56;
+    color: #242424;              
+}
 
-/* 링크 스타일 */
+.btn_new_error:hover {
+    background-color: #e9a839;
+    color: #fff;
+    text-decoration: none;
+}
+
+/* 테이블 본체 */
+
+.error_lnfo_table {
+    width: 80%;
+    margin: 20px auto 40px;
+    border-collapse: collapse;
+    table-layout: auto;
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.error_lnfo_table thead th {
+    padding: 16px;
+    background-color: #f8f9fa;
+    color: #495057;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 2px solid #dee2e6;
+    font-weight: 600;
+}
+
+.error_lnfo_table td {
+    padding: 14px 16px;
+    text-align: center;
+    border-bottom: 1px solid #f1f3f5;
+    color: #333;
+    font-size: 1rem;
+}
+
+.error_lnfo_table tbody tr:hover {
+    background-color: #f8f9fa;
+}
 
 .error_lnfo_table a {
     color: #242424;
@@ -56,11 +296,43 @@ body {
     font-weight: bold;
 }
 
-.error_lnfo_table a:hover {
-    text-decoration: underline;
+.row_new td {
+    background-color: #fff8e1;   
 }
 
-/* MODIFY 버튼 스타일 */
+.list_staff_id, .list_category {
+    color: #666;
+}
+
+/* DETAIL 버튼 */
+
+.detail_td {
+    vertical-align: middle; 
+    text-align: center;
+}
+
+.btn_detail {
+    display: inline-block; 
+    padding: 4px 12px;
+    background: #ffffff;             
+    border: 1px solid #dee2e6;       
+    border-radius: 4px;              
+    color: #495057;                  
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.02); 
+}
+
+.btn_detail:hover {
+    background: #edd5ab;             
+    border-color: #ced4da;
+    color: #212529;                 
+    text-decoration: none;
+}
+
+/* MODIFY 버튼 */
 
 .open_modal {
     background-color: #5f5d58;
@@ -72,32 +344,27 @@ body {
     transition: background 0.3s;
 }
 
-
 .open_modal:hover {
     background-color: #45a049;
 }
 
+.open_modal_defense {
+    cursor: not-allowed;
+}
 
-/*  error_infos memo */
-
+/* 수정 모달  */
 
 #modal_test {
-    display: none; 
+    display: none;
     position: fixed;
     top: 0; left: 0;
     width: 100vw;
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 1000;
-    justify-content: center; 
-    align-items: center;     
+    justify-content: center;
+    align-items: center;
 }
-
-
-.input_basic_eNum {
-    display: none;
-}
-
 
 .resolution_modal {
     width: 600px;
@@ -105,7 +372,7 @@ body {
     padding: 30px;
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    text-align: center; 
+    text-align: center;
 }
 
 #resolutionInput {
@@ -116,302 +383,173 @@ body {
     border: 1px solid #ccc;
     border-radius: 5px;
     resize: none;
-    box-sizing: border-box; 
+    box-sizing: border-box;
     font-size: 1rem;
 }
 
+/* 모달 버튼 */
 
 .save_modal, .cancel_modal {
-
     display: inline-block;
+    padding: 9px 20px;
+    margin: 6px 4px 0;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.9rem;
     cursor: pointer;
-    text-align: right;
-    color:darkblue
-
+    transition: background 0.2s;
 }
 
+.save_modal {
+    background: #5f5d58;
+    color: #fff;
+}
 
+.save_modal:hover {
+    background: #45a049;
+}
 
-/* 폼 컨테이너 */
+.cancel_modal {
+    background: #f1f3f5;
+    color: #343a40;
+}
 
-#new_critical_error_wrap {
+.cancel_modal:hover {
+    background: #dee2e6;
+}
+
+/* 상세 페이지*/
+
+#error_info_wrap {
     display: flex;
     justify-content: center;
-    padding-top: 50px;
+    padding: 10px 20px 30px;
 }
 
-
-.new_critical_error_form {
-    background: rgba(255, 255, 255, 0.9);
-    padding: 30px;
-    border-radius: 15px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    width: 500px;
-}
-
-
-/* 입력 필드 */
-
-.input_basic, .select_basic, .input_basic_eNum {
+.detail_card {
     width: 100%;
-    padding: 12px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    box-sizing: border-box; /* 패딩이 너비에 포함되게 함 */
-    font-size: 14px;
+    max-width: 900px;
+    background: #fff;
+    border: 1px solid #e9ecef;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+    padding: 26px 34px;
+    text-align: left;
 }
 
-
-.select_basic {
-    text-align: center;
-    background-color:#e8e9dd;
-}
-
-
-.select_basic[name="progress"] {
-    text-align: center;
-    background-color:#eff1f1
-}
-
-
-/* readonly 필드 강조 */
-
-.input_basic_eNum {
-    background-color: #f0f0f0;
-    color: #666;
-    font-weight: bold;
-}
-
-
-/* 버튼 영역 스타일 */
-
-.input_button_basic_130 {
-    width: 48%;
-    padding: 12px;
-    margin-top: 15px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: 0.3s;
-}
-
-
-.input_button_basic_130[value="SUBMIT"] {
-    background-color: #5f5d58;
-    color: white;
-}
-
-
-.input_button_basic_130[value="SUBMIT"]:hover {
-    background-color: #6fce73;
-}
-
-
-.input_button_basic_130[value="RESET"] {
-    background-color: #5f5d58;
-    color: white;
-}
-
-
-.input_button_basic_130[value="RESET"]:hover {
-    background-color: #da190b;
-}
-
-
-/* regist 이후 결과창 버튼  */
-
-.input_button_basic_140, .input_button_basic_145  {
-
-    text-decoration:none;
-    display:inline-block;
-    text-align:center;
-    padding : 5px 10px;
-    cursor: pointer;
-    border: solid #ebe0e0;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    border-radius: 8px;
-    color:#242424;
-    background-color: #f2f3b5
-}
-
-
-.input_button_basic_145 {
-    background-color: #daaa51
-}
-
-
-.result_container h2 {
-    text-align: center;
-    color:#c25951;
-}
-
-
-.result_container {
+.detail_header {
     display: flex;
-    flex-direction: column; 
-    align-items: center;    
-    gap: 20px;              
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #343a40;
+    margin-bottom: 16px;
 }
 
-
-.button_group {
-    display: flex;
-    gap: 15px;              
-}
-
-
-.new_critical_error_result h2 {
+.detail_header h2 {
     margin: 0;
+    font-size: 1.5rem;
+    letter-spacing: 0.5px;
 }
 
-#list_category {
-    background-color: #e0e9df;
-}
-
-#Critical_Error_List_wrap .error_lnfo_table th {
-    background-color: #b9bcc5;
-}
-
-#list_staff_id {
-    text-align: center;
-    background-color:rgb(241, 238, 228);
-}
-
-
-/* error_info */
-
-/* #error_info_wrap  */
-
-#error_info_wrap {
-    margin: 50px;
-}
-
-#error_info_wrap table {
-    width: 800px;
-    margin: 0 auto 40px auto;
-    border-collapse: collapse;
-    table-layout: fixed; /* 이 속성이 핵심입니다! */
-}
-
-#error_info_wrap thead th {
-    text-align: center;
-    padding: 15px;
-    border-bottom: 2px solid #333;
-    color: #333;
-    font-weight: 600;
+.detail_enum {
+    font-family: Consolas, monospace;
     font-size: 1rem;
-    text-transform: uppercase;
+    color: #868e96;
+    background: #f1f3f5;
+    padding: 4px 12px;
+    border-radius: 999px;
 }
 
-/* 데이터 셀 정렬도 중앙으로 맞춤 */
-#error_info_wrap tbody td {
-    padding: 15px;
-    border-bottom: 1px solid #eee;
-    color: #666;
-    font-size: 0.95rem;
-    text-align: center; 
+.detail_meta {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 18px;
 }
 
-#error_info_wrap tbody tr:hover {
-    background-color: #f9f9f9;
-    transition: background-color 0.2s ease;
-}
-
-#error_info_wrap {
-    text-align: center;
-}
-
-#error_info_wrap h2 {
-    text-align: center;
-    padding: 5px;
-    display: inline-block;
-    background-color: #E0E0E0;
+.meta_item {
+    background: #f8f9fa;
     border-radius: 8px;
-    margin-bottom: 50px;
-}
-
-#eNum_in_info {
-    text-align: right;
-}
-
-/* error_list table style*/
-
-.error_lnfo_table {
-    width: 80%; 
-    margin: 40px auto; 
-    border-collapse: collapse;
-    table-layout: auto;  
-    background-color: #fff;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); 
-}
-
-/* header design */
-.error_lnfo_table thead th {
-    padding: 16px;
-    background-color: #f8f9fa; 
-    color: #495057;
-    font-size: 0.9rem;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    border-bottom: 2px solid #dee2e6;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-}
-
-/* 데이터 셀 디자인 */
-.error_lnfo_table td {
-    padding: 16px;
-    text-align: center;
-    border-bottom: 1px solid #f1f3f5; 
-    color: #333;
-    font-size: 1rem;
-     font-weight: 600;
-    letter-spacing: 0.5px;
-}
-
-.error_lnfo_table tbody tr:hover {
-    background-color: #eecc5e;
-}
-
-
-.table_toolbar {
+    padding: 12px 16px;
     display: flex;
-    justify-content: flex-end;
-    width: 73%;              
-    margin: 40px auto -10px; 
-    text-align: right;
+    flex-direction: column;
+    gap: 4px;
 }
 
-/* EXCEL 다운로드 버튼 */
-
-.btn_excel_download {
-    text-align: right;
-    padding: 10px 20px;
-    background-color: #217346; 
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-    font-weight: bold;
+.meta_label {
     font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #868e96;
+    font-weight: 600;
 }
 
-.btn_excel_download:hover {
-    background-color: #1a5c38;
+.meta_value {
+    font-size: 1.05rem;
+    color: #212529;
+    font-weight: 700;
 }
 
-#Critical_Error_List_wrap h2 {
-    margin-top: 90px;
-    padding: 5px;
-    display: inline-block;
-    text-align: center;
-    background-color: #E0E0E0;
+.meta_category {
+    color: #1a5c38;
+}
+
+.detail_section {
+    margin-bottom: 16px;
+}
+
+.detail_section h3 {
+    margin: 0 0 6px;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: #868e96;
+}
+
+.detail_text {
+    margin: 0;
+    font-size: 1.1rem;
+    line-height: 1.65;
+    color: #343a40;
+    word-break: keep-all;
+}
+
+.detail_code {
+    margin: 0;
+    padding: 14px 18px;
+    background: #f6f8fa;
+    border: 1px solid #e9ecef;
     border-radius: 8px;
+    font-family: Consolas, monospace;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #c7254e;
+    white-space: pre-wrap;
+    word-break: break-all;
 }
 
-#Critical_Error_List_wrap {
-    text-align: center; /* 부모 요소에 적용 */
+.detail_footer {
+    padding-top: 12px;
+    border-top: 1px solid #f1f3f5;
+    text-align: right;
 }
+
+.btn_back {
+    display: inline-block;
+    padding: 10px 22px;
+    background: #5f5d58;
+    color: #fff;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.2s;
+}
+
+.btn_back:hover {
+    background: #343a40;
+    text-decoration: none;
+}
+

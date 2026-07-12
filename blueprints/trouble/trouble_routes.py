@@ -1,6 +1,6 @@
 import pandas as pd
 import io
-from flask import Blueprint, render_template, request, session, jsonify, send_file
+from flask import Blueprint, render_template, request, session, jsonify, send_file, redirect, url_for, flash
 from db.utils.trouble_json_manager import load_errors, save_errors
 from db.utils import time
 import uuid
@@ -66,7 +66,8 @@ def new_critical_error_confirm():
     
     save_errors(critical_errors)
 
-    return render_template('trouble/new_critical_error_result.html')
+    flash("Error Successfully Registered.")
+    return redirect(url_for('trouble.error_list', eNum=eNum))
 
 #/error_modify_confirm
 @trouble_bp.route('/error_modify_confirm', methods=['POST'])
@@ -105,7 +106,7 @@ def error_modify_confirm():
     
     return jsonify({"status": "success", "message": "Modified Complete!"})
 
-# /trouble/error_list_view
+# /trouble/error_list
 @trouble_bp.route('/error_list', methods=['GET'])
 def error_list():
     

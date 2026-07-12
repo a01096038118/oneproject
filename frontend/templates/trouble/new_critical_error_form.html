@@ -3,74 +3,67 @@
 <head>
     <meta charset="UTF-8">
     {% include 'include/trouble_title.html' %}
-
-    <link href="{{url_for('static', filename='css/troubleshooting/trouble_common.css')}}" rel="stylesheet">
-    <link href="{{url_for('static', filename='css/troubleshooting/trouble.css')}}" rel="stylesheet">
-
-    <script src="{{url_for('static', filename='js/trouble.js')}}"></script>
-
 </head>
 <body>
-    
+
     {% include 'include/trouble_nav.html' %}
 
     <article id="new_critical_error_wrap">
         <div class="new_critical_error_form">
-            <form action="{{url_for('trouble.new_critical_error_confirm')}}"  method="post" name="newErrorForm">
+            <form action="{{url_for('trouble.new_critical_error_confirm')}}" method="post" name="newErrorForm">
 
                 <input class="input_basic_eNum" type="text" name="eNum" value="{{ eNum }}" readonly>
-                
-                <select class="select_basic" type="text" name="category">
-                    <option value="python">
-                        UNKNOWN
-                    </option>
-                    <option value="GIT">
-                        GIT
-                    </option>
-                    <option value="HTML">
-                        HTML 
-                    </option>
-                    <option value="JSON">
-                        JSON 
-                    </option>
-                    <option value="YOLO">
-                        FLASK(YOLO)
-                    </option>
-                    <option value="CAM">
-                        ESP32-CAM
-                    </option >
-                    <option value="FRONTEND">
-                        JS/CSS
-                    </option>
-                    <option value="PYTHON">
-                        FLASK(PYTHON)
-                    </option>
-                </select>    
-                <br>
-                <input class="input_basic" type="text" name="error_code" placeholder="Input Error Code">
-                <br>
-                <input class="input_basic" type="text" name="issue" placeholder="Input your Issue Simply">
-                <br>
-                <select class="select_basic" type="text" name="progress">
-                    <option value="Resolved">
-                       Resolved
-                    </option>
-                    <option value="In_Progress">
-                        In Progress
-                    </option>
-                    <option value="Needs_Review">
-                        Needs Review 
-                    </option>          
-                </select>    
-                <input class="input_button_basic_130" type="button" value="SUBMIT" onclick="submitCriticalErrorForm();">
-                <input class="input_button_basic_130" type="reset" value="RESET">
+
+                <header class="form_header">
+                    <div>
+                        <span class="form_eyebrow">Critical Error Report</span>
+                        <h2 class="form_title">New Error</h2>
+                    </div>
+                    <span class="enum_badge">#{{ eNum }}</span>
+                </header>
+
+                <div class="field">
+                    <label class="field_label" for="category">Category</label>
+                    <select class="select_basic" id="category" name="category">
+                        <option value="python">UNKNOWN</option>
+                        <option value="GIT">GIT</option>
+                        <option value="HTML">HTML</option>
+                        <option value="JSON">JSON</option>
+                        <option value="YOLO">FLASK(YOLO)</option>
+                        <option value="CAM">ESP32-CAM</option>
+                        <option value="FRONTEND">JS/CSS</option>
+                        <option value="PYTHON">FLASK(PYTHON)</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label class="field_label" for="error_code">Error Code</label>
+                    <input class="input_basic input_code" id="error_code" type="text" name="error_code"
+                           placeholder="Ex: ModuleNotFoundError, 404, ...">
+                </div>
+
+                <div class="field">
+                    <label class="field_label" for="issue">Issue</label>
+                    <textarea class="input_basic input_issue" id="issue" name="issue"
+                              placeholder="Briefly describe the situation and the issue that occurred."></textarea>
+                </div>
+
+                <div class="field">
+                    <label class="field_label" for="progress">Progress</label>
+                    <select class="select_basic" id="progress" name="progress">
+                        <option value="Resolved">Resolved</option>
+                        <option value="In_Progress">In Progress</option>
+                        <option value="Needs_Review">Needs Review</option>
+                    </select>
+                </div>
+
+                <div class="form_actions">
+                    <input class="input_button_basic_130 btn_submit" type="button" value="SUBMIT" onclick="submitCriticalErrorForm();">
+                    <input class="input_button_basic_130 btn_reset" type="reset" value="RESET">
+                </div>
             </form>
         </div>
     </article>
 
 </body>
 </html>
-
-     
-            
-         

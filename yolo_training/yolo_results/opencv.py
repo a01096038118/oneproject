@@ -1,9 +1,8 @@
 import cv2
 import os
 
-# ⚙️ 설정 부분
-video_path = r'C:\Alot1team\project\videos\test_video.mp4'  # 원본 동영상 경로
-output_folder = r'C:\Alot1team\project\extracted_frames'    # 추출된 이미지가 저장될 경로
+video_path = r'C:\Alot1team\project\videos\test_video.mp4'  
+output_folder = r'C:\Alot1team\project\extracted_frames'   
 frame_interval = 30  # 30프레임마다 1장 추출 (1초에 1장)
 
 def extract_frames():
@@ -13,13 +12,13 @@ def extract_frames():
     # 동영상 열기
     cap = cv2.VideoCapture(video_path)
     if not cap.isOpened():
-        print(f"❌ 에러: 동영상 파일을 열 수 없습니다: {video_path}")
+        print(f"에러: 동영상 파일을 열 수 없습니다: {video_path}")
         return
 
     frame_count = 0
     saved_count = 0
 
-    print(f"⏳ 프레임 추출을 시작합니다 (주기: {frame_interval}프레임마다)...")
+    print(f"프레임 추출을 시작합니다 (주기: {frame_interval}프레임마다)...")
 
     while True:
         ret, frame = cap.read()
@@ -35,7 +34,7 @@ def extract_frames():
         frame_count += 1
 
     cap.release()
-    print(f"🎉 완료! 총 {saved_count}장의 이미지가 '{output_folder}'에 저장되었습니다.")
+    print(f"완료! 총 {saved_count}장의 이미지가 '{output_folder}'에 저장되었습니다.")
 
 if __name__ == "__main__":
     extract_frames()
