@@ -11,12 +11,20 @@
 <body>
     
     {% include 'include/header.html' %}
-    {% include 'include/nav.html' %}
+    {% include 'include/nav.html' %}    
 
     <article id="signin_wrap">
-        <div class="signin_result">
-            <h3>SIGNIN SUCCESS!!</h3>
-        </div>
+        {% if result %}
+            <h3><script>
+                alert(result);
+                location.href = "/";
+            </script></h3>
+        {% else %}
+            <script>
+                alert("SIGNIN SUCCESS!!");
+                location.href = "/";
+            </script>
+        {% endif %}
 
     </article>
 

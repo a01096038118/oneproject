@@ -7,7 +7,7 @@
     <link href="{{ url_for('static', filename='css/common.css') }}" rel="stylesheet">
     <link href="{{ url_for('static', filename='css/member/member.css') }}" rel="stylesheet">
 
-    <script src="{{ url_for('static', filename='js/admin.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/member.js') }}"></script>
     
 </head>
 <body>
@@ -24,7 +24,8 @@
         {% endif %}
 
         <div class="signin_form">
-            <form action="{{ url_for('admin.adminSignIn_confirm') }}" name="signin_form" method="POST">
+            <!-- 여기서 form action=..url_for를 쓰면 작동하지 않음 -->
+            <form action="/admin/adminSignIn_confirm" name="signin_form" method="POST">
                 <input class="input_basic" type="text" name="mId" placeholder="Input new admin ID"><br>
                 <input class="input_basic" type="password" name="mPw" placeholder="Input new admin PW"><br>
                 <input class="input_basic" type="password" name="admin_key" placeholder="Input ADMIN KEY"><br>

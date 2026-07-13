@@ -18,13 +18,13 @@ nav > div.admin_wrap a {
 }
 nav > div.member_wrap span {
     margin-left:40px;
-    color: rgb(250, 151, 3);
+    color: red;
     font-weight: bold;
     font-size: 0.8em;
 }
 nav > div.admin_wrap span {
     margin-left:20px;
-    color: rgb(19, 2, 253);
+    color: blue;
     font-weight: bold;
     font-size: 0.8em;
 }

@@ -58,7 +58,7 @@ h1, h2, p, a, span {
 /* 기본 버튼 스타일 */
 .input_button_basic_130 {
     width: 130px;
-    padding: 12px 0;
+    padding: 6px 6px;
     border: 1px solid #cbd5e1;
     border-radius: 6px;
     margin: 6px 2px;

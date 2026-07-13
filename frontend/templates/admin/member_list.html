@@ -12,7 +12,6 @@
     <link href="{{ url_for('static', filename='css/include/footer.css') }}" rel="stylesheet">
 
     <link href="{{ url_for('static', filename='css/admin/list.css') }}" rel="stylesheet">
-    <link href="{{ url_for('static', filename='css/admin/modify.css') }}" rel="stylesheet">
 
     <script src="/static/js/admin.js"></script>
     
@@ -38,8 +37,10 @@
                 <td>{{ member.mId }}</td>
                 <td>{{ member.mMail }}</td>
                 <td>{{ member.mPhone }}</td>
-                
+                                
                 <td>
+                    <a href="/admin/modify_form/{{ mId }}">MODIFY</a>
+                    |
                     <a href="/admin/delete_form/{{ mId }}">DELETE</a>
                 </td>
             </tr>
@@ -51,15 +52,15 @@
                 <td>{{ admin.mId }}</td>
                 <td>{{ admin.mMail }}</td>
                 <td>{{ admin.mPhone }}</td>
-
                 <td>
                     <a href="/admin/modify_form/{{ mId }}">MODIFY</a>
                     |
                     <a href="/admin/delete_form/{{ mId }}">DELETE</a>
                 </td>
             </tr>
-        </table>
     {% endfor %}
+        </table>
+
     </article>
 
     {% include 'include/footer.html' %}

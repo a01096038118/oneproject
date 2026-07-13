@@ -49,7 +49,7 @@ function saveModalform() {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(dataToSend)   
+        body: JSON.stringify(dataToSend)   // 자바스크립트 객체를 "문자열(String) 형태의 JSON"으로 변환
     })
     .then(response => response.json())
     .then(data => {

@@ -16,9 +16,15 @@
     <article id="signin_wrap">
         <div class="signin_result">
             {% if result %}
-                <h3>{{ result }}</h3>
+                <h3><script>
+                    alert(result);
+                    location.href = "/";
+                </script></h3>
             {% else %}
-                <h3>SIGNIN SUCCESS!!</h3>
+                <script>
+                    alert("SIGNIN SUCCESS!!");
+                    location.href = "/";
+                </script>
             {% endif %}
         </div>
 

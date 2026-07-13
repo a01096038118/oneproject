@@ -7,8 +7,7 @@
     <link href="{{ url_for('static', filename='css/common.css') }}" rel="stylesheet">
     <link href="{{ url_for('static', filename='css/member/member.css') }}" rel="stylesheet">
 
-
-    <script src="{{ url_for('static', filename='js/member.js') }}"></script> 
+    <script src="{{ url_for('static', filename='js/member.js') }}"></script>
     
 </head>
 <body>
@@ -20,11 +19,12 @@
         
         <div class="modify_form">
             <form action="/admin/modify_confirm" name="modify_form" method="POST">
-                <input type="hidden" name="mId" value="{{ admin.mId }}">
-                <input class="input_basic" type="text" value="{{ admin.mId }}" readonly disabled><br>
-                <input class="input_basic" type="password" name="mPw" value="{{ admin.mPw }}" placeholder="Input admin PW"><br>
-                <input class="input_basic" type="email" name="mMail" value="{{ admin.mMail }}" placeholder="Input admin MAIL"><br>
-                <input class="input_basic" type="text" name="mPhone" value="{{ admin.mPhone }}" placeholder="Input admin PHONE"><br>
+                <input class="input_basic" name="admin_key" placeholder="Input admin key">
+                <input type="hidden" name="mId" value="{{ modified.mId }}">
+                <input class="input_basic" type="text" value="{{ modified.mId }}" readonly disabled><br>
+                <input class="input_basic" type="password" name="mPw" value="{{ modified.mPw }}"><br>
+                <input class="input_basic" type="email" name="mMail" value="{{ modified.mMail }}"><br>
+                <input class="input_basic" type="text" name="mPhone" value="{{ modified.mPhone }}"><br>
                 <input class="input_button_basic_130" type="button" value="MODIFY" onclick="modifyForm();">
                 <input class="input_button_basic_130" type="reset" value="RESET">
             </form>

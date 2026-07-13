@@ -16,6 +16,7 @@
     margin-bottom: 20px;
     font-size: 28px;
     font-weight: bold;
+
 }
 
 /* 입력창 */
@@ -40,7 +41,7 @@
 /* 버튼 */
 .modify_form .input_button_basic_130 {
     width: 140px;
-    padding: 12px;
+    padding: 6px 6px;
     margin: 8px 5px 0;
     background-color: #0f172a;
     color: #fff;
@@ -81,6 +82,11 @@
     margin-bottom: 30px;
 }
 
+#modify_wrap > div > p {
+    margin-top: -5px;
+}
+
+
 /* 버튼 또는 링크 */
 .modify_result a {
     display: inline-block;
@@ -96,4 +102,11 @@
 /* Hover */
 .modify_result a:hover {
     background-color: #1e293b;
+}
+
+.modify_form a.input_button_basic_130 {
+    display: inline-block;
+    width: 140px;
+    line-height: 20px;
+    box-sizing: border-box;
 }

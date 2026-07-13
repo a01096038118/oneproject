@@ -6,10 +6,10 @@
 
     <link href="{{ url_for('static', filename='css/common.css') }}" rel="stylesheet">
     <link href="{{ url_for('static', filename='css/member/member.css') }}" rel="stylesheet">
-    <link href="{{ url_for('static', filename='css/admin/modify.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/member/modify.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/admin/list.css') }}" rel="stylesheet">
 
     <script src="{{ url_for('static', filename='js/member.js') }}"></script>
-    
 </head>
 <body>
     
@@ -17,14 +17,21 @@
     {% include 'include/nav.html' %}
 
     <article id="modify_wrap">
-        
-        <div class="modify_result">
-            <h3>MODIFY SUCCESS!!</h3>
+        <div class="modify_form">
+            {% if result == 'MODIFY SUCCESS!!' %}
+                <h3>MODIFY SUCCESS!!</h3>
+                <p>회원 정보가 정상적으로 수정되었습니다.</p>
 
-            <a href="{{ url_for('admin.member_list') }}">회원목록</a>
+            {% elif result %}
+                <h3>MODIFY FAILED</h3>
+                <p>{{ result }}</p>
+            {% endif %}
+
+            <a class="input_button_basic_130"
+            href="{{ url_for('admin.member_list') }}">
+                회원목록
+            </a>
         </div>
-
-
     </article>
 
     {% include 'include/footer.html' %}
