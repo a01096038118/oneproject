@@ -24,7 +24,7 @@ nav > div.member_wrap span {
 }
 nav > div.admin_wrap span {
     margin-left:20px;
-    color: blue;
+    color: rgb(3, 168, 245);
     font-weight: bold;
     font-size: 0.8em;
 }

@@ -101,6 +101,8 @@ function signinForm() {
 
     let mIdPattern = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z0-9]{4,20}$/;
     let mPwPattern = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[\W_])[^\s]{8,20}$/;
+    let adminKeyPattern =/^[A-Za-z0-9-]+$/;
+
     
     if (mId === "") {
         alert("PLEASE INPUT ADMIN ID");
@@ -126,12 +128,11 @@ function signinForm() {
         alert("PLEASE INPUT ADMIN KEY");
         form.admin_key.focus();
 
-    } else if (!admin_key.test(admin_key)) {
+    } else if (!adminKeyPattern.test(admin_key)) {
         alert("KEY NUMBER NO MACTH")
         form.admin_key.focus();
     }
     else {
-        alert("SIGNIN SUCCESS!!")
         form.submit();
     }
 
