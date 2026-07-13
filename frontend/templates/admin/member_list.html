@@ -25,6 +25,7 @@
     <article id="list_wrap">
         <table>
             <tr>
+                <th>USER</th>
                 <th>ID</th>
                 <th>EMAIL</th>
                 <th>PHONE</th>
@@ -33,18 +34,32 @@
 
     {% for mId, member in members.items() %}
             <tr>
+                <td>{{ member.role }}</td>
                 <td>{{ member.mId }}</td>
                 <td>{{ member.mMail }}</td>
                 <td>{{ member.mPhone }}</td>
+                
+                <td>
+                    <a href="/admin/delete_form/{{ mId }}">DELETE</a>
+                </td>
+            </tr>
+    {% endfor %}
+    
+    {% for mId, admin in admins.items() %}
+            <tr>
+                <td>{{ admin.role }}</td>
+                <td>{{ admin.mId }}</td>
+                <td>{{ admin.mMail }}</td>
+                <td>{{ admin.mPhone }}</td>
+
                 <td>
                     <a href="/admin/modify_form/{{ mId }}">MODIFY</a>
                     |
                     <a href="/admin/delete_form/{{ mId }}">DELETE</a>
                 </td>
             </tr>
-    {% endfor %}
         </table>
-
+    {% endfor %}
     </article>
 
     {% include 'include/footer.html' %}

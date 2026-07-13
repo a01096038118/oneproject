@@ -17,6 +17,8 @@
             |
             <a href="{{ url_for('common.signOut_form') }}">SIGN-OUT</a>
             |
+            <a href="{{ url_for('member.modify_form', mId=session['signedInMemberId']) }}">MODIFY</a>
+            |
             <a href="{{ url_for('dashboard.main') }}">DASHBOARD</a>
 
             <span class="member"> 👤 직원 : {{session['signedInMemberId'] }} </span>

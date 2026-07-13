@@ -118,7 +118,8 @@ def memberSignIn_confirm():
     session['signedInMemberId'] = mId
     session['role'] = members[mId]['role']
                    
-    return render_template('index.html', result = 'SIGNIN SUCCESS!!')
+    return render_template('member/memberSignIn_result.html', result = 'SIGNIN SUCCESS!!')
+
 
 
 @member_bp.route('/gateway', methods=['GET'])
@@ -126,4 +127,41 @@ def member_gateway():
     return render_template('member/member_gateway.html')
 
 
+
+# 회원정보 수정 화면 
+@member_bp.route('/modify_form/<mId>', methods = ['GET'])
+def modify_form(mId):
+
+    members = load_members()
+
+    if mId not in members:
+        return('존재하지 않은 회원입니다.')
     
+    member = members[mId]
+    
+    return render_template('member/modify_form.html',
+                           member = member)
+
+
+#  회원정보 수정 양식
+@member_bp.route('/modify_confirm', methods = ['POST'])
+def modify_confirm():
+
+    members = load_members()
+
+    mId = request.form['mId']
+    mPw = request.form['mPw']
+    mMail = request.form['mMail']
+    mPhone = request.form['mPhone']
+        
+    if mId in members:
+
+        # [mId]가 없으면 덮어쓰기가 아니라 mPw, mMail, mPhone이 새로 추가됨
+        members[mId]['mPw'] = mPw
+        members[mId]['mMail'] = mMail
+        members[mId]['mPhone'] = mPhone
+
+        save_members(members)
+
+        return render_template('member/modify_result.html',
+                                result = 'MODIFY SUCCESS!!')
