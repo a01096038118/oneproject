@@ -3,17 +3,6 @@
 <head>
     <meta charset="UTF-8">
     {% include 'include/trouble_title.html' %}
-
-    <link href="{{url_for('static', filename='css/troubleshooting/trouble_common.css')}}" rel="stylesheet">
-    <link href="{{url_for('static', filename='css/troubleshooting/trouble.css')}}" rel="stylesheet">
-
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
-
-    <script src="{{url_for('static', filename='js/trouble.js')}}"></script>
-
 </head>
 <body>  
 
@@ -21,8 +10,15 @@
 
     <article id="Critical_Error_List_wrap">
            <h2>CRITICAL ERRORS</h2>
-
+        {% with messages = get_flashed_messages() %}
+            {% for msg in messages %}
+                <div class="flash_success">
+                    {{ msg }}
+                </div>
+            {% endfor %}
+        {% endwith %}
         <div class="table_toolbar">
+            <a href="{{url_for('trouble.new_critical_error_form')}}" class="btn_new_error">NEW ERROR</a>
             <a href="{{url_for('trouble.download_excel')}}" class="btn_excel_download">
                 EXCEL
             </a>
@@ -34,25 +30,28 @@
                 <tr>
                     <th>No.</th>
                     <th>ID</th>
-                    <th>Error_Num</th>
+                    <th>ISSUE</th>
+                    <th>DETAIL</th>
                     <th>CATEGORY</th>
-                    <th>CREATED DATE</th>
-                    <th>Action/Modify</th>
+                    <th>DATE</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
-
                     {% for info in all_error_list %}
-                    <tr>
+                    <tr class="{{ 'row_new' if request.args.get('new') == info.error_num|string }}"></tr>
                         <td>{{ loop.index }}</td>
-                        <td id="list_staff_id">{{ info.staff_id }}</td>
-                        <td id="list_error_num_td"><a href="{{ url_for('trouble.error_infos', eNum=info.error_num) }}">{{ info.error_num }}</a></td>
-                        <td id="list_category">{{ info.category }}</td>
+                        <td class="list_staff_id">{{ info.staff_id }}</td>
+                        <td class="list_issue">{{ info.issue }}</td>
+                        <td class="detail_td"><a href="{{ url_for('trouble.error_infos', eNum=info.error_num) }}" class="btn_detail">DETAIL</a></td>
+                        <td class="list_category">{{ info.category }}</td>
                         <td>{{ info.date }}</td>
                         <td>
-                            <button class="open_modal" onclick="openModal('{{ info.error_num  }}');">
-                                MODIFY
-                            </button>
+                            {% if session.get('role') == 'ADMIN' %}
+                                <button class="open_modal" onclick="openModal('{{ info.error_num }}');">MODIFY</button>
+                            {% else %}
+                                <button class="open_modal_defense" disabled title="Admin Access Only">MODIFY</button>
+                            {% endif %}
                         </td>
                     </tr>
                     {% endfor %}                   

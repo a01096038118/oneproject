@@ -8,7 +8,7 @@ min_size = 0.007
 
 dry_run = False
 
-# 원본 라벨 폴더를 통째로 백업해두고 싶으면 True (라벨 파일은 용량이 작아서 권장)
+# 원본 라벨 폴더를 통째로 백업 True 
 make_backup = True
 backup_root = label_root + '_backup'
 
@@ -45,7 +45,7 @@ for root, dirs, files in os.walk(label_root):
 
             if w < min_size or h < min_size:
                 removed_lines += 1
-                continue  # 이 박스(줄)만 버림
+                continue  
 
             kept_lines.append(line)
             stats_after[cls_id] += 1
@@ -65,7 +65,7 @@ for root, dirs, files in os.walk(label_root):
                         os.remove(img_path)
                         break
         else:
-            # 일부 박스만 걸러낸 경우: 라벨 파일만 다시 쓰기 (이미지는 유지)
+            # 일부 박스만 걸러낸 경우: 라벨 파일만 다시 쓰기
             if len(kept_lines) != len(lines):
                 print(f"[라인 일부 제거] {label_file}: {len(lines)} -> {len(kept_lines)}")
                 if not dry_run:

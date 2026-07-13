@@ -11,7 +11,6 @@ media/
 
 # YOLO 학습 산출물
 runs/
-*.pt
 *.onnx
 *.cache
 

@@ -43,7 +43,7 @@ def update_labels():
             with open(file_path, 'w') as f:
                 f.write("\n".join(new_lines) + "\n")
 
-    print("🎉 모든 학습(train) 및 검증(val) 라벨에서 life_saving_appliances 제외 및 번호 수정이 완료되었습니다!")
+    print("모든 학습(train) 및 검증(val) 라벨에서 life_saving_appliances 제외 및 번호 수정이 완료되었습니다!")
 
 if __name__ == "__main__":
     update_labels()

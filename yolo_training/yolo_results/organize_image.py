@@ -2,17 +2,14 @@ import os
 import shutil
 import json
 
-# ==========================================
-# ⚙️ 설정 부분
-# ==========================================
-# 1. 원본 이미지들이 현재 들어있는 전체 폴더 경로
-source_image_folder = "./all_images" # 모든 원본 이미지가 모여 있는 폴더명으로 바꾸세요
-# 2. 이미지를 옮겨 담을 최종 목적지
+
+
+source_image_folder = "./all_images" 
+
 target_image_folder = "./data/images/train"
-# 3. 데이터셋 JSON 파일 경로
+
 json_file_path = "data/raw/instances_train.json"
 
-# ==========================================
 
 def organize():
     # 폴더 생성
@@ -25,7 +22,7 @@ def organize():
     # 필요한 파일명 목록 추출
     required_files = {img['file_name'] for img in data['images']}
     
-    print(f"✅ 총 {len(required_files)}장의 이미지를 찾습니다.")
+    print(f"총 {len(required_files)}장의 이미지를 찾습니다.")
     
     count = 0
     for file_name in required_files:
@@ -38,9 +35,9 @@ def organize():
             if count % 100 == 0:
                 print(f"📦 {count}장 이동 중...")
         else:
-            print(f"⚠️ 경고: '{file_name}' 파일을 찾을 수 없습니다.")
+            print(f"경고: '{file_name}' 파일을 찾을 수 없습니다.")
 
-    print(f"🎉 완료! 총 {count}장의 이미지를 {target_image_folder}로 복사했습니다.")
+    print(f"완료! 총 {count}장의 이미지를 {target_image_folder}로 복사했습니다.")
 
 if __name__ == "__main__":
     organize()
