@@ -19,12 +19,12 @@
     <article id="modify_wrap">
         
         <div class="modify_form">
-            <form action="/admin/modify_confirm" name="modify_form" method="POST">
-                <input type="hidden" name="mId" value="{{ admin.mId }}">
-                <input class="input_basic" type="text" value="{{ admin.mId }}" readonly disabled><br>
-                <input class="input_basic" type="password" name="mPw" value="{{ admin.mPw }}" placeholder="Input admin PW"><br>
-                <input class="input_basic" type="email" name="mMail" value="{{ admin.mMail }}" placeholder="Input admin MAIL"><br>
-                <input class="input_basic" type="text" name="mPhone" value="{{ admin.mPhone }}" placeholder="Input admin PHONE"><br>
+            <form action="/member/modify_confirm" name="modify_form" method="POST">
+                <input type="hidden" name="mId" value="{{ member.mId }}">
+                <input class="input_basic" type="text" value="{{ member.mId }}" readonly disabled><br>
+                <input class="input_basic" type="password" name="mPw" value="{{ member.mPw }}" placeholder="Input member PW"><br>
+                <input class="input_basic" type="email" name="mMail" value="{{ member.mMail }}" placeholder="Input member MAIL"><br>
+                <input class="input_basic" type="text" name="mPhone" value="{{ member.mPhone }}" placeholder="Input member PHONE"><br>
                 <input class="input_button_basic_130" type="button" value="MODIFY" onclick="modifyForm();">
                 <input class="input_button_basic_130" type="reset" value="RESET">
             </form>

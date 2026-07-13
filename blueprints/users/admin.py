@@ -140,9 +140,7 @@ def adminSignIn_confirm():
 
     session['signedInAdminId'] = mId
     session['role'] = admins[mId]['role']
-    print("입력한 키:", admin_key)
-    print("admin_keys:", admin_keys)
-    print("존재 여부:", admin_key in admin_keys)
+
         
     return render_template('/index.html', result = 'SIGNIN SUCCESS!!')
 
@@ -159,10 +157,12 @@ def admin_gateway():
 def member_list():
 
     members = load_members()
+    admins = load_admins()
 
     return render_template(
         'admin/member_list.html',
-        members = members
+        members = members,
+        admins = admins
         # members(html에 사용할 이름) = members(python 변수)
         # python 변수 members를 html에 사용할 이름 members에 전달한다.
     )
@@ -171,42 +171,35 @@ def member_list():
 @admin_bp.route('/modify_form/<mId>', methods = ['GET'])
 def modify_form(mId):
 
-    members = load_members()
+    admins = load_admins()
 
-    if mId not in members:
+    if mId not in admins:
         return('존재하지 않은 회원입니다.')
     
-    member = members[mId]
+    admin =admins[mId]
     
     return render_template('admin/modify_form.html',
-                           member = member)
+                           admin = admin)
 
 #  회원정보 수정 양식
 @admin_bp.route('/modify_confirm', methods = ['POST'])
 def modify_confirm():
-
-    admin_key = request.form['admin_key']
-    admin_keys = load_admin_keys()
     
-    if admin_key not in admin_keys:
-        return render_template('admin/adminSignUp_result.html',
-                               result = '올바른 키번호가 아닙니다.') 
-    
-    members = load_members()
+    admins = load_admins()
 
     mId = request.form['mId']
     mPw = request.form['mPw']
     mMail = request.form['mMail']
     mPhone = request.form['mPhone']
         
-    if mId in members:
+    if mId in admins:
 
         # [mId]가 없으면 덮어쓰기가 아니라 mPw, mMail, mPhone이 새로 추가됨
-        members[mId]['mPw'] = mPw
-        members[mId]['mMail'] = mMail
-        members[mId]['mPhone'] = mPhone
+        admins[mId]['mPw'] = mPw
+        admins[mId]['mMail'] = mMail
+        admins[mId]['mPhone'] = mPhone
 
-        save_members(members)
+        save_admins(admins)
 
         return render_template('admin/modify_result.html',
                                 result = 'MODIFY SUCCESS!!')
@@ -237,7 +230,15 @@ def delete_confirm():
         del members[mId]
 
         save_members(members)
+
+    admins = load_admins()
+
+    if mId in admins:
+        del admins[mId]
+
+        save_admins(admins)
         
+
     return redirect('/admin/member_list')
 
     
