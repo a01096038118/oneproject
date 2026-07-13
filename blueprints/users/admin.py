@@ -140,6 +140,9 @@ def adminSignIn_confirm():
 
     session['signedInAdminId'] = mId
     session['role'] = admins[mId]['role']
+    print("입력한 키:", admin_key)
+    print("admin_keys:", admin_keys)
+    print("존재 여부:", admin_key in admin_keys)
         
     return render_template('/index.html', result = 'SIGNIN SUCCESS!!')
 

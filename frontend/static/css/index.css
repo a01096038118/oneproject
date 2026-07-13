@@ -41,21 +41,21 @@
 .main-content-overlay span,
 .main-content-overlay div,
 .main-content-overlay li {
-    color: #ffffff !important;
-    font-weight: bold !important;
-    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6) !important;
+    color: #ffffff;
+    font-weight: bold;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
 }
 
 /* 🌟 네비게이션 및 메뉴 링크 스타일 추가 강조 */
 .main-content-overlay a {
-    font-weight: 800 !important; /* 메뉴 링크는 더욱 더 두껍게 설정 */
+    font-weight: 800; /* 메뉴 링크는 더욱 더 두껍게 설정 */
     display: inline-block;
     padding: 0 4px;
 }
 
 /* 서브 텍스트 역시 흰색 계열로 유지 */
 .main-content-overlay .scnd-font-color {
-    color: #f1f5f9 !important;
+    color: #f1f5f9;
 }
 
 /* 푸터 하단 배경 투명 처리 */
