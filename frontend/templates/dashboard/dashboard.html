@@ -13,16 +13,34 @@
     
     <article id="dashboard_wrap">
         
-        <h3>위험구역 침입 감지 대시보드</h3>
-        
+        {% if session.get('role') == 'MEMBER' %}  
         <div class="menu">
-            <a href="/"> HOME </a>
+            <a href="/">HOME</a>
+            |
+            <a href="{{ url_for('common.signOut_form') }}">SIGN-OUT</a>
+            |
+            <a href="{{ url_for('member.modify_form', mId=session['signedInMemberId']) }}">MODIFY</a>
             |
             <a href="{{ url_for('dashboard.log_list') }}">LOG_LIST</a>
-            |
-            <a href="{{ url_for('common.signOut_form') }}"> SIGN_OUT </a>
-            
+
+            <span class="member"> 👤 직원 : {{session['signedInMemberId'] }} </span>
         </div>
+
+        {% elif session.get('role') == 'ADMIN' %}  
+        <div class="menu">
+            <a href="/">HOME</a>
+            |
+            <a href="{{ url_for('common.signOut_form') }}">SIGN-OUT</a>
+            |
+            <a href="{{ url_for('admin.member_list') }}">MEMBER_LIST</a>
+            |
+            <a href="{{ url_for('dashboard.log_list') }}">LOG_LIST</a>
+
+            <span class="admin"> 👑 관리자 : {{ session['signedInAdminId']}}</span>
+        </div>
+
+        {% endif %}
+
         
         <div class="main_layout">
 

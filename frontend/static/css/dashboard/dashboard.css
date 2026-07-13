@@ -230,7 +230,9 @@ body {
     min-height: 130px;
 }
 
-
+.member, .admin {
+    color: #ffffff; 
+}
 
 
 /* .warning { 
