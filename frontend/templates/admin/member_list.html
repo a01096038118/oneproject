@@ -40,7 +40,9 @@
                 <td>{{ member.mPhone }}</td>
                 
                 <td>
-                    <a href="/admin/delete_form/{{ mId }}">DELETE</a>
+                    <a href="/member/modify_form/{{ mId }}">MODIFY</a>
+                    |
+                    <a href="/member/delete_form/{{ mId }}">DELETE</a>
                 </td>
             </tr>
     {% endfor %}
@@ -53,13 +55,11 @@
                 <td>{{ admin.mPhone }}</td>
 
                 <td>
-                    <a href="/admin/modify_form/{{ mId }}">MODIFY</a>
-                    |
                     <a href="/admin/delete_form/{{ mId }}">DELETE</a>
                 </td>
             </tr>
-        </table>
     {% endfor %}
+    </table>
     </article>
 
     {% include 'include/footer.html' %}
