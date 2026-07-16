@@ -168,6 +168,5 @@ function modifyForm() {
 }
 
 function deleteForm() {
-     alert("MEMBER DELETE SUCCESS!!")
-     form.submit();
+     return confirm("정말 삭제하시겠습니까?");
     }

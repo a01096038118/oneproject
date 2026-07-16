@@ -136,7 +136,7 @@ def adminSignIn_confirm():
         return render_template('admin/adminSignUp_result.html',
                                result = '올바른 키번호가 아닙니다.')  
     
-    save_admin_keys(admin_keys)
+    save_admin_keys(admin_key)
 
     session['signedInAdminId'] = mId
     session['role'] = admins[mId]['role']

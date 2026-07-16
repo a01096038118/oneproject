@@ -1,10 +1,11 @@
+// html이 준비되면 실행되는 함수
 window.onload = function () {
     loadLogs();
 };
 
-// =========================
+
 // 로그 목록 불러오기
-// =========================
+
 async function loadLogs() {
 
     const response = await fetch("/dashboard/logs");
@@ -29,6 +30,7 @@ async function loadLogs() {
 
                 <button class="delete_btn"
                     onclick="event.stopPropagation(); deleteLog('${log.log_id}')">
+                    // 부모 클릭이벤트가 실행되지않게함
                     🗑️
                 </button>
 
@@ -38,9 +40,9 @@ async function loadLogs() {
 
 }
 
-// =========================
+
 // 로그 클릭
-// =========================
+
 async function checkLog(logId){
 
     const response = await fetch(
@@ -150,9 +152,9 @@ async function deleteLog(logId){
 
 }
 
-const alertLayer = document.getElementById('intrusionAlert');
-// 침입 감지 시 (즉시 켜짐)
-function triggerAlert() {
-    alertLayer.classList.add('active');
-}
+// const alertLayer = document.getElementById('intrusionAlert');
+// // 침입 감지 시 (즉시 켜짐)
+// function triggerAlert() {
+//     alertLayer.classList.add('active');
+// }
 
