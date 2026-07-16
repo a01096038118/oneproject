@@ -1,10 +1,10 @@
 {
-    "gildong01": {
-        "mId": "gildong01",
-        "mPw": "@gildong01",
-        "mMail": "gildong@gmail.com",
-        "mPhone": "01012345678",
+    "gildong02": {
+        "mId": "gildong02",
+        "mPw": "@gildong02",
+        "mMail": "gildong@naver.com",
+        "mPhone": "01090123456",
         "role": "ADMIN",
-        "admin_key": "24795eb8-eab8-4ebc-8a49-da74daccc9be"
+        "admin_key": "0d3bcd2d-67ae-4119-aaa2-a9a706be8733"
     }
 }
