@@ -24,6 +24,12 @@
 
     </article>
 
+    {% if result %}
+    <script>
+        alert("{{ result }}");
+    </script>
+    {% endif %}
+
     {% include 'include/footer.html' %}
 
 </body>
