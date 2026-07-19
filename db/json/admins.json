@@ -1,10 +1,18 @@
 {
+    "seari02": {
+        "mId": "seari02",
+        "mPw": "!@seari02",
+        "mMail": "seari02@gmail.com",
+        "mPhone": "01077778888",
+        "role": "ADMIN",
+        "admin_key": "ede9560e-5a15-4dc4-809e-66811bb0eeb9"
+    },
     "gildong02": {
         "mId": "gildong02",
-        "mPw": "@gildong02",
-        "mMail": "gildong@naver.com",
-        "mPhone": "01090123456",
+        "mPw": "!@gildong02",
+        "mMail": "gildong02@gmail.com",
+        "mPhone": "01012345678",
         "role": "ADMIN",
-        "admin_key": "0d3bcd2d-67ae-4119-aaa2-a9a706be8733"
+        "admin_key": "523de0ef-f810-426f-a947-86900335c3c5"
     }
 }

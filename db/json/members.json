@@ -1,1 +1,10 @@
-{}
+{
+    "gildong01": {
+        "mId": "gildong01",
+        "mPw": "!!gildong01",
+        "mMail": "gildong01@gmail.com",
+        "mPhone": "01045678912",
+        "mCareer": "3개월",
+        "role": "MEMBER"
+    }
+}

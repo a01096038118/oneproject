@@ -87,7 +87,7 @@ def memberSignup_confirm():
 
     return render_template(
         'member/memberSignIn_form.html', 
-        result = 'OK')
+        result = 'MEMBER SIGNUP SUCCESS!!')
 
 
 # member 로그인 화면
@@ -118,7 +118,7 @@ def memberSignIn_confirm():
     session['signedInMemberId'] = mId
     session['role'] = members[mId]['role']
                    
-    return render_template('member/memberSignIn_result.html', result = 'SIGNIN SUCCESS!!')
+    return render_template('/index.html', result = 'MEMBER SIGNIN SUCCESS!!')
 
 
 

@@ -65,7 +65,6 @@ function signupForm() {
     
         
     } else {
-        alert("MEMBER SIGN UP SUCCESS!!")
         form.submit();
     }
 
@@ -103,7 +102,6 @@ function signinForm() {
        
 
     } else {
-        alert("SIGNIN SUCCESS!!")
         form.submit();
     }
 

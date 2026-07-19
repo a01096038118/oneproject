@@ -114,9 +114,6 @@ def adminSignIn_form():
 def adminSignIn_confirm():
 
     admins = load_admins()
-    print("FILE =", FILE)
-    print("admins =", admins)
-    print("mId =", request.form["mId"])
 
     mId = request.form['mId']
     mPw = request.form['mPw']
@@ -133,10 +130,10 @@ def adminSignIn_confirm():
                                result = '올바른 비밀번호가 아닙니다.') 
     #  키 존재 확인
     if admin_key not in admin_keys:
-        return render_template('admin/adminSignUp_result.html',
+        return render_template('admin/adminSignIn_form.html',
                                result = '올바른 키번호가 아닙니다.')  
     
-    save_admin_keys(admin_key)
+    save_admin_keys(admin_keys)
 
     session['signedInAdminId'] = mId
     session['role'] = admins[mId]['role']
