@@ -6,5 +6,93 @@
         "mPhone": "01045678912",
         "mCareer": "3개월",
         "role": "MEMBER"
+    },
+    "sungjin7": {
+        "mId": "sungjin7",
+        "mPw": "sungjin7!",
+        "mMail": "sungjin@gmail.com",
+        "mPhone": "01011112222",
+        "mCareer": "8개월",
+        "role": "MEMBER"
+    },
+    "hyunho8": {
+        "mId": "hyunho8",
+        "mPw": "hyunho8!",
+        "mMail": "hyunho@gmail.com",
+        "mPhone": "01022223333",
+        "mCareer": "2개월",
+        "role": "MEMBER"
+    },
+    "hyeonjeong6": {
+        "mId": "hyeonjeong6",
+        "mPw": "hyeonjeong6!",
+        "mMail": "hyeonjeong@gmail.com",
+        "mPhone": "01033334444",
+        "mCareer": "6개월",
+        "role": "MEMBER"
+    },
+    "Kwonmin3": {
+        "mId": "Kwonmin3",
+        "mPw": "Kwonmin3!",
+        "mMail": "Kwonmin@gmail.com",
+        "mPhone": "01044445555",
+        "mCareer": "1개월",
+        "role": "MEMBER"
+    },
+    "chanho1": {
+        "mId": "chanho1",
+        "mPw": "chanho1@",
+        "mMail": "chanho@naver.com",
+        "mPhone": "01012345677",
+        "mCareer": "12개월",
+        "role": "MEMBER"
+    },
+    "saeri25": {
+        "mId": "saeri25",
+        "mPw": "saeri25@",
+        "mMail": "saeri@gmail.com",
+        "mPhone": "01022229996",
+        "mCareer": "10개월",
+        "role": "MEMBER"
+    },
+    "python9": {
+        "mId": "python9",
+        "mPw": "python9#",
+        "mMail": "python@gmail.com",
+        "mPhone": "01022229354",
+        "mCareer": "6개월",
+        "role": "MEMBER"
+    },
+    "java95": {
+        "mId": "java95",
+        "mPw": "java95#!",
+        "mMail": "java95@naver.com",
+        "mPhone": "01022229599",
+        "mCareer": "8개월",
+        "role": "MEMBER"
+    },
+    "oracle77": {
+        "mId": "oracle77",
+        "mPw": "oracle77#",
+        "mMail": "oracle77@gmail.com",
+        "mPhone": "01022229352",
+        "mCareer": "2개월",
+        "role": "MEMBER"
+    },
+    "torvalds5": {
+        "mId": "torvalds5",
+        "mPw": "torvalds5#",
+        "mMail": "linustorvalds@gmail.com",
+        "mPhone": "01012345673",
+        "mCareer": "9개월",
+        "role": "MEMBER"
+    },
+    "javascript95": {
+        "mId": "javascript95",
+        "mPw": "javascript95#",
+        "mMail": "javascript@naver.com",
+        "mPhone": "01022329354",
+        "mCareer": "3개월",
+        "role": "MEMBER"
     }
 }
