@@ -14,5 +14,13 @@
         "mPhone": "01012345678",
         "role": "ADMIN",
         "admin_key": "523de0ef-f810-426f-a947-86900335c3c5"
+    },
+    "leeyoon3": {
+        "mId": "leeyoon3",
+        "mPw": "leeyoon3@",
+        "mMail": "leeyoon@gmail.com",
+        "mPhone": "01012345672",
+        "role": "ADMIN",
+        "admin_key": "5ee1abe3-a36d-4245-9fdd-10bb6afc4a1f"
     }
 }
