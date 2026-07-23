@@ -21,17 +21,27 @@ class CameraManager:
         self.model = YOLO(config.YOLO_MODEL_PATH)
         self.last_intrusion_time_by_zone = {}
 
+    def get_video_source(self):
+
+        if config.USE_TEST_VIDEO:
+            return config.TEST_VIDEO_PATH
+        
+        return config.ESP32_STREAM_URL    
+
     def init_camera(self):
 
         if self.camera is None:
-            print("camera connecting...")
+            video_source = self.get_video_source()
 
-            self.camera = cv2.VideoCapture(config.ESP32_STREAM_URL)
-            print("camera connected")
+            print("video source connecting:", video_source)
+
+            self.camera = cv2.VideoCapture(video_source)
+
+            print("video source connected")
     
     def reconnect_camera(self):
 
-        print("camera reconnecting...")
+        print("video source reconnecting...")
 
         try:
             if self.camera is not None:
@@ -39,10 +49,12 @@ class CameraManager:
 
         except Exception as e:
             print("camera release exception:", e)
-                
-        self.camera = cv2.VideoCapture(config.ESP32_STREAM_URL)
 
-        print("camera reconnected")
+        video_source = self.get_video_source()
+                
+        self.camera = cv2.VideoCapture(video_source)
+
+        print("video source reconnected")
 
     def is_camera_available(self):
 
@@ -60,9 +72,17 @@ class CameraManager:
         with self.camera_lock:
             success, frame = self.camera.read()
 
+            if not success and config.USE_TEST_VIDEO:
+                # 테스트 영상이 끝나면 첫 프레임으로 이동
+                self.camera.set(cv2.CAP_PROP_POS_FRAMES, 0)
+                success, frame = self.camera.read()
+
         if not success:
-            print("camera frame read failed")
-            self.reconnect_camera()
+            print("video frame read failed")
+
+            if not config.USE_TEST_VIDEO:
+                self.reconnect_camera()
+
             return None
 
         return frame

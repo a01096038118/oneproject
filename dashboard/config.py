@@ -3,8 +3,20 @@ import os
 # config.py 파일이 있는 dashboard 폴더의 절대 경로
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
+PROJECT_ROOT = os.path.abspath(os.path.join(BASE_DIR, ".."))
+
+# False: ESP32-CAM 사용
+# True: 테스트 영상 사용
+USE_TEST_VIDEO = False
+
 # ESP32 카메라 설정
-ESP32_STREAM_URL = "http://192.168.137.181:81/stream"
+ESP32_STREAM_URL = "http://192.168.137.196:81/stream"
+
+TEST_VIDEO_PATH = os.path.join(
+    PROJECT_ROOT,
+    "test_video",
+    "demo.mp4"
+)
 
 # YOLO 모델 설정
 YOLO_MODEL_PATH = os.path.join(
